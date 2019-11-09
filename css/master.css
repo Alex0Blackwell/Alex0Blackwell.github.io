@@ -3,6 +3,7 @@ body {
   background-color: #404040;
 }
 
+
 h1, p {
   font-family: Courier New, monospace;
 }
@@ -10,6 +11,12 @@ h1, p {
 u {
   font-family: Arial, sans-serif;
   font-weight: 10;
+}
+
+#scrollTxt {
+  text-align: center;
+  opacity: 0.7;
+  font-size: 50px;
 }
 
 .smallText {
@@ -29,7 +36,7 @@ u {
 
 #myImage {
   border-radius: 10px;
-  width: 40%;
+  width: 30%;
   max-width: 600px;
   min-width: 400px;
 }
@@ -52,6 +59,7 @@ u {
   height: 1500px;
   margin-top: 35%;
 }
+
 
 .bubble {
   border-radius: 50%;
