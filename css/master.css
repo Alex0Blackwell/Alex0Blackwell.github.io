@@ -17,8 +17,6 @@ u {
   margin-left: auto;
   margin-right: auto;
   margin-top: -50px;
-  /* max-width: 100%;
-  min-width: 30%; */
   max-width: 60%;
 }
 
@@ -59,8 +57,19 @@ u {
 }
 
 .content {
-  /* height: 1500px; */
+  height: 110%;
   margin-top: 20%;
+}
+
+#webStamp {
+  color: white;
+  text-align: center;
+}
+
+#hiddenFill {
+  border-radius: 10px;
+  background-color: black;
+  height: 200px;
 }
 
 
