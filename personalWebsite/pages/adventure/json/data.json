@@ -1,0 +1,97 @@
+sceneOne = {
+  "disp":"Rachael is having a party. Do you go?",
+  "choices":["Yes.","No."],
+    "one": {
+      "disp":"You're at the party and you see the most attractive person at the party. And then you stop looking in the mirror and look at Alex. Should you talk to Alex?",
+      "choices":["Yes, ask about the Gus and Eddy Podcast.","No, instead communicate via interpretive dance."],
+      "two": {
+        "disp":"How do you dance to convey your emotion?",
+        "choices":["Start with a classy head bop, maybe some light foot tapping.","We don't know if the world is ready for the wildness of this dance move. Arm movement is measured in speed and not velocity because it has no direction."],
+        "one": {
+          "disp":"Definitly working. However, he only knows one dance move and it's the Chandler dance.",
+        },
+        "two": {
+          "disp":"Alex doesn't know if this girl is breaking it down or breaking her arms. This was not the strategy unfortunately.",
+        },
+        "final":"Ultimately, the flaw was with the interpretive dance, and while this would be a story that Hali would never forget, both Alex and Alexandra wish they could.",
+      }
+   },
+   "two": {
+     "disp":"You have a great time. Fun night overall, made some spicy grilled cheese, maybe watched the Gus and Eddy Podcast.",
+     "choices":["",""],
+   }
+}
+
+sceneTwo = {
+  "disp":"Uh-oh, Alex knows about the Gus and Eddy Podcast",
+  "choices":["Show your excitement with a double high five.","Show your excitement by staring at him for a few seconds and then unwillingly start to moonwalk away from him."],
+  "two": {
+    "disp":"Alex starts smiling uncomfortably, partly because he's uncomfortable, and partly because this is genuinely one of the best moments of his life.",
+    "choices":["The issue is the lack of arm movement. Start moving those arms baby.","You want the subject changed and mistakenly do something even more embarrassing than what's already happening."],
+    "final":"Ultimately, the flaw was with the moonwalk dance moves, and while this would be a story that Hali would never forget, both Alex and Alexandra wish they could.",
+  }
+}
+
+sceneThree = {
+  "disp":"Alex is introduced to a scenario that no amount of \"shower thought potential social event\" practice could save him from. Alexandra requests a double high five when his hands are wet...",
+  "choices":["No disclaimer: Alex should give that wet double high five.","Disclaimer: Alex should say that he has water on his hands (the non-psychopath option)."],
+  "one": {
+    "disp":"Alexandra sees the water fly off his hands due to the inertia of the droplets after the impact of that double high five",
+    "choices":["You really hope that's water anyways. Throw up in your mouth a little bit and re-evaluate your life out of self-disgust that you once found this man attractive.","You don't see a problem (and that's not just because you're temporarily blinded by the water) that is apparently a normal thing to do."],
+  },
+  "two": {
+    "disp":"Despite the social checkmate, the wet hand incident doesn't break up this relationship before it starts. (Wow, these guys can make it through anything then).",
+    "choices":["Ask if Alex wants to take a black licorice shot with you (partly because he doesn't have anything to drink and partly out of spite for subjecting you to his wet hands.)","Say, \"Got to HAND it to you, that was pretty gross\"."],
+    "one": {
+      "disp":"This mans hands are ShAkInG.",
+      "choices":["Ask if he's okay and secretly dial an ambulance because you think this drink has triggered a minor seizure.","Don't realize he has shakey hands and instead wonder if this drink puts the liquor in licorice, or the licorice in liquor... hmmm..."],
+    },
+    "two": {
+      "disp":"Immediately destroys any chance of this relationship working, I wasn't to disable the 'Back' button because I don't think you deserve another chance.",
+    }
+  }
+}
+
+sceneFour = {
+  "disp":"Uh-oh, Alex has to communicate how bad that drink was...",
+  "choices":["Lean into the hyperbole WAY too hard and say it's \"grounds for suicide\"","Say something socially acceptable like \"Even though that's 40%, I don't think I could get drunk off it because I can't manage another drink of that.\""],
+  "one": {
+    "disp":"Wow, what a weird thing to say. I understand now why you say that you haven't really talked to anyone in 5 years.",
+    "choices":["Stare at Alex for 5 seconds and under the influence of licorice vodka and overwhelming awkwardness say \"... double high five?\"","Do pretty much anything else for 20 minutes."],
+    "two": {
+      "disp":"... 20 minutes later."
+    }
+  }
+}
+
+sceneFive = {
+  "disp":"Talk with Alex late into the night, not knowing that he was wondering why this beautiful girl was still talking to him.",
+  "ambul": {
+    "disp":"The ambulance shows up and you realize you called it when Alex's hands were shaking.",
+    "choices":["Say, \"Ohh, sorry. If you want a shaky hand you can shake mine...\""],
+  }
+}
+
+sceneSix = {
+  "disp":"It's time to go home and it's raining just hard enough for it to be annoying without an umbrella, however, equally annoying to hold the umbrella.",
+  "choices":["Alex doesn't hold the umbrella, instead, he forces you to listen to McConnell talk about how \"he likes the rain\" and how he's \"probably immune to discomfort\".","Alex holds up the umbrella like the champion he is."],
+  "two": {
+    "disp":"Is he even holding up the umbrella though? Really he's just whacking it on your head. Honestly, you swear it doesn't count.",
+    "choices":["Tell him you think the cryptocurrency market is more stable than the umbrella he's holding and make him put it away.","Accept that your head will be bruised tomorrow and make him feel like he's helping."],
+  }
+}
+
+sceneSeven = {
+  "disp":"Call your dad because wow, why haven't our tax dollars built an escalator for Montroyal by now?",
+  "choices":["Your dad can't show up for a bit.","Your dad can show up."],
+  "one": {
+    "disp":"Looks like you have to walk up with Alex and McConnell.",
+    "choices":["Oh my God, is... McConnell - is McConnell somersaulting","Alex will NOT stop hitting me with his umbrella"],
+    "final":"This is the worst moment of the night, and I had a \"wet hand\" interaction with Alex earlier."
+  },
+  "two": {
+    "disp":"Your dad shows up, and while he's not blasting Bohemian Rhapsody, he is giving us a ride. And that's pretty great.",
+    "next":"Drop Alex off at his house.",
+    "final":"Over time, pursue a relationship that, at least for me, has resulted in the best period of my life. Almost 5 months later he makes a stupid choose your own adventure reflecting on the light we met. Looking back on this time I love the stories that have happened in the past, and I know I will love the stories that are to happen in the future. I know that every day with you is an adventure, and I know that I love you, Alexandra. Happy 18th birthday.",
+  }
+}
