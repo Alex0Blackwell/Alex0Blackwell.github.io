@@ -75,9 +75,6 @@ function testBraille() {
   }
   if(checkBoxes.toString() == brailleAlphabet[ranNum].toString()) {
     var totalT = (t1-t0).toFixed(2);
-    console.log("totalT", totalT);
-    console.log("localStorage.bestTime", localStorage.bestTime);
-    console.log(totalT < parseFloat(localStorage.bestTime));
 
     if(totalT > 20) {
       res = `That is the correct embossing of ${ranLetter}. That took more than 20 seconds. Best time: ${localStorage.bestTime}.`;
@@ -90,7 +87,8 @@ function testBraille() {
     }
   } else {
     res = `That is not the correct embossing of ${ranLetter}. The correct embossing is shown below:`;
-    show_image(`imgs/${ranLetter}.png`, "containSingleBraille");
+    var imagePath = "imgs/" + ranLetter.toLowerCase() + ".png";
+    show_image(imagePath, "containSingleBraille");
   }
   document.getElementById('correctness').innerHTML = res;
   // Get rid of the last braille input
