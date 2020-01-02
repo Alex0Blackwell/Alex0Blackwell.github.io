@@ -128,7 +128,7 @@ function translateToBraille() {
     if(userInput[i] == ' ') {
       var imageName = "imgs/space.png";
     } else {
-      var imageName = "imgs/" + userInput[i] + ".png";
+      var imageName = "imgs/" + userInput[i].toLowerCase() + ".png";
     }
     show_image(imageName, "containBraille", userInput[i])
   }
