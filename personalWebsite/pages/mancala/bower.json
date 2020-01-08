@@ -1,0 +1,12 @@
+{
+  "name": "webapps-mancala",
+  "version": "0.0.2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+      "fredokaone-regular": "http://themes.googleusercontent.com/static/fonts/fredokaone/v1/SL0aFUFfkFMMdariYQ3_YYbN6UDyHWBl620a-IRfuBk.woff"
+  }
+}
