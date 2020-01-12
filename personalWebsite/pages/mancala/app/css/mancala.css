@@ -240,77 +240,91 @@ button{
     font-family: ChunkFive;
     font-size: 24px;
     line-height: 42px;
-    text-shadow: 1px 1px 1px rgba(255,255,255,1);
+    /* text-shadow: 1px 1px 1px rgba(255,255,255,1); */
     width: 42px;
     height: 42px;
-    border: 1px solid #93b5c0;
+    /* border: 1px solid #93b5c0; */
+}
+
+#three-marbles, #four-marbles, #five-marbles, #six-marbles {
+  color: black;
+  background-color: white;
 }
 
 #three-marbles{
     border-radius: 10px 0px 0px 10px;
-    border-right: 1px solid #ffffff;
+    border-right: 2px solid black;
     left: 332px;
-    color: #93b5c0;
-    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ced3ce));
+    color: black;
+    background-color: white;
+    /* background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ced3ce)); */
 }
 
 #three-marbles_active{
     border-radius: 10px 0px 0px 10px;
-    border-right: 1px solid #ffffff;
+    border-right: 2px solid black;
     left: 332px;
-    color: #5c95aa;
-    background: -webkit-gradient(linear, left top, left bottom, from(#c9d7dd), to(#a3b2b2));
+    color: white;
+    background-color: #5577a3;
+    /* color: #5c95aa;
+    background: -webkit-gradient(linear, left top, left bottom, from(#c9d7dd), to(#a3b2b2)); */
 }
 
 #four-marbles{
     left: 373px;
     border-radius: 0px 0px 0px 0px;
-    border-right: 1px solid #ffffff;
-    border-left: 1px solid #ffffff;
-    color: #93b5c0;
-    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ced3ce));
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+    /* color: #93b5c0;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ced3ce)); */
 }
 
 #four-marbles_active{
     left: 373px;
     border-radius: 0px 0px 0px 0px;
-    border-right: 1px solid #ffffff;
-    border-left: 1px solid #ffffff;
-    color: #5c95aa;
-    background: -webkit-gradient(linear, left top, left bottom, from(#c9d7dd), to(#a3b2b2));
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+    color: white;
+    background-color: #5577a3;
+    /* color: #5c95aa;
+    background: -webkit-gradient(linear, left top, left bottom, from(#c9d7dd), to(#a3b2b2)); */
 }
 
 #five-marbles{
     left: 414px;
     border-radius: 0px 0px 0px 0px;
-    border-right: 1px solid #ffffff;
-    border-left: 1px solid #ffffff;
-    color: #93b5c0;
-    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ced3ce));
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+    /* color: #93b5c0;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ced3ce)); */
 }
 
 #five-marbles_active{
     left: 414px;
     border-radius: 0px 0px 0px 0px;
-    border-left: 1px solid #ffffff;
-    color: #5c95aa;
-    background: -webkit-gradient(linear, left top, left bottom, from(#c9d7dd), to(#a3b2b2));
+    border-left: 2px solid black;
+    color: white;
+    background-color: #5577a3;
+    /* color: #5c95aa;
+    background: -webkit-gradient(linear, left top, left bottom, from(#c9d7dd), to(#a3b2b2)); */
 }
 
 #six-marbles{
     left: 455px;
     border-radius: 0px 10px 10px 0px;
-    border-left: 1px solid #ffffff;
-    color: #93b5c0;
-    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ced3ce));
+    border-left: 2px solid black;
+    /* color: #93b5c0;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ced3ce)); */
 }
 
 #six-marbles_active{
     left: 455px;
     border-radius: 0px 10px 10px 0px;
-    border-left: 1px solid #ffffff;
-    color: #5c95aa;
-    background: -webkit-gradient(linear, left top, left bottom, from(#c9d7dd), to(#a3b2b2));
+    border-left: 2px solid black;
+    color: white;
+    background-color: #5577a3;
+    /* color: #5c95aa;
+    background: -webkit-gradient(linear, left top, left bottom, from(#c9d7dd), to(#a3b2b2)); */
 }
 
 .sound-buttons{
@@ -319,12 +333,13 @@ button{
     z-index:3;
     font-family: ChunkFive;
     font-size: 24px;
-    color: #93b5c0;
-    text-shadow: 1px 1px 1px rgba(255,255,255,1);
+    color: black;
+    /* text-shadow: 1px 1px 1px rgba(255,255,255,1); */
     width: 70px;
     height: 42px;
-    border: 1px solid #93b5c0;
-    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ced3ce));
+    /* border: 2px solid black; */
+    background-color: white;
+    /* background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ced3ce)); */
 }
 
 #on{
@@ -337,8 +352,9 @@ button{
     left:570px;
     border-radius: 10px 0px 0px 10px;
     border-right: 1px solid #ffffff;
-    color: #5c95aa;
-    background: -webkit-gradient(linear, left top, left bottom, from(#c9d7dd), to(#a3b2b2));
+    color: white;
+    background-color: #5577a3;
+    /* background: -webkit-gradient(linear, left top, left bottom, from(#c9d7dd), to(#a3b2b2)); */
 }
 
 #off{
@@ -351,8 +367,7 @@ button{
     left:639px;
     border-radius: 0px 10px 10px 0px;
     border-left: 1px solid #ffffff;
-    color: #5c95aa;
-    background: -webkit-gradient(linear, left top, left bottom, from(#c9d7dd), to(#a3b2b2));
+    background-color: #5577a3;
 }
 
 .divider-third{
