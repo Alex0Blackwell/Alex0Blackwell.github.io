@@ -18,6 +18,19 @@ input {
     box-sizing: border-box;
 }
 
+::placeholder {
+  color: #E8DDCB;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color: #E8DDCB;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+ color: #E8DDCB;
+}
+
 input[type=number] {
     width: 80px;
 }
@@ -47,11 +60,11 @@ button:hover {
 }
 
 #wordPlace {
-    height: 150px;
+    height: 165px;
 }
 
 #displayWord {
-    font-size: 60px;
+    font-size: 3em;
 }
 
 .wrapper {
