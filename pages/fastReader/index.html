@@ -12,6 +12,7 @@
             <p>Paste what you want to read in the input below:</p>
             <input type="text" id="contentIn" placeholder="type/paste here...">
             <input type="number" id="wpmInput" min="1" placeholder="wpm">
+            <p>This will take <i id="dispMins">0 seconds</i> to read</p>
             <button type="button" id="goBtn" onclick="main(false);move(false);">Go!</button>
             <button type="button" onclick="main(true);move(true);">Pause</button>
             <div id="wordPlace">
@@ -23,5 +24,6 @@
         </div>
         <script src="js/main.js" charset="utf-8"></script>
         <script src="js/progressBar.js" charset="utf-8"></script>
+        <script src="js/calcTime.js" charset="utf-8"></script>
     </body>
 </html>
