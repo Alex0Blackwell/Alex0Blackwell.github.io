@@ -18,8 +18,8 @@ function updateReadTime(e) {
 function parseTime(words, wpm) {
     var res;
     var hours, mins, seconds, addedMins;
-    if(wpm == 0 || words == 0){
-        hours = addedMins = 0;
+    if(wpm == 0 || words == 0) {
+        hours = addedMins = seconds = 0;
     }
     else {
         mins = words / wpm;
@@ -28,7 +28,7 @@ function parseTime(words, wpm) {
         seconds = Math.round((mins * 60 % 60) * 100) / 100;
     }
     if(hours < 1) {
-        if(addedMins < 1){
+        if(addedMins < 1) {
             res = `${seconds} seconds`;
         } else {
             res = `${addedMins} minutes`;
