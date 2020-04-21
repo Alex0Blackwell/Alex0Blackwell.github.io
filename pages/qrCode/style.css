@@ -1,5 +1,5 @@
-@font-face { font-family: daisy; src: url('paperdaisy-demo.ttf'); }
-@font-face { font-family: daisy; font-weight: bold; src: url('paperdaisy-demo.ttf');}
+@font-face { font-family: daisy; src: url('fonts/paperdaisy-demo.ttf'); }
+@font-face { font-family: daisy; font-weight: bold; src: url('fonts/paperdaisy-demo.ttf');}
 
 body {
 	background-color: #FEDCD2;
@@ -26,7 +26,7 @@ input[type=button] {
 
 input[type=text] {
   margin-top: 10px;
-  width: 20%;
+  width: 50%;
   box-sizing: border-box;
   border: 2px solid #262626;
   border-radius: 4px;
