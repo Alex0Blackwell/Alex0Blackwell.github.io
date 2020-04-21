@@ -9717,6 +9717,8 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .masthead .masthead-avatar {
+    border-radius: 10px;
+    border: 2px solid black;
   width: 15rem;
 }
 
