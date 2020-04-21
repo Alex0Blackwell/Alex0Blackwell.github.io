@@ -160,7 +160,7 @@ sup {
 }
 
 a {
-  color: #324057;
+  color: #618fcf;
   text-decoration: none;
   background-color: transparent;
 }
@@ -9713,6 +9713,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 .masthead .masthead-subheading {
   font-size: 1.25rem;
+  padding-bottom: 20px;
 }
 
 .masthead .masthead-avatar {

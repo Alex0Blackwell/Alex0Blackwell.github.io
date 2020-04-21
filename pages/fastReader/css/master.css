@@ -59,6 +59,10 @@ button:hover {
   color: black;
 }
 
+.button1 {
+    padding: 8px 12px;
+}
+
 #wordPlace {
     height: 165px;
 }
