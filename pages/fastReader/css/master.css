@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'dyslexic'; /*a name to be used later*/
+    src: url('fonts/OpenDyslexic-Regular.otf'); /*URL to font*/
+}
+
 body {
     background-color: #031634;
 }
@@ -7,7 +12,8 @@ h1, p {
 }
 
 h1 {
-    font-size: 40px;
+    font-family: 'dyslexic';
+    font-size: 50px;
 }
 
 input {
@@ -68,6 +74,7 @@ button:hover {
 }
 
 #displayWord {
+    font-family: 'dyslexic';
     font-size: 3em;
 }
 
