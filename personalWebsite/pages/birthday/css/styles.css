@@ -1,0 +1,48 @@
+@font-face { font-family: lost; src: url('/fonts/Lost.ttf'); }
+@font-face { font-family: lost; font-weight: bold; src: url('fonts/Lost.ttf');}
+
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: #3e4857;
+}
+
+.wrapper {
+  position: relative;
+  min-height: 100vh;
+}
+
+.center {
+  margin-top: 100px;
+  text-align: center;
+}
+
+[class|="confetti"] {
+  position: absolute;
+}
+
+.red {
+  background-color: #E94A3F;
+}
+
+.yellow {
+  background-color: #FAA040;
+}
+
+.blue {
+  background-color: #5FC9F5;
+}
+
+h1, h3 {
+  font-family: lost;
+}
+
+h1 {
+  font-size: 100px;
+}
+
+
+h3 {
+  font-size: 50px;
+}
