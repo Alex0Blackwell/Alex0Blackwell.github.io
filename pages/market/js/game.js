@@ -212,7 +212,11 @@ function buy(id, index) {
       localStorage.setItem('moneySave', moneyRewrite);
       if (moneyBool[1]) {
         myItems.push(content);
-        botBuy(id, index);
+        var data = document.getElementById(id + index).innerHTML;
+        var res = data.fontcolor("#49c460").strike();
+        document.getElementById(id + index).innerHTML = res;
+        document.getElementById(id + index).value = false;
+        //botBuy(id, index);
       }
     }
   document.getElementById('inventory').innerHTML = invenCopy();
@@ -242,8 +246,18 @@ function moneyFn(price) {
   var money = parseInt(localStorage.moneySave);
   if (money - price >= 0) {
     localStorage.moneySave = Number(localStorage.moneySave) - price;
+    var el = document.getElementById("alert-bought");
+    el.style.display = "block";
+    setTimeout(function(){
+      $("#alert-bought").fadeOut();
+    }, 2000);
     return [localStorage.moneySave, true];
   }
+  var el = document.getElementById("alert-money");
+  el.style.display = "block";
+  setTimeout(function(){
+    $("#alert-money").fadeOut();
+  }, 2000);
   return [localStorage.moneySave, false];
 }
 
@@ -265,28 +279,33 @@ function myMarket() {
 
   for (var b = 0; b < itemArr.length; b++) { //loop that dynamically generates html via javascript and gives these elements unique id's
     var newDiv = document.createElement('div');
-    newDiv.className = 'gridItem';
+    newDiv.className = "gridItem col-lg col-sm-4 col-6 col-xs-12";
 
     var amountType = document.createElement('p');
     amountType.innerText = `${itemArr[b].split(' ')[0]}/${maxQuant[b]} ${itemArr[b].replace(/[0-9]|\/|/g, '').trim()}`;
     amountType.setAttribute('id', 'typeID' + b);
+    amountType.setAttribute('class', "dt");
 
     var up = document.createElement('p');
     up.innerText = '▲';
     up.setAttribute('id', 'upID~' + b);
+    up.setAttribute('class', "clickable dt");
 
     var down = document.createElement('p');
     down.innerText = '▼';
     down.setAttribute('id', 'downID~' + b);
+    down.setAttribute('class', "clickable dt");
 
     var input = document.createElement('input');
     input.type = 'number';
     input.setAttribute('id', 'input~' + b);
+    amountType.setAttribute('class', "dt");
     input.value = itemType(itemArr[b].replace(/[0-9]|\/|/g, '').trim())*itemArr[b].split(' ')[0];
 
     var confirm = document.createElement('button');
     confirm.innerText = 'Advertise';
     confirm.setAttribute('id', 'confirm~' + b);
+    confirm.setAttribute('class', "confirmBtn");
 
     newDiv.appendChild(up);
     newDiv.appendChild(amountType);
@@ -402,21 +421,36 @@ function hostAppend(index, content, type, price) {
 
   var amount = document.getElementById('typeID' + index).innerHTML.split('/')[0];
   var newDiv = document.createElement('div');
-  newDiv.className = 'gridItem';
+  newDiv.className = 'gridItem col-lg col-sm-3 col-6';
+
   var newItem = document.createElement('p');
   newItem.innerText = `${amount} ${type}`;
   newItem.setAttribute('id', 'MMhost' + nodeList);
+  newItem.setAttribute('class', "dt");
+
   var itemPrice = document.createElement('p');
   itemPrice.innerText = `$${price}`;
   itemPrice.setAttribute('id', 'itemPrice' + nodeList);
+  itemPrice.setAttribute('class', "dt");
+
   var deleteBtn = document.createElement('button');
   deleteBtn.innerText = 'delete';
   deleteBtn.onclick = function() {newDiv.remove();}
+
   newDiv.appendChild(newItem);
   newDiv.appendChild(itemPrice);
   newDiv.appendChild(deleteBtn);
   document.getElementById('myLiveItems').appendChild(newDiv);
-  setTimeout(botBuyMM, Math.pow(price / (itemType(type)*amount),3) * 20000, nodeList, newDiv); //exponential function where price is x and time is y, if x is the average price, it will take 20 secs to buy out
+
+  var buyTime = Math.pow(price / (itemType(type)*amount),3) * 20000;
+  setTimeout(botBuyMM, buyTime, nodeList, newDiv); //exponential function where price is x and time is y, if x is the average price, it will take 20 secs to buy out
+  setTimeout(function(){
+    var el = document.getElementById("alert-sold");
+    el.style.display = "block";
+    setTimeout(function(){
+      $("#alert-sold").fadeOut();
+    }, 2000);
+  }, buyTime);
 }
 
 //used to reference what type of item it is and then dealing with it based on a ternary condition to either increase the amount of an item, or return the average price

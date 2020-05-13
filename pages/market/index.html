@@ -4,73 +4,89 @@
 <head>
   <meta charset="utf-8">
   <title>Alex Blackwell</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="../../img/favicon.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-  <div id="linkBack">
-    <input type="button" id="backBtn" onclick="location.href='../../index.html'" value="Return to Home"/>
+  <div id="alert-money" class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Whoops</strong> not enough money!
   </div>
-  <div class="wrap">
-    <div class="left">
-      <div class="mTitleWrap">
-        <div class="market">
-          <p>Market</p>
-        </div>
-        <div class="money">
-          <p id='moneyP'></p>
-        </div>
-      </div>
+  <div id="alert-bought" class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      You bought an item!
+  </div>
+  <div id="alert-sold" class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      You sold an item!
+  </div>
 
-      <div class="largeMarket">
-        <u>Large Market Item</u>
-        <p>Market Refreshes in:</p>
-        <p id='mBRefreshT'></p>
-        <div id="mSlotsBig">
-          <i>Reference for Average Prices:</i> <br>
-          <i>Electronics Store:$10,000 Computer Store:$20,000 Café:$25,000 Restaurant:$75,000</i>
-          <p id='bMSlot0' onclick="buy('bMSlot',0)"></p>
-        </div>
-      </div>
+  <div class="text-center">
+    <button id="linkBack" type="button" name="button" onclick="location.href='../../index.html'">Return to home</button>
+  </div>
+  <div class="row">
+    <div class="marketMoney text-center col-lg-6 col-sm-12">
+      <h1>Market Simulator</h1>
+      <p id='moneyP'></p>
     </div>
 
-    <div class="right">
-      <div class="lightMarket">
-        <u>Light Item Market</u>
-        <p>Market Refreshes in:</p>
-        <p id='mRefreshT'></p><br>
-        <i>Reference for Average Prices:</i> <br>
-        <i>Wood:$10, Brick:$15, Steel$25, Silver$50, Gold$100, Platinum:$150, Cell Phone:$1000, Computer:$1500</i>
-        <div id="mSlots">
-          <p id='mSlot0' onclick="buy('mSlot',0)"></p>
-          <p id='mSlot1' onclick="buy('mSlot',1)"></p>
-          <p id='mSlot2' onclick="buy('mSlot',2)"></p>
-          <p id='mSlot3' onclick="buy('mSlot',3)"></p>
-          <div class="rightSideText">
-            <p id='mSlot4' onclick="buy('mSlot',4)"></p>
-            <p id='mSlot5' onclick="buy('mSlot',5)"></p>
-            <p id='mSlot6' onclick="buy('mSlot',6)"></p>
-            <p id='mSlot7' onclick="buy('mSlot',7)"></p>
-          </div>
+    <div class="largeMarket text-center col-lg-6 col-sm-12">
+      <h2 class="dt">Large Item Market</h2>
+      <h3 class="dt">Market Refreshes in:</h3>
+      <h5 id='mBRefreshT' class="dt"></h5>
+      <div id="mSlotsBig" class="dt text-center">
+        <h4 class="dt">Reference for Average Prices:</h4>
+        <i class="dt">Electronics Store: $10,000 Computer Store: $20,000 Café: $25,000 Restaurant: $75,000</i>
+        <div class="center clickable" onclick="buy('bMSlot',0)">
+          <p id='bMSlot0' class="dt"></p>
         </div>
       </div>
-    </div>
-      <p style="visibility:hidden;">fill</p>
-    <div class="invenDiv">
-  	  <u>Inventory</u>
-  	  <p id='inventory'></p>
-    </div>
-
-    <div class="myMarketDiv">
-      <br>
-      <p id='myMarket'><u>My Market</u></p>
-      <div class="gridContainer" id="myLiveItems"> </div>
-      <p>Add Items to My Market:</p>
-      <div class="gridContainer" id="container"> </div>
     </div>
   </div>
+
+  <div class="lightMarket text-center">
+    <h2>Light Item Market</h2>
+    <h3>Market Refreshes in:</h3>
+    <h5 id='mRefreshT'></h5>
+    <h4>Reference for Average Prices:</h4>
+    <i>Wood: $10, Brick: $15, Steel: $25, Silver: $50, Gold: $100, Platinum: $150, Cell Phone: $1000, Computer: $1500</i>
+    <div id="mSlots" class="row">
+      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',0)"><p id='mSlot0' class="dt"></p></div>
+      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',1)"><p id='mSlot1' class="dt"></p></div>
+      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',2)"><p id='mSlot2' class="dt"></p></div>
+      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',3)"><p id='mSlot3' class="dt"></p></div>
+      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',4)"><p id='mSlot4' class="dt"></p></div>
+      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',5)"><p id='mSlot5' class="dt"></p></div>
+      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',6)"><p id='mSlot6' class="dt"></p></div>
+      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',7)"><p id='mSlot7' class="dt"></p></div>
+    </div>
+  </div>
+
+  <div class="myMarket text-center">
+    <h2 id='myMarket'>My Market</h2>
+    <div class="gridContainer row" id="myLiveItems"> </div>
+  </div>
+
+  <div class="inventory text-center">
+	  <h2>Inventory</h2>
+	  <p id='inventory'></p>
+  </div>
+
+  <div class="myMarket text-center">
+    <div class="gridContainer row" id="container"> </div>
+  </div>
+
   <script src="js/game.js" charset="utf-8"></script>
 </body>
+<footer>
+  <div class="col-lg text-center">
+    <hr>
+    <p>Alex Blackwell | 2020</p>
+  </div>
+</footer>
 
 </html>
