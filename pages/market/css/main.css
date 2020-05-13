@@ -116,7 +116,8 @@ button:hover {
 }
 
 #myLiveItems {
-  height: 165px;
+  min-height: 165px;
+  /* height: 165px; */
   background-color: #8ea6b2;
 }
 
