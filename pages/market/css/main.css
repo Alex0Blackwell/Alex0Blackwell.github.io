@@ -9,15 +9,39 @@ body {
   overflow-x: hidden;
 }
 
+.unfocus {
+  filter: blur(8px);
+}
+
+#tutorial {
+  /* position: fixed; */
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
+#tut0, #tut1, #tut2 {
+  display: none;
+}
+
 h1, h2, h3, h4, h5, i, p {
   color: #f6f8fa;
   font-family: smallMoney, sans-serif;
 }
 
-h2, h3 {
+h2{
   text-decoration: underline;
 }
 
+
+.pad {
+  padding: 30px 30px;
+}
 
 .clickable {
   -webkit-user-select: none; /* Safari */
@@ -49,7 +73,7 @@ strike {
   z-index: 1;
 }
 
-#alert-money {
+#alert-money, #alert-alreadyBought {
   display: none;
   background-color: #ffa6a6;
 }
@@ -121,8 +145,13 @@ button:hover {
   background-color: #8ea6b2;
 }
 
-#linkBack:hover {
+.onBackG:hover {
   border: 2px solid #f6f8fa;
+}
+
+#playBtn {
+  font-size: 32px;
+  padding: 6px 14px;
 }
 
 h1 {

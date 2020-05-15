@@ -11,73 +11,99 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 
-<body>
-  <div id="alert-money" class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    <strong>Whoops</strong> not enough money!
-  </div>
-  <div id="alert-bought" class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-      You bought an item!
-  </div>
-  <div id="alert-sold" class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-      You sold an item!
-  </div>
 
-  <div class="text-center">
-    <button id="linkBack" type="button" name="button" onclick="location.href='../../index.html'">Return to home</button>
+<body id="body">
+  <div id="tutorial">
+    <div class="row text-center">
+      <h1 class="col-lg-6 col-sm-12">Welcome to Market Simulator</h1>
+      <div class="row col-lg-6 col-sm-12 text-center">
+        <h2 class="col-lg-12 pad" id="tut0">Since this is your first time trying the game, here is a tutorial!</h2>
+        <h3 class="col-lg-12 pad" id="tut1">The idea of the game is to buy low and sell high.</h3>
+        <h3 class="col-lg-12 pad" id="tut2">Act fast before items are gone.</h3>
+      </div>
+    </div>
+    <div class="row">
+      <h4 class="col-lg-4 col-sm-6 col-xs-12 pad">This game has a Large Item Market and a Light Item Market. The Large Item Market refreshes every 1 minute and 30 seconds. Every refresh, a different large item will spawn with a price. The Light Item market has the same structure; however, this market refreshes every 30 seconds and the price is less than what can be expected in the Large Item Market. The idea of the game is to buy low and sell high. Items have an average price that can be found above where they are being sold. </h4>
+      <h4 class="col-lg-4 col-sm-6 col-xs-12 pad">This average price will determine if an item or a group of items is a good deal. However, the better a deal is, the faster it will be bought out. When you find a good deal, buy it quick! After the item is purchased, your money will go down and the item will go to your inventory. From your inventory, you can add items to your own market for other people to buy. Your market has six slots that can hold items. Before advertising the items on your market, you need to choose how much of the product to sell and what price to sell it at. </h4>
+      <h4 class="col-lg-4 col-sm-6 col-xs-12 pad">Your items will sell faster if they are priced lower. Remember that if your items are not selling, they may be priced too high and since your market can only hold six items, you may be forced to delete the item from your market with no money in return. However, if your items are well-priced they should sell quickly, hopefully leaving you with a profit!</h4>
+    </div>
+    <div class="text-center">
+      <button id="playBtn" type="button" class="onBackG" onclick="off()">Let's Play</button>
+    </div>
   </div>
-  <div class="row">
-    <div class="marketMoney text-center col-lg-6 col-sm-12">
-      <h1>Market Simulator</h1>
-      <p id='moneyP'></p>
+  <div id="game">
+
+    <div id="alert-money" class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Whoops!</strong> Not enough money!
+    </div>
+    <div id="alert-bought" class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Alright!</strong> You bought an item!
+    </div>
+    <div id="alert-sold" class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Nice!</strong> You sold an item!
+    </div>
+    <div id="alert-alreadyBought" class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Whoops!</strong> This Item has already been bought!
     </div>
 
-    <div class="largeMarket text-center col-lg-6 col-sm-12">
-      <h2 class="dt">Large Item Market</h2>
-      <h3 class="dt">Market Refreshes in:</h3>
-      <h5 id='mBRefreshT' class="dt"></h5>
-      <div id="mSlotsBig" class="dt text-center">
-        <h4 class="dt">Reference for Average Prices:</h4>
-        <i class="dt">Electronics Store: $10,000 Computer Store: $20,000 Café: $25,000 Restaurant: $75,000</i>
-        <div class="center clickable" onclick="buy('bMSlot',0)">
-          <p id='bMSlot0' class="dt"></p>
+    <div class="text-center">
+      <button class="onBackG" type="button" name="button" onclick="location.href='../../index.html'">Return to home</button>
+    </div>
+    <div class="row">
+      <div class="marketMoney text-center col-lg-6 col-sm-12">
+        <h1>Market Simulator</h1>
+        <p id='moneyP'></p>
+      </div>
+
+      <div class="largeMarket text-center col-lg-6 col-sm-12">
+        <h2 class="dt">Large Item Market</h2>
+        <h3 class="dt">Market Refreshes in:</h3>
+        <h5 id='mBRefreshT' class="dt"></h5>
+        <div id="mSlotsBig" class="dt text-center">
+          <h4 class="dt">Reference for Average Prices:</h4>
+          <i class="dt">Electronics Store: $10,000 Computer Store: $20,000 Café: $25,000 Restaurant: $75,000</i>
+          <div class="center clickable" onclick="buy('bMSlot',0)">
+            <p id='bMSlot0' class="dt"></p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="lightMarket text-center">
-    <h2>Light Item Market</h2>
-    <h3>Market Refreshes in:</h3>
-    <h5 id='mRefreshT'></h5>
-    <h4>Reference for Average Prices:</h4>
-    <i>Wood: $10, Brick: $15, Steel: $25, Silver: $50, Gold: $100, Platinum: $150, Cell Phone: $1000, Computer: $1500</i>
-    <div id="mSlots" class="row">
-      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',0)"><p id='mSlot0' class="dt"></p></div>
-      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',1)"><p id='mSlot1' class="dt"></p></div>
-      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',2)"><p id='mSlot2' class="dt"></p></div>
-      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',3)"><p id='mSlot3' class="dt"></p></div>
-      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',4)"><p id='mSlot4' class="dt"></p></div>
-      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',5)"><p id='mSlot5' class="dt"></p></div>
-      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',6)"><p id='mSlot6' class="dt"></p></div>
-      <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',7)"><p id='mSlot7' class="dt"></p></div>
+    <div class="lightMarket text-center">
+      <h2>Light Item Market</h2>
+      <h3>Market Refreshes in:</h3>
+      <h5 id='mRefreshT'></h5>
+      <h4>Reference for Average Prices:</h4>
+      <i>Wood: $10, Brick: $15, Steel: $25, Silver: $50, Gold: $100, Platinum: $150, Cell Phone: $1000, Computer: $1500</i>
+      <div id="mSlots" class="row">
+        <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',0)"><p id='mSlot0' class="dt"></p></div>
+        <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',1)"><p id='mSlot1' class="dt"></p></div>
+        <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',2)"><p id='mSlot2' class="dt"></p></div>
+        <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',3)"><p id='mSlot3' class="dt"></p></div>
+        <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',4)"><p id='mSlot4' class="dt"></p></div>
+        <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',5)"><p id='mSlot5' class="dt"></p></div>
+        <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',6)"><p id='mSlot6' class="dt"></p></div>
+        <div class="col-lg col-sm-3 col-6 clickable gridItem" onclick="buy('mSlot',7)"><p id='mSlot7' class="dt"></p></div>
+      </div>
     </div>
-  </div>
 
-  <div class="myMarket text-center">
-    <h2 id='myMarket'>My Market</h2>
-    <div class="gridContainer row" id="myLiveItems"> </div>
-  </div>
+    <div class="myMarket text-center">
+      <h2 id='myMarket'>My Market</h2>
+      <div class="gridContainer row" id="myLiveItems"> </div>
+    </div>
 
-  <div class="inventory text-center">
-	  <h2>Inventory</h2>
-	  <p id='inventory'></p>
-  </div>
+    <div class="inventory text-center">
+      <h2>Inventory</h2>
+      <p id='inventory'></p>
+    </div>
 
-  <div class="myMarket text-center">
-    <div class="gridContainer row" id="container"> </div>
+    <div class="myMarket text-center">
+      <div class="gridContainer row" id="container"> </div>
+    </div>
   </div>
 
   <script src="js/game.js" charset="utf-8"></script>

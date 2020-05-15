@@ -2,22 +2,38 @@ var myItems = []; //the inventory items that the user has bought
 
 var lastPick; // used for making sure the same large item doesn't spawn consecutively
 
-
 //The below are variables stored in local storage so the users progress can be saved after closing or refreshing
-if (!localStorage.moneySave) {localStorage.moneySave = 1500;}
+if(!localStorage.moneySave) {
+  localStorage.moneySave = 1500;
+  localStorage.woodSave = 0;
+  localStorage.brickSave = 0;
+  localStorage.steelSave = 0;
+  localStorage.silverSave = 0;
+  localStorage.goldSave = 0;
+  localStorage.platinumSave = 0;
+  localStorage.cellPhoneSave = 0;
+  localStorage.computerSave = 0;
+  localStorage.electronicsStoreSave = 0;
+  localStorage.computerStoreSave = 0;
+  localStorage.cafeSave = 0;
+  localStorage.restaurantSave = 0;
 
-if (!localStorage.woodSave) {localStorage.woodSave = 0;}
-if (!localStorage.brickSave) {localStorage.brickSave = 0;}
-if (!localStorage.steelSave) {localStorage.steelSave = 0;}
-if (!localStorage.silverSave) {localStorage.silverSave = 0;}
-if (!localStorage.goldSave) {localStorage.goldSave = 0;}
-if (!localStorage.platinumSave) {localStorage.platinumSave = 0;}
-if (!localStorage.cellPhoneSave) {localStorage.cellPhoneSave = 0;}
-if (!localStorage.computerSave) {localStorage.computerSave = 0;}
-if (!localStorage.electronicsStoreSave) {localStorage.electronicsStoreSave = 0;}
-if (!localStorage.computerStoreSave) {localStorage.computerStoreSave = 0;}
-if (!localStorage.cafeSave) {localStorage.cafeSave = 0;}
-if (!localStorage.restaurantSave) {localStorage.restaurantSave = 0;}
+  // and we want to show the tutorial
+  document.getElementById("tutorial").style.display = "block";
+  document.getElementById("game").style.display = "none";
+
+  $(document).ready(function(){
+    $("#tut0").fadeIn(1000);
+    $("#tut1").fadeIn(2000);
+    $("#tut2").fadeIn(3000);
+  });
+
+}
+
+function off() {
+  document.getElementById("tutorial").style.display = "none";
+  document.getElementById("game").style.display = "block";
+}
 
 document.getElementById('moneyP').innerHTML = `Money: $${localStorage.moneySave}`; //display money
 
@@ -25,6 +41,7 @@ marketTime(); //start timers
 mSlotGen(); //generate light market items
 mSlotGenBig(); //generate large market items
 myMarket(); //if the user has items in their market they will display
+document.getElementById('inventory').innerHTML = invenCopy();  // set inventory
 
 //for counting down and calling the market generation
 function marketTime() {
@@ -216,8 +233,13 @@ function buy(id, index) {
         var res = data.fontcolor("#49c460").strike();
         document.getElementById(id + index).innerHTML = res;
         document.getElementById(id + index).value = false;
-        //botBuy(id, index);
       }
+    } else {
+      var el = document.getElementById("alert-alreadyBought");
+      el.style.display = "block";
+      setTimeout(function(){
+        $("#alert-alreadyBought").fadeOut();
+      }, 2000);
     }
   document.getElementById('inventory').innerHTML = invenCopy();
   document.getElementById('moneyP').innerHTML = `Money: $${localStorage.moneySave}`;
