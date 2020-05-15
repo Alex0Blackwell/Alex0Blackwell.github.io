@@ -1,0 +1,28 @@
+@font-face { font-family: lost; src: url('/fonts/Lost.ttf'); }
+@font-face { font-family: lost; font-weight: bold; src: url('fonts/Lost.ttf');}
+
+body {
+  background-color: #324057;
+}
+
+#container {
+  text-align: center;
+  margin-top: 200px;
+}
+
+h1, h2 {
+  color: #f8f9fa;
+  font-family: lost, sans-serif;
+}
+
+h1 {
+  font-size: 100px;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+img {
+  width: 100px;
+}
