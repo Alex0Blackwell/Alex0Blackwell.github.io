@@ -73,7 +73,7 @@ strike {
   z-index: 1;
 }
 
-#alert-money, #alert-alreadyBought {
+.bad {
   display: none;
   background-color: #ffa6a6;
 }

@@ -67,7 +67,7 @@ function marketTime() {
     if (rawTime0 === 0) {
       rawTime0 = t0 / 1000;
     }
-    return `${rawTime0--} secs`;
+    return `${rawTime0--} seconds`;
   }
 
   function mCountDwn1() { //large market countdown function
@@ -78,11 +78,11 @@ function marketTime() {
 
     if (rawTime1 === 0) {
       rawTime1 = t1 / 1000;
-      return `${s} secs`;
+      return `${s} seconds`;
     } else if (m === 0) {
-      return `${s} secs`;
+      return `${s} seconds`;
     } else {
-      return `${m} min ${s} secs`;
+      return `${m} minute ${s} seconds`;
     }
   }
 }
@@ -376,6 +376,13 @@ function myMarket() {
       if (value < 0) {
         document.getElementById('input~' + itemOrderNum0).value = 0;
       } else if (nodeList < 6) {
+        if(nodeList == 4) {
+          var el = document.getElementById("alert-oneMoreSlot");
+          el.style.display = "block";
+          setTimeout(function(){
+            $("#alert-oneMoreSlot").fadeOut();
+          }, 2000);
+        }
         var type = document.getElementById('typeID' + itemOrderNum0).innerHTML;
         switch (type.replace(/[0-9]|\/|/g, '').trim()) {
           case 'Wood':
@@ -430,7 +437,11 @@ function myMarket() {
         myMarket();
         document.getElementById('inventory').innerHTML = invenCopy();
       } else {
-        alert("You don't have enough slots"); //the user must now wait for more slots or delete items without any money gained
+        var el = document.getElementById("alert-notEnoughSlots");
+        el.style.display = "block";
+        setTimeout(function(){
+          $("#alert-notEnoughSlots").fadeOut();
+        }, 2000);
       }
     })
   }
@@ -464,15 +475,19 @@ function hostAppend(index, content, type, price) {
   newDiv.appendChild(deleteBtn);
   document.getElementById('myLiveItems').appendChild(newDiv);
 
-  var buyTime = Math.pow(price / (itemType(type)*amount),3) * 20000;
-  setTimeout(botBuyMM, buyTime, nodeList, newDiv); //exponential function where price is x and time is y, if x is the average price, it will take 20 secs to buy out
-  setTimeout(function(){
-    var el = document.getElementById("alert-sold");
-    el.style.display = "block";
+  var ratio = price / (itemType(type)*amount);
+  if(!(Math.random()+ratio-1.5 > 1)) {  // over 1.5 * the pricing it might not sell at all
+    // if priced at average, will take about 60 secs
+    var buyTime = (40*Math.pow(ratio, 2)+20 + Math.random()*10)*1000;
+    setTimeout(botBuyMM, buyTime, nodeList, newDiv);
     setTimeout(function(){
-      $("#alert-sold").fadeOut();
-    }, 2000);
-  }, buyTime);
+      var el = document.getElementById("alert-sold");
+      el.style.display = "block";
+      setTimeout(function(){
+        $("#alert-sold").fadeOut();
+      }, 2000);
+    }, buyTime);
+  }
 }
 
 //used to reference what type of item it is and then dealing with it based on a ternary condition to either increase the amount of an item, or return the average price
