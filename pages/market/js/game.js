@@ -1,49 +1,5 @@
-var myItems = []; //the inventory items that the user has bought
 
-var lastPick; // used for making sure the same large item doesn't spawn consecutively
-
-//The below are variables stored in local storage so the users progress can be saved after closing or refreshing
-if(!localStorage.moneySave) {
-  localStorage.moneySave = 1500;
-  localStorage.woodSave = 0;
-  localStorage.brickSave = 0;
-  localStorage.steelSave = 0;
-  localStorage.silverSave = 0;
-  localStorage.goldSave = 0;
-  localStorage.platinumSave = 0;
-  localStorage.cellPhoneSave = 0;
-  localStorage.computerSave = 0;
-  localStorage.electronicsStoreSave = 0;
-  localStorage.computerStoreSave = 0;
-  localStorage.cafeSave = 0;
-  localStorage.restaurantSave = 0;
-
-  // and we want to show the tutorial
-  document.getElementById("tutorial").style.display = "block";
-  document.getElementById("game").style.display = "none";
-
-  $(document).ready(function(){
-    $("#tut0").fadeIn(1000);
-    $("#tut1").fadeIn(2000);
-    $("#tut2").fadeIn(3000);
-  });
-
-}
-
-function off() {
-  document.getElementById("tutorial").style.display = "none";
-  document.getElementById("game").style.display = "block";
-}
-
-document.getElementById('moneyP').innerHTML = `Money: $${localStorage.moneySave}`; //display money
-
-marketTime(); //start timers
-mSlotGen(); //generate light market items
-mSlotGenBig(); //generate large market items
-myMarket(); //if the user has items in their market they will display
-document.getElementById('inventory').innerHTML = invenCopy();  // set inventory
-
-//for counting down and calling the market generation
+/* for counting down and calling the market generation. void */
 function marketTime() {
   var t0 = 15000;
   var t1 = 75000;
@@ -84,7 +40,8 @@ function marketTime() {
 }
 
 /* Generates large market items.
- * Does not generate the same item as there was previously */
+ * Does not generate the same item as there was previously.
+  * void, calls mBigPriceGen to get the price */
 function mSlotGenBig() {
   var mBigItems = ['Electronics Store', 'Computer Store', 'Café', 'Restaurant'];
   var rarity, firstWord, index, price;
@@ -130,12 +87,14 @@ function mSlotGenBig() {
 
   } while (repeat);
 
+
   price = mBigPriceGen(index);
   el.innerHTML = `${mBigItems[index]} for $${price}`;
-  el.value = `1~Electronics Store~${price}`;
+  el.value = `1~${mBigItems[index]}~${price}`;
 }
 
-//for generating market slot items
+/* for generating light market slot items.
+ * void. Calls mPriceGen() to get the price */
 function mSlotGen() {
   var c = 0;
   var mSlotItems = ['Wood', 'Brick', 'Steel', 'Silver', 'Gold', 'Platinum', 'Cell Phone', 'Computer']; //market slot item
@@ -171,7 +130,7 @@ function mSlotGen() {
   }
 }
 
-//gets the light market prices
+/* returns the light market price, sets a timer to buy the items */
 function mPriceGen(index, amount, i) {
   var mItemPrice = [10, 15, 25, 50, 100, 150, 1000, 1500];
   if (Math.random()>.5) {
@@ -183,7 +142,7 @@ function mPriceGen(index, amount, i) {
   }
 }
 
-//gets the large market prices
+/* returns the large market price, sets a timer to buy the items */
 function mBigPriceGen(index) {
   var mItemPrice = [10000, 20000, 25000, 75000];
 
@@ -196,7 +155,8 @@ function mBigPriceGen(index) {
   }
 }
 
-//sets the maximum number of items that will spawn so cheaper items spawn in greater quantities
+/* returns the number of items that will spawn
+ * so cheaper items spawn in greater quantities */
 function numOfItem(a) {
   if (a < 4) {
     return (Math.random() * 9 + 1).toFixed();
@@ -207,14 +167,18 @@ function numOfItem(a) {
   }
 }
 
-//for when a bot buys an item it crosses it out and makes it impossible to buy
+/* for when a bot buys an item it crosses it out
+ * and makes it impossible to buy. void */
 function botBuy(id, index) {
   var content = document.getElementById(id + index).innerHTML.strike();
   document.getElementById(id + index).innerHTML = content;
   document.getElementById(id + index).value = false;
 }
 
-//when buying items, makes sure the item can't be bought again, crosses it out, subtract the item price from the users money, and adds the items to the inventory
+/* when buying items, makes sure the item can't be bought again,
+ * crosses it out, subtract the item price from the users money,
+ * and adds the items to the inventory
+ * calls moneyFn(), invenCopy(), and myMarket(). void */
 function buy(id, index) {
     var content = document.getElementById(id + index).value;
     if (content) {
@@ -222,7 +186,6 @@ function buy(id, index) {
       var moneyRewrite = parseInt(moneyBool[0]);
       localStorage.setItem('moneySave', moneyRewrite);
       if (moneyBool[1]) {
-        myItems.push(content);
         var data = document.getElementById(id + index).innerHTML;
         var res = data.fontcolor("#49c460").strike();
         document.getElementById(id + index).innerHTML = res;
@@ -235,19 +198,19 @@ function buy(id, index) {
         $("#alert-alreadyBought").fadeOut();
       }, 2000);
     }
-  document.getElementById('inventory').innerHTML = invenCopy();
+  document.getElementById('inventory').innerHTML = invenCopy(content);
   document.getElementById('moneyP').innerHTML = `Money: $${localStorage.moneySave}`;
   myMarket();
 }
 
-//adds all the repeating items together and organizes them from cheapest to most expensive, displaying only the items that have a quantity greater than 0
-function invenCopy() {
+/* adds all the repeating items together and organizes them from cheapest to
+ * most expensive, displaying only the items that have a quantity greater than 0
+ * calls itemType(). Returns an array of all your items with amount > 0 */
+function invenCopy(boughtItem) {
   var finalInven = [];
-  console.log(myItems);
 
-  for (var i = 0; i < myItems.length; i++) {
-	itemType(myItems[i].split('~')[1], parseInt(myItems[i].split('~')[0]));
-    myItems = [];
+  if(boughtItem) {
+    itemType(boughtItem.split('~')[1], parseInt(boughtItem.split('~')[0]));
   }
   var amountArr = [`${localStorage.woodSave} Wood`, `${localStorage.brickSave} Brick`, `${localStorage.steelSave} Steel`, `${localStorage.silverSave} Silver`, `${localStorage.goldSave} Gold`, `${localStorage.platinumSave} Platinum`, `${localStorage.cellPhoneSave} Cell Phone`, `${localStorage.computerSave} Computer`, `${localStorage.electronicsStoreSave} Electronics Store`, `${localStorage.computerStoreSave} Computer Store`, `${localStorage.cafeSave} Cafe`, `${localStorage.restaurantSave} Restaurant`];
   for (var a = 0; a < amountArr.length; a++) {
@@ -258,7 +221,8 @@ function invenCopy() {
   return finalInven;
 }
 
-//subtracts price if user money doesn't go negative, also returns a flag that will be used later to decide to push the item to inventory or not
+/* subtracts price if user money doesn't go negative.
+ * Returns [money, flag] where flag is true if the item could be bought */
 function moneyFn(price) {
   var money = parseInt(localStorage.moneySave);
   if (money - price >= 0) {
@@ -278,9 +242,12 @@ function moneyFn(price) {
   return [localStorage.moneySave, false];
 }
 
-//for everything about the users market: adding items to the users live market, selecting the amount of items to add, selecting the price of the items, the option to delete live items
+/* for everything about the users market: adding items to the users live market,
+ * selecting the amount of items to add, selecting the price of the items,
+ * the option to delete live items.
+ * Calls myMarket(). void. Actual nightmare, disaster to code. black magic. stay away */
 function myMarket() {
-  var itemArr = invenCopy();
+  var itemArr = invenCopy(false);
   var maxQuant = []; //used so you can't add more items than you have to your market
   var parent = document.getElementById('container');
 
@@ -332,7 +299,6 @@ function myMarket() {
     document.getElementById('container').appendChild(newDiv);
   }
 
-
   for (var c = 0; c < itemArr.length; c++) { //a simular for loop is needed to reference different id's to add listeners
       document.getElementById('upID~' + c).addEventListener('click', function() { //up button to increment quantity by + 1
       var itemOrderNum0 = parseInt(this.id.split('~')[1]);
@@ -361,7 +327,7 @@ function myMarket() {
       }
 	    document.getElementById('typeID' + itemOrderNum1).innerHTML = itemArr[itemOrderNum1];
     })
-    //------------------------------------------------------------------------------
+
     document.getElementById('confirm~' + c).addEventListener('click', function() { //advertise button to put on the users live market
       var itemOrderNum0 = parseInt(this.id.split('~')[1]);
       var value = document.getElementById('input~' + itemOrderNum0).value;
@@ -430,7 +396,7 @@ function myMarket() {
             break;
         }
         myMarket();
-        document.getElementById('inventory').innerHTML = invenCopy();
+        document.getElementById('inventory').innerHTML = invenCopy(false);
       } else {
         var el = document.getElementById("alert-notEnoughSlots");
         el.style.display = "block";
@@ -442,7 +408,9 @@ function myMarket() {
   }
 }
 
-//for adding items to the users live market, this includes the number of which type of item, the price, and a delete button. The funtion also starts a timer for which the item will be bought out
+/* for adding items to the users live market, this includes the number of which
+ * type of item, the price, and a delete button. The funtion also starts a timer
+ * for which the item will be bought out */
 function hostAppend(index, content, type, price) {
   var div = document.getElementById("myLiveItems");
   var nodeList = div.getElementsByTagName("div").length;
@@ -485,7 +453,9 @@ function hostAppend(index, content, type, price) {
   }
 }
 
-//used to reference what type of item it is and then dealing with it based on a ternary condition to either increase the amount of an item, or return the average price
+/* used to reference what type of item it is and then dealing with it based
+ * on a ternary condition to either increase the amount of an item,
+ * or return the average price */
 function itemType(type, amount) {
   switch (type) {
     case 'Wood':
@@ -527,7 +497,9 @@ function itemType(type, amount) {
   }
 }
 
-//the bot buying function for the users market which buys the item, crosses it out, adds the money to the users total amount, and removes it after 2 seconds
+/* the bot buying function for the users market which buys the item,
+ * crosses it out, adds the money to the users total amount,
+ * and removes it after 2 seconds. void.*/
 function botBuyMM(index, deleteSlot) {
   var content = document.getElementById('MMhost' + index).innerHTML.strike();
   document.getElementById('MMhost' + index).innerHTML = content;
@@ -537,3 +509,43 @@ function botBuyMM(index, deleteSlot) {
     deleteSlot.remove();
   }, 2000);
 }
+
+
+/* main function, called on start up. void */
+function main() {
+  //The below are variables stored in local storage so the users progress can be saved after closing or refreshing
+  if(!localStorage.moneySave) {
+    localStorage.moneySave = 1500;
+    localStorage.woodSave = 0;
+    localStorage.brickSave = 0;
+    localStorage.steelSave = 0;
+    localStorage.silverSave = 0;
+    localStorage.goldSave = 0;
+    localStorage.platinumSave = 0;
+    localStorage.cellPhoneSave = 0;
+    localStorage.computerSave = 0;
+    localStorage.electronicsStoreSave = 0;
+    localStorage.computerStoreSave = 0;
+    localStorage.cafeSave = 0;
+    localStorage.restaurantSave = 0;
+
+    // and we want to show the tutorial
+    document.getElementById("tutorial").style.display = "block";
+    document.getElementById("game").style.display = "none";
+
+    $(document).ready(function(){
+      $("#tut0").fadeIn(1000);
+      $("#tut1").fadeIn(2000);
+      $("#tut2").fadeIn(3000);
+    });
+  }
+  marketTime(); // start timers
+  mSlotGen(); // generate light market items
+  mSlotGenBig(); // generate large market items
+  myMarket(); // if the user has items in their market they will display
+  document.getElementById('moneyP').innerHTML = `Money: $${localStorage.moneySave}`; // display money
+  document.getElementById('inventory').innerHTML = invenCopy(false);  // set inventory
+}
+
+
+main();
