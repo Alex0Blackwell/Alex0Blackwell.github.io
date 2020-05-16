@@ -50,95 +50,89 @@ function marketTime() {
   var rawTime0 = t0 / 1000;
   var rawTime1 = t1 / 1000;
 
-  setInterval(mSlotGen, t0);
-  setInterval(mSlotGenBig, t1);
-
-  document.getElementById('mRefreshT').innerHTML = `${mCountDwn0()}`;
+  var lightCD = document.getElementById('mRefreshT');
+  lightCD.innerHTML = `${t0/1000} seconds`;
   setInterval(function() {
-    document.getElementById('mRefreshT').innerHTML = `${mCountDwn0()}`;
-  }, 1000);
-
-  document.getElementById('mBRefreshT').innerHTML = `${mCountDwn1()}`;
-  setInterval(function() {
-    document.getElementById('mBRefreshT').innerHTML = `${mCountDwn1()}`;
-  }, 1000);
-
-  function mCountDwn0() { //light market countdown function
+    rawTime0--;
     if (rawTime0 === 0) {
       rawTime0 = t0 / 1000;
+      mSlotGen();
     }
-    return `${rawTime0--} seconds`;
-  }
+    lightCD.innerHTML = `${rawTime0} seconds`;
+  }, 1000);
 
-  function mCountDwn1() { //large market countdown function
+  var heavyCD = document.getElementById('mBRefreshT');
+  heavyCD.innerHTML = "1 minute 15 seconds";
+  setInterval(function() {
+    rawTime1--;
     var m = Math.floor(rawTime1 / 60);
     var s = rawTime1 % 60;
+    var res = "";
 
-    rawTime1--;
-
-    if (rawTime1 === 0) {
-      rawTime1 = t1 / 1000;
-      return `${s} seconds`;
-    } else if (m === 0) {
-      return `${s} seconds`;
-    } else {
-      return `${m} minute ${s} seconds`;
+    if (m != 0) {
+      res += `${m} minute`;
     }
-  }
+    res += ` ${s} seconds`;
+    if (rawTime1 === 0) {
+      mSlotGenBig();
+      rawTime1 = t1 / 1000;
+      res = "1 minute 15 seconds"
+    }
+
+    document.getElementById('mBRefreshT').innerHTML = res;
+  }, 1000);
 }
 
-//for generating large market Items
+/* Generates large market items.
+ * Does not generate the same item as there was previously */
 function mSlotGenBig() {
   var mBigItems = ['Electronics Store', 'Computer Store', 'Café', 'Restaurant'];
-  var mBRand = Math.random() * 10;
+  var rarity, firstWord, index, price;
+  var repeat = false;
 
-  genLogic();
+  var el = document.getElementById("bMSlot0");
 
-  //genLogic generates more typically less expensive items and makes sure the same item is generated consecutively
-  function genLogic() {
-    if (mBRand < 4) { //electronics store
-      if (lastPick === mBigItems[0]) {
-	    noRepeat(0);
-      } else {
-        var bigPrice0 = mBigPriceGen(0);
-        document.getElementById('bMSlot0').innerHTML = `${mBigItems[0]} for $${bigPrice0}`;
-        document.getElementById('bMSlot0').value = `1~Electronics Store~${bigPrice0}`;
-	    lastPick = mBigItems[0];
-      }
-    } else if (mBRand < 7) { //computer store
-      if (lastPick === mBigItems[1]) {
-        noRepeat(1);
-      } else {
-        var bigPrice1 = mBigPriceGen(1);
-        document.getElementById('bMSlot0').innerHTML = `${mBigItems[1]} for $${bigPrice1}`;
-        document.getElementById('bMSlot0').value = `1~Computer Store~${bigPrice1}`;
-	    lastPick = mBigItems[1];
-      }
-    } else if (mBRand < 9) { //cafe
-      if (lastPick === mBigItems[2]) {
-        noRepeat(2);
-      } else {
-        var bigPrice2 = mBigPriceGen(2);
-        document.getElementById('bMSlot0').innerHTML = `${mBigItems[2]} for $${bigPrice2}`;
-        document.getElementById('bMSlot0').value = `1~Cafe~${bigPrice2}`;
-	    lastPick = mBigItems[2];
-      }
-    } else if (mBRand >= 9) { //restaurant
-      if (lastPick === mBigItems[3]) {
-        noRepeat(3);
-     } else {
-        var bigPrice3 = mBigPriceGen(3);
-        document.getElementById('bMSlot0').innerHTML = `${mBigItems[3]} for $${bigPrice3}`;
-        document.getElementById('bMSlot0').value = `1~Restaurant~${bigPrice3}`;
-	    lastPick = mBigItems[3];
+  do {
+    rarity = Math.random() * 10;
+    firstWord = el.innerHTML.replace("<strike>", '').split(' ')[0];
+
+    if(rarity < 4) {
+      if(firstWord == "Electronics")
+        repeat = true;
+      else {
+        index = 0;
+        repeat = false;
       }
     }
-  }
-  function noRepeat(index) {
-	mBRand = Math.random() * 10;
-	lastPick = mBigItems[index];
-    genLogic();
-  }
+    else if(rarity < 7) {
+      if(firstWord == "Computer")
+        repeat = true;
+      else {
+        index = 1;
+        repeat = false;
+      }
+    }
+    else if(rarity < 9) {
+      if(firstWord == "Café")
+        repeat = true;
+      else {
+        index = 2;
+        repeat = false;
+      }
+    } else {
+      if(firstWord == "Restaurant")
+        repeat = true;
+      else {
+        index = 3;
+        repeat = false;
+      }
+    }
+
+  } while (repeat);
+
+  price = mBigPriceGen(index);
+  el.innerHTML = `${mBigItems[index]} for $${price}`;
+  el.value = `1~Electronics Store~${price}`;
 }
 
 //for generating market slot items
@@ -249,6 +243,7 @@ function buy(id, index) {
 //adds all the repeating items together and organizes them from cheapest to most expensive, displaying only the items that have a quantity greater than 0
 function invenCopy() {
   var finalInven = [];
+  console.log(myItems);
 
   for (var i = 0; i < myItems.length; i++) {
 	itemType(myItems[i].split('~')[1], parseInt(myItems[i].split('~')[0]));
