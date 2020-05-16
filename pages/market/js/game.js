@@ -96,38 +96,36 @@ function mSlotGenBig() {
 /* for generating light market slot items.
  * void. Calls mPriceGen() to get the price */
 function mSlotGen() {
-  var c = 0;
-  var mSlotItems = ['Wood', 'Brick', 'Steel', 'Silver', 'Gold', 'Platinum', 'Cell Phone', 'Computer']; //market slot item
-  numItems = [];
+ var items = ['Wood', 'Brick', 'Steel', 'Silver', 'Gold',
+             'Platinum', 'Cell Phone', 'Computer'];
+ var rarity, index, numItems, price;
 
-  //this the the logic for getting rarity on the items. No they werent picked at random, this is MANY minutes of balancing
-  for (i = 0; i < mSlotItems.length; i++) {
-    var randItem = Math.random() * 100;
+ // get rarity
+ for (i = 0; i < items.length; i++) {
+   rarity = Math.random() * 100;
 
-    if (randItem < 25) { //wood
-      itemInput(0, 'Wood', i);
-    } else if (randItem < 45) { //brick
-      itemInput(1, 'Brick', i);
-    } else if (randItem < 65) { //steel
-      itemInput(2, 'Steel', i);
-    } else if (randItem < 80) { //silver
-      itemInput(3, 'Silver', i);
-    } else if (randItem < 87) { //gold
-      itemInput(4, 'Gold', i);
-    } else if (randItem < 93) { //platinum
-      itemInput(5, 'Platinum', i);
-    } else if (randItem < 97) { //cell phone
-      itemInput(6, 'Cell Phone', i);
-    } else if (randItem <= 100) { //computer
-      itemInput(7, 'Computer', i);
-    }
-  }
-  function itemInput(index, type, i) { //index = number 0-7; type = wood, brick, ect...; i = num for id calls
-    var numItems = numOfItem(index);
-    var price = mPriceGen(index, numItems, i);
-    document.getElementById("mSlot" + i).innerHTML = `${numItems} ${mSlotItems[index]} for $${price}`;
-    document.getElementById("mSlot" + i).value = `${numItems}~${type}~${price}`;
-  }
+   if (rarity < 25)
+     index = 0;
+   else if (rarity < 45)
+     index = 1;
+   else if (rarity < 65)
+     index = 2;
+   else if (rarity < 80)
+     index = 3;
+   else if (rarity < 87)
+     index = 4;
+   else if (rarity < 93)
+     index = 5;
+   else if (rarity < 97)
+     index = 6;
+   else if (rarity <= 100)
+     index = 7;
+
+   numItems = numOfItem(index);
+   price = mPriceGen(index, numItems, i);
+   document.getElementById("mSlot"+i).innerHTML = `${numItems} ${items[index]} for $${price}`;
+   document.getElementById("mSlot"+i).value = `${numItems}~${items[index]}~${price}`;
+ }
 }
 
 /* returns the light market price, sets a timer to buy the items */
