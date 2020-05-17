@@ -207,15 +207,15 @@ function buy(id, index) {
  * calls itemType(). Returns an array of all your items with amount > 0 */
 function invenCopy(boughtItem) {
   var finalInven = [];
+  var amountArr = [`${localStorage.woodSave} Wood`, `${localStorage.brickSave} Brick`, `${localStorage.steelSave} Steel`,
+    `${localStorage.silverSave} Silver`, `${localStorage.goldSave} Gold`, `${localStorage.platinumSave} Platinum`,
+    `${localStorage.cellPhoneSave} Cell Phone`, `${localStorage.computerSave} Computer`,
+    `${localStorage.electronicsStoreSave} Electronics Store`, `${localStorage.computerStoreSave} Computer Store`,
+    `${localStorage.cafeSave} Cafe`, `${localStorage.restaurantSave} Restaurant`];
 
   if(boughtItem) {
     itemType(boughtItem.split('~')[1], parseInt(boughtItem.split('~')[0]));
   }
-  var amountArr = [`${localStorage.woodSave} Wood`, `${localStorage.brickSave} Brick`, `${localStorage.steelSave} Steel`,
-                  `${localStorage.silverSave} Silver`, `${localStorage.goldSave} Gold`, `${localStorage.platinumSave} Platinum`,
-                  `${localStorage.cellPhoneSave} Cell Phone`, `${localStorage.computerSave} Computer`,
-                  `${localStorage.electronicsStoreSave} Electronics Store`, `${localStorage.computerStoreSave} Computer Store`,
-                  `${localStorage.cafeSave} Cafe`, `${localStorage.restaurantSave} Restaurant`];
   for (var a = 0; a < amountArr.length; a++) {
     if (parseInt(amountArr[a].slice(0, 1)) > 0) {
       finalInven.push(amountArr[a]);
@@ -239,13 +239,15 @@ function moneyFn(price, numItems) {
     }, 2000);
     return [localStorage.moneySave, true];
   }
-  var msg = "Not enough money!";
-  if(allItems > 20)
-    msg = `Not enough storage space (${allItems}/20)!`;
+  var msg = `Not enough storage space (${allItems}/20)!`;
+  if(money - price < 0)
+    msg = "Not enough money!";
   alertBad(msg);
   return [localStorage.moneySave, false];
 }
 
+
+/* displays an alert message containing the content of msg */
 function alertBad(msg) {
   var el = document.getElementById("alert-bad");
   document.getElementById("badAlertFill").innerHTML = msg;
@@ -312,7 +314,7 @@ function myMarket() {
     document.getElementById('container').appendChild(newDiv);
   }
 
-  for (var c = 0; c < itemArr.length; c++) { //a simular for loop is needed to reference different id's to add listeners
+  for (var c = 0; c < itemArr.length-1; c++) { //a simular for loop is needed to reference different id's to add listeners
       document.getElementById('upID~' + c).addEventListener('click', function() { //up button to increment quantity by + 1
       var itemOrderNum0 = parseInt(this.id.split('~')[1]);
       var amountOrig = parseInt(itemArr[itemOrderNum0].split(' ')[0]);
@@ -425,9 +427,11 @@ function myMarket() {
 /* for adding items to the users live market, this includes the number of which
  * type of item, the price, and a delete button. The funtion also starts a timer
  * for when the item will be bought out */
+var uniqueId = 0;
 function hostAppend(index, content, type, price) {
+  var alertTimeout, buyTimeout;
   var div = document.getElementById("myLiveItems");
-  var nodeList = div.getElementsByTagName("div").length;
+  // var nodeList = div.getElementsByTagName("div").length;
 
   var amount = document.getElementById('typeID' + index).innerHTML.split('/')[0];
   var newDiv = document.createElement('div');
@@ -435,17 +439,17 @@ function hostAppend(index, content, type, price) {
 
   var newItem = document.createElement('p');
   newItem.innerText = `${amount} ${type}`;
-  newItem.setAttribute('id', 'MMhost' + nodeList);
+  newItem.setAttribute('id', 'MMhost' + uniqueId);
   newItem.setAttribute('class', "dt");
 
   var itemPrice = document.createElement('p');
   itemPrice.innerText = `$${price}`;
-  itemPrice.setAttribute('id', 'itemPrice' + nodeList);
+  itemPrice.setAttribute('id', 'itemPrice' + uniqueId);
   itemPrice.setAttribute('class', "dt");
 
   var deleteBtn = document.createElement('button');
   deleteBtn.innerText = 'delete';
-  deleteBtn.onclick = function() {newDiv.remove();}
+  deleteBtn.onclick = function() {newDiv.remove(); clearTimeout(alertTimeout); clearTimeout(buyTimeout);}
 
   newDiv.appendChild(newItem);
   newDiv.appendChild(itemPrice);
@@ -456,72 +460,79 @@ function hostAppend(index, content, type, price) {
   if(!(Math.random()+ratio-1.5 > 1)) {  // over 1.5 * the pricing it might not sell at all
     // if priced at average, will take about 60 secs
     var buyTime = (40*Math.pow(ratio, 2)+20 + Math.random()*10)*1000;
-    setTimeout(botBuyMM, buyTime, nodeList, newDiv);
-    setTimeout(function(){
+    buyTimeout = setTimeout(botBuyMM, buyTime, uniqueId, newDiv);
+    alertTimeout = setTimeout(function(){
       var el = document.getElementById("alert-sold");
       el.style.display = "block";
       setTimeout(function(){
         $("#alert-sold").fadeOut();
       }, 2000);
     }, buyTime);
+  } else {
+    console.log("this item will not sell");
+    clearTimeout(buyTimeout);
+    clearTimeout(alertTimeout);
   }
+  uniqueId++;
+}
+
+/* the bot buying function for the users market which buys the item,
+* crosses it out, adds the money to the users total amount,
+* and removes it after 2 seconds. void.*/
+function botBuyMM(index, deleteSlot) {
+  var data = document.getElementById("MMhost" + index).innerHTML;
+  var res = data.fontcolor("#49c460").strike();
+  document.getElementById("MMhost" + index).innerHTML = res;
+  localStorage.moneySave = parseInt(document.getElementById('itemPrice' + index).innerHTML.replace('$','')) + Number(localStorage.moneySave);
+  document.getElementById('moneyP').innerHTML = `Money: $${localStorage.moneySave}`;
+  setTimeout(function(){
+    deleteSlot.remove();
+  }, 2000);
 }
 
 /* used to reference what type of item it is and then dealing with it based
  * on a ternary condition to either increase the amount of an item,
  * or return the average price */
 function itemType(type, amount) {
+  let ls = localStorage;
   switch (type) {
     case 'Wood':
-	  return ((amount) ? (localStorage.woodSave = Number(localStorage.woodSave) + amount) : 10);
+	  return ((amount) ? (ls.woodSave = Number(ls.woodSave) + amount) : 10);
       break;
     case 'Brick':
-	  return ((amount) ? (localStorage.brickSave = Number(localStorage.brickSave) + amount) : 15);
+	  return ((amount) ? (ls.brickSave = Number(ls.brickSave) + amount) : 15);
       break;
     case 'Steel':
-	  return ((amount) ? (localStorage.steelSave = Number(localStorage.steelSave) + amount) : 25);
+	  return ((amount) ? (ls.steelSave = Number(ls.steelSave) + amount) : 25);
       break;
     case 'Silver':
-	  return ((amount) ? (localStorage.silverSave = Number(localStorage.silverSave) + amount) : 50);
+	  return ((amount) ? (ls.silverSave = Number(ls.silverSave) + amount) : 50);
       break;
     case 'Gold':
-	  return ((amount) ? (localStorage.goldSave = Number(localStorage.goldSave) + amount) : 100);
+	  return ((amount) ? (ls.goldSave = Number(ls.goldSave) + amount) : 100);
       break;
     case 'Platinum':
-	  return ((amount) ? (localStorage.platinumSave = Number(localStorage.platinumSave) + amount) : 150);
+	  return ((amount) ? (ls.platinumSave = Number(ls.platinumSave) + amount) : 150);
       break;
     case 'Cell Phone':
-	  return ((amount) ? (localStorage.cellPhoneSave = Number(localStorage.cellPhoneSave) + amount) : 1000);
+	  return ((amount) ? (ls.cellPhoneSave = Number(ls.cellPhoneSave) + amount) : 1000);
       break;
     case 'Computer':
-	  return ((amount) ? (localStorage.computerSave = Number(localStorage.computerSave) + amount) : 1500);
+	  return ((amount) ? (ls.computerSave = Number(ls.computerSave) + amount) : 1500);
       break;
     case 'Electronics Store':
-	  return ((amount) ? (localStorage.electronicsStoreSave = Number(localStorage.electronicsStoreSave) + amount) : 10000);
+	  return ((amount) ? (ls.electronicsStoreSave = Number(ls.electronicsStoreSave) + amount) : 10000);
       break;
     case 'Computer Store':
-	  return ((amount) ? (localStorage.computerStoreSave = Number(localStorage.computerStoreSave) + amount) : 20000);
+	  return ((amount) ? (ls.computerStoreSave = Number(ls.computerStoreSave) + amount) : 20000);
       break;
     case 'Cafe':
-	  return ((amount) ? (localStorage.cafeSave = Number(localStorage.cafeSave) + amount) : 25000);
+	  return ((amount) ? (ls.cafeSave = Number(ls.cafeSave) + amount) : 25000);
       break;
     case 'Restaurant':
-	  return ((amount) ? (localStorage.restaurantSave = Number(localStorage.restaurantSave) + amount) : 75000);
+	  return ((amount) ? (ls.restaurantSave = Number(ls.restaurantSave) + amount) : 75000);
       break;
   }
-}
-
-/* the bot buying function for the users market which buys the item,
- * crosses it out, adds the money to the users total amount,
- * and removes it after 2 seconds. void.*/
-function botBuyMM(index, deleteSlot) {
-  var content = document.getElementById('MMhost' + index).innerHTML.strike();
-  document.getElementById('MMhost' + index).innerHTML = content;
-  setTimeout(function(){
-    localStorage.moneySave = parseInt(document.getElementById('itemPrice' + index).innerHTML.replace('$','')) + Number(localStorage.moneySave);
-    document.getElementById('moneyP').innerHTML = `Money: $${localStorage.moneySave}`;
-    deleteSlot.remove();
-  }, 2000);
 }
 
 
@@ -529,20 +540,11 @@ function botBuyMM(index, deleteSlot) {
 function main() {
   //The below are variables stored in local storage so the users progress can be saved after closing or refreshing
   if(!localStorage.moneySave) {
+    let ls = localStorage;
     localStorage.moneySave = 500;
-    localStorage.totalItems = 0;
-    localStorage.woodSave = 0;
-    localStorage.brickSave = 0;
-    localStorage.steelSave = 0;
-    localStorage.silverSave = 0;
-    localStorage.goldSave = 0;
-    localStorage.platinumSave = 0;
-    localStorage.cellPhoneSave = 0;
-    localStorage.computerSave = 0;
-    localStorage.electronicsStoreSave = 0;
-    localStorage.computerStoreSave = 0;
-    localStorage.cafeSave = 0;
-    localStorage.restaurantSave = 0;
+    ls.totalItems = ls.woodSave = ls.brickSave = ls.steelSave = ls.silverSave = 0;
+    ls.goldSave = ls.platinumSave = ls.cellPhoneSave = ls.computerSave = 0;
+    ls.electronicsStoreSave = ls.computerStoreSave = ls.cafeSave = ls.restaurantSave = 0;
 
     // and we want to show the tutorial
     document.getElementById("tutorial").style.display = "block";
@@ -550,8 +552,12 @@ function main() {
 
     $(document).ready(function(){
       $("#tut0").fadeIn(1000);
-      $("#tut1").fadeIn(2000);
-      $("#tut2").fadeIn(3000);
+      setTimeout(function() {
+        $("#tut1").fadeIn(1000);
+      }, 1000);
+      setTimeout(function() {
+        $("#tut2").fadeIn(1000);
+      }, 2000);
     });
   }
   marketTime(); // start timers
