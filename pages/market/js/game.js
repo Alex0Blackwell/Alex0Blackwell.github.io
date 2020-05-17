@@ -464,6 +464,7 @@ function hostAppend(index, content, type, price) {
     alertTimeout = setTimeout(function(){
       var el = document.getElementById("alert-sold");
       el.style.display = "block";
+      document.getElementById("soldFill").innerHTML = `Your ${type} sold ($${price})!`;
       setTimeout(function(){
         $("#alert-sold").fadeOut();
       }, 2000);

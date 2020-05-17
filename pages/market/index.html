@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0 user-scalable=0;">
   <link rel="icon" type="image/png" sizes="32x32" href="../../img/favicon.png">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="css/main.css">
 </head>
@@ -43,7 +44,7 @@
     </div>
     <div id="alert-sold" class="alert">
       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-      <strong>Nice!</strong> You sold an item!
+      <strong>Nice! </strong><span id="soldFill"></span>
     </div>
     <div id="alert-alreadyBought" class="alert bad">
       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
