@@ -180,14 +180,16 @@ function botBuy(id, index) {
 function buy(id, index) {
     var content = document.getElementById(id + index).value;
     if (content) {
-      var moneyBool = moneyFn(parseInt(content.split('~')[2]));
+      var moneyBool = moneyFn(parseInt(content.split('~')[2]), Number(content.split('~')[0]));
       var moneyRewrite = parseInt(moneyBool[0]);
       localStorage.setItem('moneySave', moneyRewrite);
       if (moneyBool[1]) {
+        localStorage.totalItems = Number(localStorage.totalItems) + Number(content.split('~')[0]);
         var data = document.getElementById(id + index).innerHTML;
         var res = data.fontcolor("#49c460").strike();
         document.getElementById(id + index).innerHTML = res;
         document.getElementById(id + index).value = false;
+        document.getElementById('inventory').innerHTML = invenCopy(content);
       }
     } else {
       var el = document.getElementById("alert-alreadyBought");
@@ -196,7 +198,6 @@ function buy(id, index) {
         $("#alert-alreadyBought").fadeOut();
       }, 2000);
     }
-  document.getElementById('inventory').innerHTML = invenCopy(content);
   document.getElementById('moneyP').innerHTML = `Money: $${localStorage.moneySave}`;
   myMarket();
 }
@@ -210,20 +211,26 @@ function invenCopy(boughtItem) {
   if(boughtItem) {
     itemType(boughtItem.split('~')[1], parseInt(boughtItem.split('~')[0]));
   }
-  var amountArr = [`${localStorage.woodSave} Wood`, `${localStorage.brickSave} Brick`, `${localStorage.steelSave} Steel`, `${localStorage.silverSave} Silver`, `${localStorage.goldSave} Gold`, `${localStorage.platinumSave} Platinum`, `${localStorage.cellPhoneSave} Cell Phone`, `${localStorage.computerSave} Computer`, `${localStorage.electronicsStoreSave} Electronics Store`, `${localStorage.computerStoreSave} Computer Store`, `${localStorage.cafeSave} Cafe`, `${localStorage.restaurantSave} Restaurant`];
+  var amountArr = [`${localStorage.woodSave} Wood`, `${localStorage.brickSave} Brick`, `${localStorage.steelSave} Steel`,
+                  `${localStorage.silverSave} Silver`, `${localStorage.goldSave} Gold`, `${localStorage.platinumSave} Platinum`,
+                  `${localStorage.cellPhoneSave} Cell Phone`, `${localStorage.computerSave} Computer`,
+                  `${localStorage.electronicsStoreSave} Electronics Store`, `${localStorage.computerStoreSave} Computer Store`,
+                  `${localStorage.cafeSave} Cafe`, `${localStorage.restaurantSave} Restaurant`];
   for (var a = 0; a < amountArr.length; a++) {
     if (parseInt(amountArr[a].slice(0, 1)) > 0) {
       finalInven.push(amountArr[a]);
     }
   }
+  finalInven.push(` (${localStorage.totalItems}/20) items`);
   return finalInven;
 }
 
 /* subtracts price if user money doesn't go negative.
  * Returns [money, flag] where flag is true if the item could be bought */
-function moneyFn(price) {
+function moneyFn(price, numItems) {
   var money = parseInt(localStorage.moneySave);
-  if (money - price >= 0) {
+  var allItems = Number(localStorage.totalItems) + numItems;
+  if (money - price >= 0 && allItems <= 20) {
     localStorage.moneySave = Number(localStorage.moneySave) - price;
     var el = document.getElementById("alert-bought");
     el.style.display = "block";
@@ -232,12 +239,20 @@ function moneyFn(price) {
     }, 2000);
     return [localStorage.moneySave, true];
   }
-  var el = document.getElementById("alert-money");
-  el.style.display = "block";
-  setTimeout(function(){
-    $("#alert-money").fadeOut();
-  }, 2000);
+  var msg = "Not enough money!";
+  if(allItems > 20)
+    msg = `Not enough storage space (${allItems}/20)!`;
+  alertBad(msg);
   return [localStorage.moneySave, false];
+}
+
+function alertBad(msg) {
+  var el = document.getElementById("alert-bad");
+  document.getElementById("badAlertFill").innerHTML = msg;
+  el.style.display = "block";
+  setTimeout(function() {
+    $("#alert-bad").fadeOut();
+  }, 2000);
 }
 
 /* for everything about the users market: adding items to the users live market,
@@ -259,7 +274,7 @@ function myMarket() {
     }
   }
 
-  for (var b = 0; b < itemArr.length; b++) { //loop that dynamically generates html via javascript and gives these elements unique id's
+  for (var b = 0; b < itemArr.length-1; b++) { //loop that dynamically generates html via javascript and gives these elements unique id's
     var newDiv = document.createElement('div');
     newDiv.className = "gridItem col-lg col-sm-4 col-6 col-xs-12";
 
@@ -393,6 +408,7 @@ function myMarket() {
             localStorage.restaurantSave = Number(localStorage.restaurantSave) - parseInt(type.split('/')[0]);
             break;
         }
+        localStorage.totalItems = Number(localStorage.totalItems) - parseInt(type.split('/')[0]);
         myMarket();
         document.getElementById('inventory').innerHTML = invenCopy(false);
       } else {
@@ -408,7 +424,7 @@ function myMarket() {
 
 /* for adding items to the users live market, this includes the number of which
  * type of item, the price, and a delete button. The funtion also starts a timer
- * for which the item will be bought out */
+ * for when the item will be bought out */
 function hostAppend(index, content, type, price) {
   var div = document.getElementById("myLiveItems");
   var nodeList = div.getElementsByTagName("div").length;
@@ -513,7 +529,8 @@ function botBuyMM(index, deleteSlot) {
 function main() {
   //The below are variables stored in local storage so the users progress can be saved after closing or refreshing
   if(!localStorage.moneySave) {
-    localStorage.moneySave = 1500;
+    localStorage.moneySave = 500;
+    localStorage.totalItems = 0;
     localStorage.woodSave = 0;
     localStorage.brickSave = 0;
     localStorage.steelSave = 0;
