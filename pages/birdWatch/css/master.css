@@ -12,6 +12,11 @@ h1, h2, h3, h4, p {
   font-family: pixelFont, sans-serif;
 }
 
+strong, .bt {
+  color: black;
+  font-family: pixelFont, sans-serif;
+}
+
 #tutorial {
   margin-top: 10vh;
   display: none;
