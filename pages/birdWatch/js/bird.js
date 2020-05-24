@@ -180,12 +180,13 @@ function birdGen() {
 function main() {
   if(!localStorage.money) {
     localStorage.money = 0;
-    localStorage.birdsBought = 3;
-    document.getElementById("tutorial").style.display = "block";
-    document.getElementById("mainGame").style.display = "none";
-  } else {
-    birdGen();
+  //   localStorage.birdsBought = 3;
+  //   document.getElementById("tutorial").style.display = "block";
+  //   document.getElementById("mainGame").style.display = "none";
   }
+  // else {
+    birdGen();
+  // }
 }
 
 
