@@ -181,7 +181,7 @@ function birdGen() {
 
 
 function main() {
-  if(true || !localStorage.money) {
+  if(!localStorage.money) {
     localStorage.money = 0;
     localStorage.birdsBought = 3;
     document.getElementById("tutorial").style.display = "block";
