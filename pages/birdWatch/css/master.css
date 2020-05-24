@@ -26,7 +26,6 @@ strong, .bt {
   left: 0;
   right: 0;
   bottom: 0;
-  /* z-index: 2; */
 }
 
 #photoContainer, #gameLoss {
@@ -36,13 +35,11 @@ strong, .bt {
   display: none;
   padding-top: 5vh;
   min-height: 56vh;
-  /* height: 56vh; */
   width: 56vw;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  /* z-index: 2; */
 }
 
 #shop {
@@ -250,7 +247,7 @@ strong, .bt {
     font-size: 4vw;
   }
   .viewfinder {
-    margin-top: 17vh;
+    margin-top: 20vh;
   }
   #birdInfo {
     margin-top: 2vh;
