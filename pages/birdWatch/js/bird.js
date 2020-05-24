@@ -149,7 +149,6 @@ function off() {
 }
 
 function birdGen() {
-  alert("Started birdgen");
   document.getElementById("money").innerHTML = "$"+localStorage.money;
   var storeBtn = document.getElementById("storeIcon")
   storeBtn.classList.remove("fa-store-slash");
@@ -182,17 +181,16 @@ function birdGen() {
 
 
 function main() {
-  if(!localStorage.money) {
+  if(true || !localStorage.money) {
     localStorage.money = 0;
-  //   localStorage.birdsBought = 3;
-  //   document.getElementById("tutorial").style.display = "block";
-  //   document.getElementById("mainGame").style.display = "none";
+    localStorage.birdsBought = 3;
+    document.getElementById("tutorial").style.display = "block";
+    document.getElementById("mainGame").style.display = "none";
   }
-  // else {
+  else {
     birdGen();
-  // }
+  }
 }
 
 
 main();
-// birdGen();

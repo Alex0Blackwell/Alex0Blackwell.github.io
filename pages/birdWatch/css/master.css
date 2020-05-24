@@ -115,8 +115,10 @@ h1, h2, h3, h4, p {
 
 .shop {
   background-color: #e3e3e3;
+  border: 2px solid #262626;
   position: absolute;
   right: 10vw;
+  margin: 4px 2px;
 }
 
 .cornerSquare {
@@ -194,7 +196,10 @@ h1, h2, h3, h4, p {
     font-size: 4vw;
   }
   .viewfinder {
-    margin-top: 18vh;
+    margin-top: 17vh;
+  }
+  #birdInfo {
+    margin-top: 2vh;
   }
 }
 
