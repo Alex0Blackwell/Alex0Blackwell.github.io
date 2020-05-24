@@ -113,6 +113,43 @@ h1, h2, h3, h4, p {
   transition-duration: 0.2s;
 }
 
+#storeBtn {
+  background-color: #e3e3e3;
+  color: #262626;
+  border: 2px solid #262626;
+  text-decoration: none;
+  padding: 15px 15px;
+  margin-top: 5px;
+  right: 10vw;
+  position: absolute;
+  display: inline-block;
+  border-radius: 2px;
+  transition-duration: 0.2s;
+}
+
+#storeBtn:hover {
+  cursor: pointer;
+  background-color: #262626;
+  color: #e3e3e3;
+  border: 2px solid #e3e3e3;
+}
+
+#storeBtn {
+  border-radius: 5px;
+}
+
+#badge {
+  display: none;
+  position: absolute;
+  top: -9px;
+  right: -9px;
+  padding: 1px 9px;
+  border-radius: 50%;
+  background: #ff4f4f;
+  color: white;
+}
+
+
 .shop {
   background-color: #e3e3e3;
   border: 2px solid #262626;

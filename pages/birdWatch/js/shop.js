@@ -25,6 +25,11 @@ function buy(index) {
     ls.birdsBought = Number(ls.birdsBought) + 1;
     ls.money = Number(ls.money) - birdPrices[index];
     document.getElementById("money").innerHTML = '$'+Number(ls.money);
+    if(Number(ls.money) >= birdPrices[Number(ls.birdsBought)]) {
+      document.getElementById("badge").style.display = "block";
+    } else {
+      document.getElementById("badge").style.display = "none";
+    }
     shop();
 
     // document.getElementById("bird"+(index+1)).src = bird.imgName[i];

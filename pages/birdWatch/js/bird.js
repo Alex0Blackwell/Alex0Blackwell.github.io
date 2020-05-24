@@ -108,6 +108,7 @@ function capture() {
   clearTimeout(timeout);
   bird.setBlur();
   bird.setPrice();
+  let ls = localStorage;
   document.getElementById("viewfinderWrap").style.display = "none";
   document.getElementById("cornerSquare").style.display = "none";
   document.getElementById("photoContainer").style.display = "block";
@@ -115,20 +116,28 @@ function capture() {
   document.getElementById("rareId").innerHTML = " "
   document.getElementById("captureBtn").disabled = true;
 
-  localStorage.money = Number(localStorage.money) + bird.price;
-  document.getElementById("money").innerHTML = "$"+localStorage.money;
+  ls.money = Number(ls.money) + bird.price;
+  // check if the next bird can be bought and set the notification
+  if(Number(ls.money) >= birdPrices[Number(ls.birdsBought)]) {
+    document.getElementById("badge").style.display = "block";
+  }
+
+  document.getElementById("money").innerHTML = "$"+ls.money;
   document.getElementById("birdPic").src = `css/imgs/${bird.file}`;
   document.getElementById("photoBirdName").innerHTML = "You took a picture of the "+bird.name+'! '+bird.rarity;
-  document.getElementById("photoPrice").innerHTML = "Based on how blurry the picture was, this earned you "+bird.price+" dollars!";
-  // choppy chop that blur number. There's no good way to do this
+  var blurBonus = "";
   var res = "ok.";
-  if(bird.blur == 0)
+  if(bird.blur == 0) {
     res = "Perfect!";
+    ls.money = Number(ls.money) + 15;
+    blurBonus = " Plus an "+"extra 15 dollars".fontcolor("#80ff86")+" for perfect picture quality!"
+  }
   else if(bird.blur < 1)
     res = "Great!";
   else if(bird.blur > 2)
     res = "no Good!";
   document.getElementById("photoBlur").innerHTML = "The picture quality was "+res;
+  document.getElementById("photoPrice").innerHTML = "Based on how blurry the picture was, this earned you "+(bird.price+" dollars").fontcolor("#80ff86")+"!"+blurBonus;
 }
 
 
