@@ -1,17 +1,20 @@
 class Bird {
-  birds = ["Black Bird", "Blue Bird", "Brown Bird", "Dark Blue Bird", "Gray Bird",
-           "Green Bird", "Orange Bird", "Tan Bird", "Red Bird", "White Bird",
-           "Yellow Bird", "Purple Bird"];
 
-  imgName = ["blackBird.gif", "blueBird.gif","brownBird.gif","darkBlueBird.gif",
-             "grayBird.gif","greenBird.gif","orangeBird.gif","tanBird.gif",
-             "redBird.gif","whiteBird.gif","yellowBird.gif", "purpleBird.gif"];
+  constructor() {
+    this.birds = ["Black Bird", "Blue Bird", "Brown Bird", "Dark Blue Bird", "Gray Bird",
+    "Green Bird", "Orange Bird", "Tan Bird", "Red Bird", "White Bird",
+    "Yellow Bird", "Purple Bird"];
 
-  titleWords = ["A wild ", "An elusive ", "The fabled ", "The forgotten ",
-                "A seemingly extinct ", "A crazy ", "A shy ", "The legendary ",
-                "The mythical "];
+    this.imgName = ["blackBird.gif", "blueBird.gif","brownBird.gif","darkBlueBird.gif",
+    "grayBird.gif","greenBird.gif","orangeBird.gif","tanBird.gif",
+    "redBird.gif","whiteBird.gif","yellowBird.gif", "purpleBird.gif"];
 
-  rarityWords = ["(Common)", "(Rare)", "(Epic)", "(Legendary)"];
+    this.titleWords = ["A wild ", "An elusive ", "The fabled ", "The forgotten ",
+    "A seemingly extinct ", "A crazy ", "A shy ", "The legendary ",
+    "The mythical "];
+
+    this.rarityWords = ["(Common)", "(Rare)", "(Epic)", "(Legendary)"];
+  }
 
   /* gets the index based on a rarity sytem. The index is then used to get the
    * bird name and the bird image name */
@@ -146,6 +149,7 @@ function off() {
 }
 
 function birdGen() {
+  alert("Started birdgen");
   document.getElementById("money").innerHTML = "$"+localStorage.money;
   var storeBtn = document.getElementById("storeIcon")
   storeBtn.classList.remove("fa-store-slash");
