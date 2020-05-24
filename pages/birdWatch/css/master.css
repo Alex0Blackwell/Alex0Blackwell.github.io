@@ -2,8 +2,8 @@
 @font-face { font-family: pixelFont; font-weight: bold; src: url('fonts/pixelFont1.ttf');}
 
 body {
-  overflow-x: hidden;
   background-color: #262626;
+  overflow-x: hidden;
   touch-action: manipulation;
 }
 
@@ -40,6 +40,8 @@ strong, .bt {
   left: 0;
   right: 0;
   bottom: 0;
+  overflow-x: hidden;
+  touch-action: manipulation;
 }
 
 #shop {
@@ -54,6 +56,11 @@ strong, .bt {
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.container {
+  overflow-x: hidden;
+  touch-action: manipulation;
 }
 
 .shopBird {
@@ -75,10 +82,13 @@ strong, .bt {
    margin-top: 16vh;
    padding: 0;
    overflow: hidden;
+   touch-action: manipulation;
 }
 
 .outside {
   background-color: #262626;
+  overflow-x: hidden;
+  touch-action: manipulation;
 }
 
 .absolutePos {
@@ -214,8 +224,9 @@ strong, .bt {
   /* padding: 10px 20px; */
   text-align: center;
   display: inline;
+  width: 60px;
   /* font-size: 16px; */
-  /* margin: 4px 2px; */
+  margin: 0 7px;
   transition-duration: 0.4s;
   cursor: pointer;
 }

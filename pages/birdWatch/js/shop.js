@@ -125,6 +125,7 @@ function closeShop() {
   document.getElementById("cornerSquare").style.display = "block";
   document.getElementById("birdInfo").style.display = "block";
   document.getElementById("captureBtn").disabled = false;
+  onStart();
   birdGen();
   // document.getElementById("photoContainer").style.display = "block";
 

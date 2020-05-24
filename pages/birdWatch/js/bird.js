@@ -141,10 +141,34 @@ function capture() {
 }
 
 
+function showTutorial() {
+  // in case there are existing timeouts
+  clearTimeout(timeout);
+  clearTimeout(gotAwayTimeout);
+  document.getElementById("tutorial").style.display = "block";
+  document.getElementById("mainGame").style.display = "none";
+}
+
+
 function play() {
+  // turn off tutorial
   document.getElementById("tutorial").style.display = "none";
+  // turn off capture
+  document.getElementById("photoContainer").style.display = "none";
+  // turn off game loss
+  document.getElementById("gameLoss").style.display = "none";
+  // turn off shop
+  document.getElementById("shop").style.display = "none";
+
+  // turn on main game and jump into a game
   document.getElementById("mainGame").style.display = "block";
+  document.getElementById("viewfinderWrap").style.display = "block";
+  document.getElementById("cornerSquare").style.display = "block";
+  document.getElementById("birdInfo").style.display = "block";
+  document.getElementById("captureBtn").disabled = false;
+
   birdGen();
+  onStart();
 }
 
 
@@ -193,8 +217,7 @@ function main() {
   if(!localStorage.money) {
     localStorage.money = 0;
     localStorage.birdsBought = 3;
-    document.getElementById("tutorial").style.display = "block";
-    document.getElementById("mainGame").style.display = "none";
+    showTutorial();
   }
   else {
     birdGen();
