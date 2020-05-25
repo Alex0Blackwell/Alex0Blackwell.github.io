@@ -18,49 +18,42 @@ class Bird {
 
   /* gets the index based on a rarity sytem. The index is then used to get the
    * bird name and the bird image name */
-  setBird() {
-    var rarityRaw, range;
-    var birdsBought = Number(localStorage.birdsBought);
-    var multiplyFactor = 4;
+   setBird() {
+     var rarityArr = [];
+     var rarityRaw, range, numToAdd;
+     var birdsBought = Number(localStorage.birdsBought);
 
-    if(birdsBought/3 > 3)
-      multiplyFactor = 10
-    else if(birdsBought/3 > 2)
-      multiplyFactor += birdsBought-4  // 7-9
-    else if(birdsBought/3 > 1)
-      multiplyFactor += birdsBought-4  // 4-6
+     for(let i = 0; i < birdsBought; i++) {
+       if(i < 3)
+         numToAdd = 4;
+       else if(i < 6)
+         numToAdd = 3;
+       else if(i < 9)
+         numToAdd = 2;
+       else if(i < 12)
+         numToAdd = 1;
 
+       for(let j = 0; j < numToAdd; j++) {
+         rarityArr.push(i)
+       }
+     }
 
-    var choose = Math.floor(Math.random()*multiplyFactor);
-    this.index = Math.floor(Math.random()*3);
-    if(choose < 4) {
-      rarityRaw = this.rarityWords[0];
-      this.rarity = rarityRaw.fontcolor("#80ff86");
-    } else if(choose < 6) {
-      // "Dark Blue Bird", "Gray Bird", "Green Bird"
-      range = 3;
-      if(birdsBought < 6)
-        range = birdsBought - 3;
-      this.index = 3 + Math.floor(Math.random()*range);
-      rarityRaw = this.rarityWords[1];
-      this.rarity = rarityRaw.fontcolor("#8fc7ff");
-    } else if(choose < 9) {
-      // "Orange Bird", "Tan Bird", "Red Bird"
-      range = 3;
-      if(birdsBought < 9)
-        range = birdsBought - 6;
-      this.index = 6 + Math.floor(Math.random()*range);
-      rarityRaw = this.rarityWords[2];
-      this.rarity = rarityRaw.fontcolor("#cea1ff");
-    } else {
-      range = birdsBought - 9;
-      this.index = 9 + Math.floor(Math.random()*range);
-      rarityRaw = this.rarityWords[3];
-      this.rarity = rarityRaw.fontcolor("#fff454");
-    }
-    this.name = this.birds[this.index];
-    this.file = this.imgName[this.index];
-  }
+     this.index = rarityArr[Math.floor(Math.random()*rarityArr.length)]
+     if(this.index < 3) {
+       this.rarity = this.rarityWords[0].fontcolor("#80ff86");
+     } else if(this.index < 6) {
+       // "Dark Blue Bird", "Gray Bird", "Green Bird"
+       this.rarity = this.rarityWords[1].fontcolor("#8fc7ff");
+     } else if(this.index < 9) {
+       // "Orange Bird", "Tan Bird", "Red Bird"
+       this.rarity = this.rarityWords[2].fontcolor("#cea1ff");
+     } else if(this.index < 12) {
+       // "White Bird", "Yellow Bird", "Purple Bird"
+       this.rarity = this.rarityWords[3].fontcolor("#fff454");
+     }
+     this.name = this.birds[this.index];
+     this.file = this.imgName[this.index];
+   }
 
   /* choses a random title from the titlewords array and sets it */
   setTitle() {
@@ -210,6 +203,43 @@ function birdGen() {
       onStart();
     }, 1500);
   }, bird.time);
+}
+
+function openFullscreen() {
+  var elem = document.documentElement;
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    elem.msRequestFullscreen();
+  } else {
+    return;
+  }
+  var fullBtn = document.getElementById("fullScreenIcon")
+  fullBtn.classList.remove("fa-expand");
+  fullBtn.classList.add("fa-compress");
+  document.getElementById("fullScreenBtn").onclick = function() {closeFullscreen()};
+}
+
+function closeFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  } else {
+    return;
+  }
+  var fullBtn = document.getElementById("fullScreenIcon")
+  fullBtn.classList.remove("fa-compress");
+  fullBtn.classList.add("fa-expand");
+  document.getElementById("fullScreenBtn").onclick = function() {openFullscreen()};
 }
 
 

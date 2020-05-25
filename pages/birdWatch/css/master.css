@@ -70,6 +70,10 @@ strong, .bt {
   width: 130px;
 }
 
+#viewfinderWrap {
+  pointer-events: none;
+}
+
 .viewfinder {
    position: relative;
    left: -50%;
@@ -124,6 +128,21 @@ strong, .bt {
   transition-duration: 0.2s;
 }
 
+#fullScreenBtn {
+  background-color: #e3e3e3;
+  color: #262626;
+  border: 2px solid #262626;
+  text-decoration: none;
+  padding: 15px 15px;
+  margin-top: 5px;
+  left: 10vw;
+  position: absolute;
+  display: inline-block;
+  border-radius: 2px;
+  transition-duration: 0.2s;
+  border-radius: 5px;
+}
+
 #storeBtn {
   background-color: #e3e3e3;
   color: #262626;
@@ -136,17 +155,14 @@ strong, .bt {
   display: inline-block;
   border-radius: 2px;
   transition-duration: 0.2s;
+  border-radius: 5px;
 }
 
-#storeBtn:hover {
+#storeBtn:hover, #fullScreenBtn:hover {
   cursor: pointer;
   background-color: #262626;
   color: #e3e3e3;
   border: 2px solid #e3e3e3;
-}
-
-#storeBtn {
-  border-radius: 5px;
 }
 
 #badge {
