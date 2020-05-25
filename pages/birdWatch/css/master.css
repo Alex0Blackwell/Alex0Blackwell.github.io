@@ -135,7 +135,7 @@ strong, .bt {
   text-decoration: none;
   padding: 15px 15px;
   margin-top: 5px;
-  left: 10vw;
+  right: 10vw;
   position: absolute;
   display: inline-block;
   border-radius: 2px;
@@ -150,7 +150,7 @@ strong, .bt {
   text-decoration: none;
   padding: 15px 15px;
   margin-top: 5px;
-  right: 10vw;
+  left: 10vw;
   position: absolute;
   display: inline-block;
   border-radius: 2px;
