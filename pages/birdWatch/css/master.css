@@ -261,6 +261,7 @@ strong, .bt {
 }
 
 @media only screen and (max-width: 650px) {
+  /* phone */
   #bird {
     left: 20%;
   }
@@ -279,6 +280,9 @@ strong, .bt {
   #birdInfo {
     margin-top: 2vh;
   }
+  #fullScreenBtn {
+    display: none;
+  }
 }
 
 #birdPic {
@@ -291,6 +295,9 @@ strong, .bt {
 
 #bottomButtons {
   margin-top: 10px;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .alert {
