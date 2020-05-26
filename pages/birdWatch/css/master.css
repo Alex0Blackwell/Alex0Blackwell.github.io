@@ -66,7 +66,7 @@ strong, .bt {
 .shopBird {
   cursor: pointer;
   border: 2px solid #e3e3e3;
-  height: 130px;
+  /*height: 130px; */
   width: 130px;
 }
 
@@ -250,7 +250,7 @@ strong, .bt {
 #bird {
   width: 150px;
   position: absolute;
-  top: 50%;
+  bottom: 10%;
   left: 40%;
 }
 
