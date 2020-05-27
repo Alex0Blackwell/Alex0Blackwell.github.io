@@ -9862,6 +9862,11 @@ form {
   margin: auto;
 }
 
+:required {
+  box-shadow: none;
+}
+
+
 .inputField {
   border: 2px solid #324057;
   border-radius: 5px;
