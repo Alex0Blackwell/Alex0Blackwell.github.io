@@ -9853,11 +9853,47 @@ form .row:first-child .floating-label-form-group {
   background-color: #1a252f;
 }
 
+.contactMe {
+  color: #618fcf;
+  text-decoration: underline;
+}
+
 form {
   margin: auto;
 }
 
+.inputField {
+  border: 2px solid #324057;
+  border-radius: 5px;
+  margin-bottom: 16px;
+}
+
+.sendMessageBtn {
+  color: black;
+  background-color: white;
+  border: 2px solid #324057;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 5px 10px;
+  transition: 0.3s;
+}
+
+.sendMessageBtn:hover {
+  color: white;
+  background-color: #618fcf;
+}
+
+textarea {
+  height: 100px;
+  width: 60%;
+}
+
+@media only screen and (max-width: 800px) {
+  textarea {
+    width: 100%;
+  }
+}
 
 #inputWrap {
-  width: 80%;
+  width: 100%;
 }

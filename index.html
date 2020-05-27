@@ -263,28 +263,27 @@
 
       <!-- Contact Section Form -->
       <div class="text-center container d-flex align-items-center flex-column">
-        <h4 class="font-weight-light mb-0">Email: alex.blackwell314@gmail.com</h4>
       </div>
 
       <div class="container">
-        <div class="row text-center">
+        <div class="row text-center contactMe">
           <form action="https://send.pageclip.co/7b7bdyGgdVJXAcm9bNbiSyJt92ptIiWz" id="inputWrap" class="pageclip-form" method="post">
           <div class="lg-col-12">
-            <input type="text" name="name" value="" placeholder="Your name" required/>
+            <h6>Your name:</h6>
+            <input type="text" name="name" value="" placeholder="name" class="inputField"/>
           </div>
           <div class="lg-col-12">
-            <input type="email" name="email" value="" placeholder="yourEmail@example.com" required/>
+            <h6>Your email address:</h6>
+            <input type="email" name="email" value="" placeholder="email@example.com" class="inputField"/>
           </div>
           <div class="lg-col-12">
-            <input type="text" name="subject" value="" placeholder="Email subject" required/>
-          </div>
-          <div class="lg-col-12">
-            <textarea name="body" required>Email body</textarea>
+            <h6>Your message:</h6>
+            <textarea name="body" class="inputField"></textarea>
           </div>
           <div class="lg-col-12">
             <!-- This button will have a loading spinner. Keep the inner span for best results. -->
-            <button type="submit" class="pageclip-form__submit">
-              <span>Send</span>
+            <button type="submit" class="pageclip-form__submit sendMessageBtn">
+              <span>Send Message</span>
             </button>
           </div>
           </form>
