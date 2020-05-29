@@ -3,15 +3,14 @@ class Bird {
   constructor() {
     this.birds = ["Black Bird", "Blue Bird", "Brown Bird", "Dark Blue Bird", "Gray Bird",
     "Green Bird", "Orange Bird", "Tan Bird", "Red Bird", "White Bird",
-    "Yellow Bird", "Purple Bird"];
+    "Yellow Bird", "Charles"];
 
     this.imgName = ["blackBird.gif", "blueBird.gif","brownBird.gif","darkBlueBird.gif",
     "grayBird.gif","greenBird.gif","orangeBird.gif","tanBird.gif",
     "redBird.gif","whiteBird.gif","yellowBird.gif", "purpleBird.gif"];
 
     this.titleWords = ["A wild ", "An elusive ", "The fabled ", "The forgotten ",
-    "A seemingly extinct ", "A crazy ", "A shy ", "The legendary ",
-    "The mythical "];
+    "A crazy ", "A shy ", "The legendary ", "The mythical "];
 
     this.rarityWords = ["(Common)", "(Rare)", "(Epic)", "(Legendary)"];
   }
