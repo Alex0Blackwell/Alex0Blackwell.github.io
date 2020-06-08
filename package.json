@@ -1,26 +1,22 @@
 {
-    "title": "Freelancer",
+    "title": "Alex Blackwell Website",
     "name": "startbootstrap-freelancer",
     "version": "5.1.3",
     "scripts": {
         "start": "node_modules/.bin/gulp watch"
     },
-    "description": "A freelancer portfolio HTML theme for Bootstrap.",
+    "description": "Simon Fraser University Junior Software Developer",
     "keywords": [
-        "css",
-        "sass",
-        "html",
-        "responsive",
-        "theme",
-        "template"
+        "Simon Fraser University",
+        "Software",
+        "Developer",
+        "Junior",
+        "Computer",
+        "Science"
     ],
-    "homepage": "https://startbootstrap.com/template-overviews/freelancer",
-    "bugs": {
-        "url": "https://github.com/BlackrockDigital/startbootstrap-freelancer/issues",
-        "email": "feedback@startbootstrap.com"
-    },
+    "homepage": "https://alex0blackwell.github.io/",
     "license": "MIT",
-    "author": "Start Bootstrap",
+    "author": "Alex Blackwell",
     "contributors": [
         "David Miller (http://davidmiller.io/)"
     ],
