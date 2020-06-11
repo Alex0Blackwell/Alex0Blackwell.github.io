@@ -11,7 +11,7 @@ This is my personal Website displaying projects and information about myself. Ma
 
 ## Screenshots
 
-    > Screenshot of the website
+> Screenshot of the website
 
 ![Screenshot](pictures/fullWeb.png "The main page")
 
