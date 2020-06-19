@@ -146,7 +146,8 @@
       </div>
 
       <div class="text-center container d-flex align-items-center flex-column">
-        <h4 class="font-weight-light text-white">Press on the tiles to learn more about the projects</h4>
+        <h3 class="text-uppercase text-white">Website Development</h3>
+        <h4 class="font-weight-light text-white mb-5">Press on the tiles to learn more about the projects</h4>
       </div>
 
       <!-- Portfolio Grid Items -->
@@ -220,21 +221,9 @@
                 <i class="fas fa-plus fa-3x"></i>
               </div>
             </div>
-            <img class="img-fluid" src="img/portfolio/terminalMusic.jpg" alt="">
+            <img class="img-fluid" src="img/portfolio/merge.png" alt="">
           </div>
         </div>
-
-        <!-- Portfolio Item 6 -->
-        <!-- <div class="col-md-6 col-lg-4">
-          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal6">
-            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-              <div class="portfolio-item-caption-content text-center text-white">
-                <i class="fas fa-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="img/portfolio/terminalVirtual.jpg" alt="">
-          </div>
-        </div> -->
 
       </div>
       <!-- /.row -->
@@ -349,12 +338,12 @@
             <i class="fas fa-times"></i>
           </span>
         </button>
-        <div class="modal-body text-center">
+        <div class="modal-body">
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-8">
                 <!-- Portfolio Modal - Title -->
-                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Market Game</h2>
+                <h2 class="portfolio-modal-title text-secondary text-uppercase text-center mb-0">Market Game</h2>
                 <!-- Icon Divider -->
                 <div class="divider-custom">
                   <div class="divider-custom-line"></div>
@@ -368,13 +357,57 @@
                   <img class="img-fluid rounded mb-5" src="img/portfolio/market.png" alt="">
                 </a>
                 <!-- Portfolio Modal - Text -->
-                <p class="mb-5">This project was assigned for completion in my AP Computer Science class where anything was to be made with HTML / CSS, and JavaScript. The project I decided to create was a fast-pace market simulation game. The game consists of a light item market containing minimally expensive items and a large item market containing expensive items. <br> The purpose of this program was to simulate a fast pace market environment that rewards quickly buying at a low price and selling high where the product is still competitively priced. The market game at its most fundamental is a large market that sells expensive items with a longer refresh time and a light market that sells less expensive items at a faster refresh interval. The items can be bought from either the light market or the large market if there are sufficient funds. When an item or group of items is purchased the item is stored in the user's inventory. From the inventory, the user can select the quantity of each item type to sell and the price in which the items will be sold. The motive of the game is not indifferent from an actual market as items can be bought for a low price and sold for a high price. However, the better the deal the item is the faster it will sell in the live market. If the item sells it will be shown as crossed out and it will no longer be available for purchase. A similar time related selling algorithm is implemented on the users' own market. This algorithm is an exponential function where x is the price and y is the amount of time it will take for the item to sell. The game starts at $1000 and from there it is up to the user to make money by buying both the light and large items at a low price and selling high.<br> The game can be found <a href="pages/market/index.html">here</a>. <br> The code can be found <a href="https://github.com/Alex0Blackwell/marketGame">here</a>.
+                <h3>Overview</h3>
+                <p class="mb-5">
+                  This is a browser game I made in highschool that simulates the market. The game rewards quickly buying low and selling high. The game has a light item and a large item market in which
+                  you can buy from. Additionally, you also have your own market where you can sell what you have purchased from the light and heavy markets. The idea of the game is to make a profit!
                 </p>
-
-                <button class="btn btn-primary" href="#" data-dismiss="modal">
-                  <i class="fas fa-times fa-fw"></i>
-                  Close Window
-                </button>
+                <h3>Technologies</h3>
+                <ul>
+                  <li>HTML / CSS <i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i></li>
+                  <li>JavaScript <i class="fab fa-js-square"></i></li>
+                  <li>Bootstrap <i class="fab fa-bootstrap"></i></li>
+                </ul>
+                <p class="mb-5">The project is developed with VanillaJS, HTML/CSS, and Bootstrap.</p>
+                <h3>Usage</h3>
+                <p class="mb-5">
+                  Act quickly to buy light items for a price lower than it's average price! Once an item is bought, it can be sold on your own market for a price chosen by yourself. Don't price the
+                  item too high, however, or it may never sell. If the item does not sell, it will crowd up space on your market that only has six item slots; you will be forced to delete your stale
+                  item for no money in return! Once you make some money buying and selling <b>light items</b>, you will be able to purchase <b>heavy items</b> where an even larger profit can be made.
+                </p>
+                <h3>Favourite Feature</h3>
+                <p class="mb-5">
+                  My favourite feature about this game is how realistic the market feels. It took a long time to balance the items in a way that common items spawned more often and in greater quantities.
+                  The balancing included how much a price can vary for a given item. Additionally, the speed at which items are bought out depending on how good of a deal the item is gives the bots a realistic quality.
+                </p>
+                <h3>Limitations</h3>
+                <ul class="mb-5">
+                  <li>No account system</li>
+                  <ul>
+                    <li>data is stored in local storage so the users' progress is limited to a single browser</li>
+                    <li>no way to implement a leaderboard</li>
+                  </ul>
+                </ul>
+                <h3>Around the Web</h3>
+                <a href="pages/market/index.html">
+                  <button type="button" class="btn btn-secondary">
+                    <i class="fas fa-server"></i>
+                    Website
+                  </button>
+                </a>
+                <a href="https://github.com/Alex0Blackwell/marketGame">
+                  <button type="button" class="btn btn-secondary">
+                    <i class="fab fa-fw fa-github"></i>
+                    Github
+                  </button>
+                </a>
+                <hr>
+                <div class="text-center">
+                  <button class="btn btn-primary" href="#" data-dismiss="modal">
+                    <i class="fas fa-times fa-fw"></i>
+                    Close Window
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -392,12 +425,12 @@
             <i class="fas fa-times"></i>
           </span>
         </button>
-        <div class="modal-body text-center">
+        <div class="modal-body">
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-8">
                 <!-- Portfolio Modal - Title -->
-                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Focused Bird Watcher</h2>
+                <h2 class="portfolio-modal-title text-secondary text-uppercase text-center mb-0">Focused Bird Watcher</h2>
                 <!-- Icon Divider -->
                 <div class="divider-custom">
                   <div class="divider-custom-line"></div>
@@ -411,11 +444,55 @@
                   <img class="img-fluid rounded mb-5" src="img/portfolio/birdWatch.png" alt="">
                 </a>
                 <!-- Portfolio Modal - Text -->
-                <p class="mb-5">This is a game based on taking clear pictures of birds. Based on how clear the photo is and how rare the bird is, the program will pay more for a picture. The user starts the game with the three common birds and must make money to learn what other, rarer, birds look like. Once this is learned, the user may find these birds in the wild and as they are rarer, pictures of them can be sold for more. However, these birds are not only less common to spawn, but they are quicker to fly away. This game is built using bootstrap and VanillaJS. The user's money is saved as well as what birds they have learned.<br> The game can be found <a href="pages/birdWatch/index.html">here</a>. <br> The code can be found <a href="https://github.com/Alex0Blackwell/focused-bird-watcher-game">here</a>.</p>
-                <button class="btn btn-primary" href="#" data-dismiss="modal">
-                  <i class="fas fa-times fa-fw"></i>
-                  Close Window
-                </button>
+                <h3>Overview</h3>
+                <p class="mb-5">This is a game based on taking clear pictures of birds. Depending on how clear the photo is and how rare the bird is, the program will pay more for a picture. The user starts
+                  the game with the three common birds and must make money to learn what other, rarer, birds look like. Once this is learned, the user may find these birds in the wild and as they are rarer,
+                  pictures of them can be sold for more. However, these birds are not only less common to spawn, but they are quicker to fly away. This game is built using bootstrap and VanillaJS. The user's
+                  money is saved as well as what birds they have learned and what worlds they have unlocked.
+                </p>
+                <h3>Technologies</h3>
+                <ul>
+                  <li>HTML / CSS <i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i></li>
+                  <li>JavaScript <i class="fab fa-js-square"></i></li>
+                  <li>Bootstrap <i class="fab fa-bootstrap"></i></li>
+                </ul>
+                <p class="mb-5">The project is developed with VanillaJS, HTML/CSS, and Bootstrap.</p>
+                <h3>Usage</h3>
+                <p class="mb-5">
+                  Act quickly to take clear pictures of birds to progress through the game. With enough money from these pictures, you will be able to buy the next item in the shop. That item can be learning
+                  what a new bird looks like so you can capture pictures of more birds that sell for a higher price. Or that new item may be a new world where entirely new animals can be found!
+                </p>
+                <h3>Favourite Feature</h3>
+                <p class="mb-5">My favourite feature of this program is how much content is in this game for how quickly it was developed.
+                </p>
+                <h3>Limitations</h3>
+                <ul class="mb-5">
+                  <li>No account system</li>
+                  <ul>
+                    <li>data is stored in local storage so the users' progress is limited to a single browser</li>
+                    <li>no way to implement a leaderboard</li>
+                  </ul>
+                </ul>
+                <h3>Around the Web</h3>
+                <a href="pages/birdWatch/index.html">
+                  <button type="button" class="btn btn-secondary">
+                    <i class="fas fa-server"></i>
+                    Website
+                  </button>
+                </a>
+                <a href="https://github.com/Alex0Blackwell/focused-bird-watcher-game">
+                  <button type="button" class="btn btn-secondary">
+                    <i class="fab fa-fw fa-github"></i>
+                    Github
+                  </button>
+                </a>
+                <hr>
+                <div class="text-center">
+                  <button class="btn btn-primary" href="#" data-dismiss="modal">
+                    <i class="fas fa-times fa-fw"></i>
+                    Close Window
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -433,12 +510,12 @@
             <i class="fas fa-times"></i>
           </span>
         </button>
-        <div class="modal-body text-center">
+        <div class="modal-body">
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-8">
                 <!-- Portfolio Modal - Title -->
-                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">QR-Code Converter</h2>
+                <h2 class="portfolio-modal-title text-secondary text-uppercase text-center mb-0">QR-Code Converter</h2>
                 <!-- Icon Divider -->
                 <div class="divider-custom">
                   <div class="divider-custom-line"></div>
@@ -452,11 +529,45 @@
                   <img class="img-fluid rounded mb-5" src="img/portfolio/qrNew.jpg" alt="">
                 </a>
                 <!-- Portfolio Modal - Text -->
-                <p class="mb-5">This is a webpage with a simple front end that takes text content through the input and generates a QR-code. I find this program useful for transferring small amounts of text data such as website urls and usernames from my laptop to my phone. <br> The program can be found <a href="pages/qrCode/index.html">here</a>.<br> The code can be found <a href="https://github.com/Alex0Blackwell/QR-code-Converter">here</a>.</p>
-                <button class="btn btn-primary" href="#" data-dismiss="modal">
-                  <i class="fas fa-times fa-fw"></i>
-                  Close Window
-                </button>
+                <h3>Overview</h3>
+                <p class="mb-5">This is a program that takes text from a textbox and automatically converts it into a Qr-code that contains the information of the text.</p>
+                <h3>Technologies</h3>
+                <ul>
+                  <li>HTML / CSS <i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i></li>
+                  <li>JavaScript <i class="fab fa-js-square"></i></li>
+                  <li>QR-Code Generator API <i class="fas fa-qrcode"></i></li>
+                </ul>
+                <p class="mb-5">The project is developed with VanillaJS, HTML/CSS</p>
+                <h3>Usage</h3>
+                <p class="mb-5">Paste or type your text content into the text box for it to automatically be converted into a QR-code in real time.</p>
+                <h3>Favourite Feature</h3>
+                <p class="mb-5">As you type in text content, the QR-code continuously updates so it represents what is being typed. It is interesting
+                  to see how with more text content, the QR-codes become more complex.
+                </p>
+                <h3>Limitations</h3>
+                <ul class="mb-5">
+                  <li>QR-codes can only represent text</li>
+                </ul>
+                <h3>Around the Web</h3>
+                <a href="pages/qrCode/index.html">
+                  <button type="button" class="btn btn-secondary">
+                    <i class="fas fa-server"></i>
+                    Website
+                  </button>
+                </a>
+                <a href="https://github.com/Alex0Blackwell/QR-code-Converter">
+                  <button type="button" class="btn btn-secondary">
+                    <i class="fab fa-fw fa-github"></i>
+                    Github
+                  </button>
+                </a>
+                <hr>
+                <div class="text-center">
+                  <button class="btn btn-primary" href="#" data-dismiss="modal">
+                    <i class="fas fa-times fa-fw"></i>
+                    Close Window
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -474,12 +585,12 @@
             <i class="fas fa-times"></i>
           </span>
         </button>
-        <div class="modal-body text-center">
+        <div class="modal-body">
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-8">
                 <!-- Portfolio Modal - Title -->
-                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Fast Reader</h2>
+                <h2 class="portfolio-modal-title text-secondary text-uppercase text-center mb-0">Fast Reader</h2>
                 <!-- Icon Divider -->
                 <div class="divider-custom">
                   <div class="divider-custom-line"></div>
@@ -493,11 +604,50 @@
                   <img class="img-fluid rounded mb-5" src="img/portfolio/read.jpg" alt="">
                 </a>
                 <!-- Portfolio Modal - Text -->
-                <p class="mb-5">This project takes pasted text content and displays it one word at a time in the center of the screen. The words per minute is chosen by the user and the time that the content will take to read is displayed. The idea of the project is reading may be able to be made faster if the reader's eyes never had to move. If the computer displays the text in a way such that all that is required is to watch and understand the text, then it may be possible that the reading process could be sped up. In actuality, does it work? Well, maybe. Try it yourself, see how fast you can read!<br>The project can be found <a href="pages/fastReader/index.html">here</a>.<br>The code can be found <a href="https://github.com/Alex0Blackwell/Alex0Blackwell.github.io/tree/master/pages/fastReader">here</a>.</p>
-                <button class="btn btn-primary" href="#" data-dismiss="modal">
-                  <i class="fas fa-times fa-fw"></i>
-                  Close Window
-                </button>
+                <h3>Overview</h3>
+                <p class="mb-5">This project takes pasted text content and displays it one word at a time in the center of the screen. The words per minute is chosen by the user and the time that
+                  the content will take to read is displayed. The idea of the project is reading may be able to be made faster if the reader's eyes never had to move. If the computer displays the text
+                  in a way such that all that is required is to watch and understand the text, then it may be possible that the reading process could be sped up. In actuality, does it work? Well, maybe.
+                  Try it yourself, see how fast you can read!
+                </p>
+                <h3>Technologies</h3>
+                <ul>
+                  <li>HTML / CSS <i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i></li>
+                  <li>JavaScript <i class="fab fa-js-square"></i></li>
+                </ul>
+                <p class="mb-5">The project is developed with VanillaJS, HTML/CSS.</p>
+                <h3>Usage</h3>
+                <p class="mb-5">Paste or type your text content into the text box and set how many words per minute (wpm) you want to read—the average wpm is about 350. The program will calculate how long
+                it will take to read the given text at the given wpm. Now the text can be read, press <b>"Go!"</b> to start reading and <b>"Pause"</b> to pause the reading. There is a progress
+                bar at the bottom of the screen that represents how far along your reading is.</p>
+                <h3>Favourite Feature</h3>
+                <p class="mb-5">My favourite feature of this program is how it can calculate how long it will take to read the pasted content. Because of how this method of reading works, it is possible
+                to know how long it will take to read something because the reading rate is consistent <i>(assuming it is not paused)</i>.
+                </p>
+                <h3>Limitations</h3>
+                <ul class="mb-5">
+                  <li>There is no way to go back if something was misread</li>
+                </ul>
+                <h3>Around the Web</h3>
+                <a href="pages/fastReader/index.html">
+                  <button type="button" class="btn btn-secondary">
+                    <i class="fas fa-server"></i>
+                    Website
+                  </button>
+                </a>
+                <a href="https://github.com/Alex0Blackwell/Alex0Blackwell.github.io/tree/master/pages/fastReader">
+                  <button type="button" class="btn btn-secondary">
+                    <i class="fab fa-fw fa-github"></i>
+                    Github
+                  </button>
+                </a>
+                <hr>
+                <div class="text-center">
+                  <button class="btn btn-primary" href="#" data-dismiss="modal">
+                    <i class="fas fa-times fa-fw"></i>
+                    Close Window
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -515,12 +665,12 @@
             <i class="fas fa-times"></i>
           </span>
         </button>
-        <div class="modal-body text-center">
+        <div class="modal-body">
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-8">
                 <!-- Portfolio Modal - Title -->
-                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Braille Converter</h2>
+                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0 text-center">Braille Converter</h2>
                 <!-- Icon Divider -->
                 <div class="divider-custom">
                   <div class="divider-custom-line"></div>
@@ -531,14 +681,74 @@
                 </div>
                 <!-- Portfolio Modal - Image -->
                 <a href="pages/braille/index.html">
-                  <img class="img-fluid rounded mb-5" src="img/portfolio/braille.jpg" alt="">
+                  <img class="img-fluid rounded mb-5" src="img/portfolio/braille.jpg" data-toggle="tooltip" title="Click to visit!">
                 </a>
                 <!-- Portfolio Modal - Text -->
-                <p class="mb-5">This braille website is a place to learn about how English characters are represented in braille. The website also serves as a method in which to test oneself; English letters can be randomly generated and the user can input the corresponding raised dots to test for correctness. If the correct braille symbol is made and submitted, the time will be recorded and stored in the browser's local memory. If the incorrect braille symbol is created, however, the correct braille combination will be shown below where the braille character was submitted.<br> The website also includes a feature in which English sentences comprised of letters can be translated into braille sentences.<br> The website can be found <a href="pages/braille/index.html">here</a>.<br> The code can be found <a href="https://github.com/Alex0Blackwell/braille-converter">here</a>.</p>
-                <button class="btn btn-primary" href="#" data-dismiss="modal">
-                  <i class="fas fa-times fa-fw"></i>
-                  Close Window
-                </button>
+                <h3>Overview</h3>
+                <p class="mb-5">This website serves as a way to convert and learn braille. The website uses six dots (two columns, three rows) to represent the bumps found on brialle.
+                  To represent a raised state, the dot turns a dark colour, otherwise the bump is not raised and remains a light colour. The website features to ability to convert
+                  braille to and from English alphabet characters. Additionally, you can test yourself and try to beat your own scores!
+                </p>
+                <h3>Technologies</h3>
+                <ul>
+                  <li>HTML / CSS <i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i></li>
+                  <li>JavaScript <i class="fab fa-js-square"></i></li>
+                </ul>
+                <p class="mb-5">The project is developed with VanillaJS, HTML/CSS.</p>
+                <h3>Usage</h3>
+                <p>There are three main features of the website:</p>
+                <ol>
+                  <li>Braille to Alphabet</li>
+                  <ul>
+                    <li>you can press on dots to switch them into their raised state, and by pressing convert the program will determine what alphabet character is represented</li>
+                  </ul>
+                  <li>Test Yourself</li>
+                  <ul>
+                    <li>the program will prompt an alphabet character to be represented. If you correctly submit the alphabet character your time will be compared against your top time ever</li>
+                    <li>if the alphabet character entered is wrong, however, the correct character will be shown</li>
+                  </ul>
+                  <li>Generate Braille</li>
+                  <ul>
+                    <li>alphabet characters can be typed into a text box and equivalent braille will be displayed below</li>
+                  </ul>
+                </ol>
+                <p class="mb-5"></p>
+                <h3>Favourite Feature</h3>
+                <p class="mb-5">My favourite feature of this program is that it is able to translate text into braille by just entering text into a text box. This is an interesting
+                  feature for learning how braille represents English characters.
+                </p>
+                <h3>Limitations</h3>
+                <ul class="mb-5">
+                  <li>Only supports lowercase English Alphabet characters </li>
+                  <ul>
+                    <li>This means the following is not supported:</li>
+                  <ul>
+                    <li>Uppercase characters</li>
+                    <li>Numbers</li>
+                    <li>Other languages</li>
+                  </ul>
+                </ul>
+                </ul>
+                <h3>Around the Web</h3>
+                <a href="pages/braille/index.html">
+                  <button type="button" class="btn btn-secondary">
+                    <i class="fas fa-server"></i>
+                    Website
+                  </button>
+                </a>
+                <a href="https://github.com/Alex0Blackwell/braille-converter">
+                  <button type="button" class="btn btn-secondary">
+                    <i class="fab fa-fw fa-github"></i>
+                    Github
+                  </button>
+                </a>
+                <hr>
+                <div class="text-center">
+                  <button class="btn btn-primary" href="#" data-dismiss="modal">
+                    <i class="fas fa-times fa-fw"></i>
+                    Close Window
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -556,12 +766,12 @@
             <i class="fas fa-times"></i>
           </span>
         </button>
-        <div class="modal-body text-center">
+        <div class="modal-body">
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-8">
                 <!-- Portfolio Modal - Title -->
-                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Music Downloader</h2>
+                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0 text-center">Merge Sort Visualizer</h2>
                 <!-- Icon Divider -->
                 <div class="divider-custom">
                   <div class="divider-custom-line"></div>
@@ -571,15 +781,51 @@
                   <div class="divider-custom-line"></div>
                 </div>
                 <!-- Portfolio Modal - Image -->
-                <a href="https://github.com/Alex0Blackwell/music-downloader">
-                  <img class="img-fluid rounded mb-5" src="img/portfolio/terminalMusic.jpg" alt="">
+                <a href="pages/merge/index.html">
+                  <img class="img-fluid rounded mb-5" src="img/portfolio/merge.png" data-toggle="tooltip" title="Click to visit!">
                 </a>
                 <!-- Portfolio Modal - Text -->
-                <p class="mb-5">By using YouTube-dl, Selenium, Beautifulsoup, and python, the names of songs can be entered in a .txt file, or scraped from a Spotify playlist, and the program will search YouTube for the top lyrical video and download the audio to the user's Music folder in a folder named after the playlist. <br> The Github link can be found <a href="https://github.com/Alex0Blackwell/music-downloader">here</a>.</p>
-                <button class="btn btn-primary" href="#" data-dismiss="modal">
-                  <i class="fas fa-times fa-fw"></i>
-                  Close Window
-                </button>
+                <h3>Overview</h3>
+                <p class="mb-5">This project is a website that visualizes the steps of a merge sort. The algorithm sorts columns of differing heights in ascending order.
+                  The initial order of the columns is random and can be randomized when the merge sort is not running. This program can help to understand the steps the
+                  merge sort algorithm takes.
+                </p>
+                <h3>Technologies</h3>
+                <ul>
+                  <li>HTML / CSS <i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i></li>
+                  <li>JavaScript <i class="fab fa-js-square"></i></li>
+                  <li>Bootstrap <i class="fab fa-bootstrap"></i></li>
+                </ul>
+                <p class="mb-5">The project is developed with VanillaJS, HTML/CSS, and Bootstrap.</p>
+                <h3>Challenges</h3>
+                <p class="mb-5">One challenge of this project was working with the timing of the moving columns because JavaScript is asynchronous. Because the website was
+                  asynchronous, the program would execute sections of the program while other parts were still running. The result was still a sorted array of columns, however,
+                  the intermediate steps were not shown. I solved this problem by using <i>"awaits"</i> and <i>"promises"</i>  to halt the premature execution of code.
+                </p>
+                <h3>Limitations</h3>
+                <ul class="mb-5">
+                  <li>Not other sorting algorithms implemented other than merge sort</li>
+                </ul>
+                <h3>Around the Web</h3>
+                <a href="pages/merge/index.html">
+                  <button type="button" class="btn btn-secondary">
+                    <i class="fas fa-server"></i>
+                    Website
+                  </button>
+                </a>
+                <a href="https://github.com/Alex0Blackwell/merge-sort-visualizer">
+                  <button type="button" class="btn btn-secondary">
+                    <i class="fab fa-fw fa-github"></i>
+                    Github
+                  </button>
+                </a>
+                <hr>
+                <div class="text-center">
+                  <button class="btn btn-primary" href="#" data-dismiss="modal">
+                    <i class="fas fa-times fa-fw"></i>
+                    Close Window
+                  </button>
+                </div>
               </div>
             </div>
           </div>
