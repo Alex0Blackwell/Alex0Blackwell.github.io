@@ -2,7 +2,7 @@
 @font-face { font-family: lost; font-weight: bold; src: url('fonts/summer.ttf');}
 
 body {
-  overflow: hidden;
+  overflow-x: hidden;
   background-color: #72829c;
 }
 
