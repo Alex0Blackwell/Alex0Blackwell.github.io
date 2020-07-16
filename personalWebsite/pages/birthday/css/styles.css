@@ -1,48 +1,21 @@
-@font-face { font-family: lost; src: url('/fonts/Lost.ttf'); }
-@font-face { font-family: lost; font-weight: bold; src: url('fonts/Lost.ttf');}
-
+@font-face { font-family: lost; src: url('fonts/summer.ttf'); }
+@font-face { font-family: lost; font-weight: bold; src: url('fonts/summer.ttf');}
 
 body {
-  margin: 0;
   overflow: hidden;
-  background-color: #3e4857;
+  background-color: #72829c;
 }
 
-.wrapper {
-  position: relative;
-  min-height: 100vh;
-}
-
-.center {
-  margin-top: 100px;
-  text-align: center;
-}
-
-[class|="confetti"] {
-  position: absolute;
-}
-
-.red {
-  background-color: #E94A3F;
-}
-
-.yellow {
-  background-color: #FAA040;
-}
-
-.blue {
-  background-color: #5FC9F5;
-}
-
-h1, h3 {
-  font-family: lost;
-}
-
-h1 {
-  font-size: 100px;
+h1, h2 {
+  margin: 15px;
+  max-width: 100vw;
+  color: white;
+  font-family: lost, sans-serif;
 }
 
 
-h3 {
-  font-size: 50px;
+img {
+  max-width: 100vw;
+  border: 2px solid #82b2ff;
+  border-radius: 10px;
 }
