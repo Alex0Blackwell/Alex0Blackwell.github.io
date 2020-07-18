@@ -486,8 +486,15 @@ mark,
 
 .img-fluid {
   max-width: 100%;
+  width: 500px;
+  height: 250px;
+}
+
+.img-modal {
+  max-width: 100%;
   height: auto;
 }
+
 
 .img-thumbnail {
   padding: 0.25rem;
