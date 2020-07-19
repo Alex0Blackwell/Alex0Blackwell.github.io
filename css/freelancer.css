@@ -5596,9 +5596,11 @@ a.close.disabled {
 }
 
 .modal-body {
+  border-radius: 10px;
   position: relative;
   flex: 1 1 auto;
   padding: 4rem 1rem;
+  background-color: #ffe8f7;
 }
 
 .modal-footer {
@@ -9908,4 +9910,8 @@ textarea {
 
 #inputWrap {
   width: 100%;
+}
+
+.indent {
+  padding-left: 55px;
 }
