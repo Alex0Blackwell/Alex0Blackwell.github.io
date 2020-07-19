@@ -13,7 +13,7 @@ This is my personal Website displaying projects and information about myself. Ma
 
 > Screenshot of the website
 
-![Screenshot](pictures/fullWeb.png "The main page")
+![Screenshot](.pictures/fullWeb.png "The main page")
 
 ## Technologies
 - **JavaScript**
