@@ -432,6 +432,7 @@ hr {
   margin-bottom: 1rem;
   border: 0;
   border-top: 0.125rem solid rgba(0, 0, 0, 0.1);
+  width: 80%;
 }
 
 small,
@@ -9914,4 +9915,8 @@ textarea {
 
 .indent {
   padding-left: 55px;
+}
+
+.hr-white {
+  border-top: 0.125rem solid #8b919e;
 }
