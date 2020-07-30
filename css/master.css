@@ -9920,3 +9920,17 @@ textarea {
 .hr-white {
   border-top: 0.125rem solid #8b919e;
 }
+
+/* loading animation */
+.loader-wrapper {
+  background-color: #324057;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 5000;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
