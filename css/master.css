@@ -9934,3 +9934,8 @@ textarea {
   justify-content: center;
   align-items: center;
 }
+
+
+#loading-anim {
+  width: 100px;
+}
