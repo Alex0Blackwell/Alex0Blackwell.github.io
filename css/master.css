@@ -67,8 +67,8 @@ body {
   color: #212529;
   text-align: left;
   background-color: #ffe8f7;
-  max-width: 100%;
-  overflow-x: hidden;
+  /* max-width: 100%;
+  overflow-x: hidden; */
 }
 
 
@@ -9936,7 +9936,6 @@ textarea {
   justify-content: center;
   align-items: center;
 }
-
 
 #loading-anim {
   width: 100px;
