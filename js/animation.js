@@ -1,6 +1,5 @@
 // load animation
 $(window).on("load",function() {
-  console.log("loaded");
   $(".loader-wrapper").fadeOut();
 });
 

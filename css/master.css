@@ -9937,6 +9937,40 @@ textarea {
   align-items: center;
 }
 
+.inner-loading {
+  position: fixed;
+  width: 400px;
+}
+
 #loading-anim {
   width: 100px;
+}
+
+.blob-1,.blob-2{
+	width:40px;
+	height:40px;
+	position:absolute;
+	background:#b6c6e0;
+	border-radius:50%;
+	top:50%;left:50%;
+	transform:translate(-50%,-50%);
+}
+.blob-1{
+	left:20%;
+	animation:osc-l 1.5s ease infinite;
+}
+.blob-2{
+	left:80%;
+	animation:osc-r 1.5s ease infinite;
+	background:#8cb8ff;
+}
+@keyframes osc-l{
+	0%{left:20%;}
+	50%{left:50%;}
+	100%{left:20%;}
+}
+@keyframes osc-r{
+	0%{left:80%;}
+	50%{left:50%;}
+	100%{left:80%;}
 }
