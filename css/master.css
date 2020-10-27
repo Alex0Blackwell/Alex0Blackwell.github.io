@@ -9976,13 +9976,13 @@ textarea {
 }
 
 .section-transition-dark-light {
-  background-image: url("../img/dark-to-light.jpg");
+  background-image: url("../img/drip-dark-light-sub.png");
   min-width: 100%;
   height: 100px;
 }
 
 .section-transition-light-dark{
-  background-image: url("../img/light-to-dark.jpg");
+  background-image: url("../img/drip-light-dark-sub.png");
   min-width: 100%;
   height: 100px;
 }
