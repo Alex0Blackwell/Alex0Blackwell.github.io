@@ -9974,3 +9974,15 @@ textarea {
 	50%{left:50%;}
 	100%{left:80%;}
 }
+
+.section-transition-dark-light {
+  background-image: url("../img/dark-to-light.jpg");
+  min-width: 100%;
+  height: 100px;
+}
+
+.section-transition-light-dark{
+  background-image: url("../img/light-to-dark.jpg");
+  min-width: 100%;
+  height: 100px;
+}
