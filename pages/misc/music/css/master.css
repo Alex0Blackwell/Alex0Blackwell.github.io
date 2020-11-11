@@ -48,3 +48,20 @@ p {
 .right {
   text-align: right;
 }
+
+.margin-top {
+  margin-top: 20px;
+}
+
+.section {
+  margin-bottom: 35px;
+}
+
+#sendSongBtn {
+  border-radius: 2px;
+  margin: 10px;
+}
+
+#songTextArea {
+  width: 100%;
+}
