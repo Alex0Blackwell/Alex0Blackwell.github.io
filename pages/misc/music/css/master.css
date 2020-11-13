@@ -6,7 +6,7 @@ body {
 }
 
 
-h1, h5, p {
+h1, h5, p , a {
   font-family: headerFont, sans-serif;
 }
 
@@ -19,6 +19,28 @@ h5 {
 }
 p {
   font-size: 25px;
+}
+
+a {
+  display: inline;
+  background-color: #bdd9ff !important;
+  box-shadow: 0 5px 0 #ffc0c0;
+  color: black !important;
+  padding: 1em 1.5em;
+  border-radius: 5px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a:hover {
+  background-color: #cfe3ff !important;
+  padding: 1.1em 1.4em;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+a:active {
+  box-shadow: none;
 }
 
 .song-card {
