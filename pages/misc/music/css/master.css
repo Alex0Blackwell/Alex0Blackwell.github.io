@@ -71,6 +71,10 @@ a:active {
   text-align: right;
 }
 
+.small-text {
+  font-size: 18px;
+}
+
 .margin-top {
   margin-top: 20px;
 }
