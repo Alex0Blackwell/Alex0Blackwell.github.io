@@ -147,6 +147,27 @@ a:active {
   margin-right: .25rem;
 }
 
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  height:100%;
+}
+
+.loader-wrapper {
+  background-color: #bdd9ff;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 5000;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .footer {
   border-top: 0.25rem solid black;
   padding-top: 2rem;
@@ -161,4 +182,10 @@ a:active {
 
 #songTextArea {
   width: 100%;
+}
+
+#loading-gif {
+  border-radius: 25px;
+  border: 0.25rem solid black;
+  width: 110px;
 }

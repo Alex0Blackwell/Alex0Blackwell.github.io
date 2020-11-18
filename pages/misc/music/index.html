@@ -13,6 +13,9 @@
     <!-- Page clip style -->
     <link rel="stylesheet" href="https://s.pageclip.co/v1/pageclip.css" media="screen">
 
+    <!-- jQuery CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
     <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon.jpg">
 
     <script src="https://kit.fontawesome.com/347ddfdf96.js" crossorigin="anonymous"></script>
@@ -20,6 +23,11 @@
     <title>Recommend Music</title>
   </head>
   <body>
+
+    <!-- loading gif -->
+    <div class="loader-wrapper">
+      <img id="loading-gif" src="./img/loading.gif">
+    </div>
 
     <div class="container text-center margin-top">
       <div>
@@ -45,7 +53,7 @@
       <!-- Alex's Section -->
       <div class="col-12 section">
 
-      <h1>Alex's Music :]</h1>
+        <h1>Alex's Music :]</h1>
 
         <div class="song-card" onclick="window.open('https://www.youtube.com/watch?v=loIFbB9E_cM', '_blank');" >
           <div class="row">
@@ -256,7 +264,7 @@
 
       <!-- Annika's section -->
       <div id="annika-section" class="col-12 section">
-      <h1>Annika's Music :]</h1>
+        <h1>Annika's Music :]</h1>
 
         <div class="song-card" onclick="window.open('https://youtu.be/NM-VWHP-cWk', '_blank');">
           <div class="row">
@@ -380,26 +388,26 @@
       </div>
     </div>
 
-  <!-- Footer -->
-  <footer class="footer text-center">
-    <div class="container">
-      <div class="row">
+    <!-- Footer -->
+    <footer class="footer text-center">
+      <div class="container">
+        <div class="row">
 
-        <!-- Footer Location -->
-        <div class="col-lg-6 mb-5 mb-lg-0" onclick="toggleDateEE()">
-          <h4 id="dateTitle" class="text-uppercase">Date</h4>
-          <p id="date" class="lead mb-0">November 2020</p>
+          <!-- Footer Location -->
+          <div class="col-lg-6 mb-5 mb-lg-0" onclick="toggleDateEE()">
+            <h4 id="dateTitle" class="text-uppercase">Date</h4>
+            <p id="date" class="lead mb-0">November 2020</p>
+          </div>
+
+          <!-- Icons -->
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <h4 class="text-uppercase">Dedicated To</h4>
+            <p class="lead mb-0">Annika</p>
+          </div>
+
         </div>
-
-        <!-- Icons -->
-        <div class="col-lg-6 mb-5 mb-lg-0">
-          <h4 class="text-uppercase">Dedicated To</h4>
-          <p class="lead mb-0">Annika</p>
-        </div>
-
       </div>
-    </div>
-  </footer>
+    </footer>
     <script src="./js/main.js" charset="utf-8"></script>
     <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
   </body>

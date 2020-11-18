@@ -10,3 +10,7 @@ function toggleDateEE() {
     date.innerHTML = "November 2020";
   }
 }
+
+$(window).on("load",function(){
+     $(".loader-wrapper").fadeOut("slow");
+});
