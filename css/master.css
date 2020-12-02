@@ -9977,12 +9977,20 @@ textarea {
 
 .section-transition-dark-light {
   background-image: url("../img/drip-dark-light-sub.png");
-  min-width: 100%;
+  background-size: contain;
+  height: 100px;
+
+  transition: height 0.2s;
+}
+
+.section-transition-light-dark {
+  background-image: url("../img/drip-light-dark-sub.png");
+  background-size: contain;
   height: 100px;
 }
 
-.section-transition-light-dark{
-  background-image: url("../img/drip-light-dark-sub.png");
-  min-width: 100%;
-  height: 100px;
+@media only screen and (max-width: 900px) {
+  .section-transition-dark-light, .section-transition-light-dark {
+    height: 50px;
+   }
 }
