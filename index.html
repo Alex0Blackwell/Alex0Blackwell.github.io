@@ -440,6 +440,30 @@
           </div>
         </div>
       </div>
+
+    <!-- start Software Developement -->
+    <div class="text-center container d-flex align-items-center flex-column">
+      <div class="text-center container d-flex align-items-center flex-column">
+        <hr class="hr-white">
+        <h3 class="text-uppercase text-white">Research <i class="fas fa-keyboard"></i></h3>
+        <h4 class="font-weight-light text-white mb-5">Press on the tiles to learn more about the paper</h4>
+      </div>
+    </div>
+
+    <div class="row text-center">
+      <div class="col-12">
+        <p class="text-white">BST AND AVL OPERATION ANALYSIS</p>
+        <div class="portfolio-item research-item mx-auto" data-toggle="modal" data-target="#portfolioResearchModel1">
+          <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+            <div class="portfolio-item-caption-content text-center text-white">
+              <i class="fas fa-plus fa-3x"></i>
+            </div>
+          </div>
+          <img class="img-fluid" src="img/portfolio/treeExperiment.gif" alt="">
+        </div>
+      </div>
+    </div>
+
   </div>
 
   </section>
@@ -1906,6 +1930,73 @@
       </div>
     </div>
   </div>
+
+  <!-- Portfolio Research Modal 1 -->
+  <div class="portfolio-modal modal fade" id="portfolioResearchModel1" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-8">
+                <!-- Portfolio Modal - Title -->
+                <h2 class="portfolio-modal-title text-secondary text-uppercase text-center mb-0">BST and AVL Operation Analysis</h2>
+                <!-- Icon Divider -->
+                <div class="divider-custom">
+                  <div class="divider-custom-line"></div>
+                  <div class="divider-custom-icon">
+                    <i class="fas fa-terminal"></i>
+                  </div>
+                  <div class="divider-custom-line"></div>
+                </div>
+                <!-- Portfolio Modal - Image -->
+                <div class="col-12 text-center">
+                  <a href="./img/portfolio/bst_vs_avl_analysis.pdf">
+                    <img class="img-modal rounded mb-5" src="img/portfolio/treeExperiment.gif" alt="">
+                  </a>
+
+                </div>
+                <!-- Portfolio Modal - Text -->
+                <h2>Overview</h2>
+                <p>The AVL tree asymptotic description implies it is more efficient than the BST;
+                  however, the AVL operations are more complex, and it is unlikely for a BST to have height proportional
+                  to its nodes when the operations and keys are random. This paper considers randomly ordered insertions, deletions,
+                  and searches of both trees where all operations operate with a random number. The random order
+                  and equally likely sequence of inserted and deleted numbers imply the average height of the BST is O(log(N)).
+                  The considered operations are proportional to the height, making the considered BST operations O(log(N)) on average.
+                  This matches the Big-Oh of the self-balancing AVL tree operations; however, the BST operations are less complicated.<br><br>
+                  Continue reading by visiting the linked paper...</p>
+
+                <div class="text-center">
+                  <h3>Around the Web</h3>
+                  <a href="https://github.com/Alex0Blackwell/qr-code-extension">
+                    <button type="button" class="btn btn-secondary">
+                      <i class="fas fa-fw fa-file-pdf"></i>
+                        PDF Document
+                    </button>
+                  </a>
+                </div>
+                <hr>
+                <div class="text-center">
+                  <button class="btn btn-primary" href="#" data-dismiss="modal">
+                    <i class="fas fa-times fa-fw"></i>
+                    Close Window
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
