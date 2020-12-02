@@ -267,8 +267,21 @@
           </div>
         </div>
 
-        <!-- Portfolio Item 3 -->
         <div class="col-md-6 col-lg-4">
+          <p class="text-white">GUITAR CHORD LOOKUP</p>
+          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
+            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+              <div class="portfolio-item-caption-content text-center text-white">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="img/portfolio/guitar-chord-lookup.gif" alt="">
+          </div>
+        </div>
+
+        <!-- Portfolio Item 3 -->
+        <!-- QR code generator website -->
+        <!-- <div class="col-md-6 col-lg-4">
           <p class="text-white">QR-CODE GENERATOR</p>
           <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
@@ -278,7 +291,7 @@
             </div>
             <img class="img-fluid" src="img/portfolio/qr-code-generator.gif" alt="">
           </div>
-        </div>
+        </div> -->
 
         <!-- Portfolio Item 4 -->
         <div class="col-md-6 col-lg-4">
@@ -737,7 +750,6 @@
     </div>
   </div>
 
-  <!-- Portfolio Modal 3 -->
   <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-labelledby="portfolioModal3Label" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
@@ -750,9 +762,9 @@
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-8">
-                <!-- Portfolio Modal - Title -->
-                <h2 class="portfolio-modal-title text-secondary text-uppercase text-center mb-0">QR-Code Converter</h2>
-                <!-- Icon Divider -->
+
+                <h2 class="portfolio-modal-title text-secondary text-uppercase text-center mb-0">Guitar Chord Lookup</h2>
+
                 <div class="divider-custom">
                   <div class="divider-custom-line"></div>
                   <div class="divider-custom-icon">
@@ -760,11 +772,107 @@
                   </div>
                   <div class="divider-custom-line"></div>
                 </div>
-                <!-- Portfolio Modal - Image -->
+
+                <a href="pages/chord/index.html">
+                  <img class="img-modal rounded mb-5" src="img/portfolio/guitar-chord-lookup.gif" alt="">
+                </a>
+
+                <h1>Guitar Chord Lookup</h1>
+
+                <h3 id="table-of-contents">Table of contents</h2>
+                <ul>
+                    <li><a href="#overviewW3">Overview</a></li>
+                    <li><a href="#technologiesW3">Technologies</a></li>
+                    <li><a href="#usageW3">Usage</a></li>
+                    <li><a href="#limitationsW3">Limitations</a></li>
+                </ul>
+
+                <h3 id="overviewW3">Overview</h3>
+                <p class="mb-5">
+                Remember the guitar chord but not the name? Use Guitar Chord Lookup to lookup the chord name!
+                <br><br>
+                Make the diagram and get the chord name, or search for the chord name and get the diagram. Guitar Chord Lookup uses the intuitive guitar chord style found on <a href="https://www.ultimate-guitar.com/">Ultimate Guitar</a>. Guitar Chord Lookup has a database of over 100 guitar chords to match your diagrams to and to search from.
+                <br><br>
+                If you are making a guitar tab and can&#39;t remember the exact chord diagram, use the search function. Alternatively, if you remember the chord but not the name, make the diagram on Guitar Chord Lookup and get the name of the chord!
+                </p>
+
+                <h3 id="technologiesW3">Technologies</h3>
+                <ul class="mb-5">
+                <li>HTML / CSS</li>
+                <li>JavaScript</li>
+                <li>Bootstrap</li>
+                </ul>
+                <h3 id="usageW3">Usage</h3>
+                <p class="mb-5">
+                Press the strings on the diagram to make a guitar chord! Press the O&#39;s above the strings to represent a closed or open string. To do a barre chord, enter the closed strings first, and then enter the number of the barred fret.
+                When you change the diagram, we will search over 100 chords and tell you if it matches any of them.
+                If you know the chord by name but not what it looks like, search for the chord below the diagram.
+                </p>
+                <h3 id="limitationsW3">Limitations</h3>
+                <ul class="mb-5">
+                  <li>Cannot represent chords lower than 5 frets that are not barred</li>
+                  <li>Does not have all possible chords</li>
+                </ul>
+
+                <div class="text-center">
+                  <h3>Around the Web</h3>
+                  <a href="pages/qrCode/index.html">
+                    <button type="button" class="btn btn-secondary">
+                      <i class="fas fa-server"></i>
+                      Website
+                    </button>
+                  </a>
+                  <a href="https://github.com/Alex0Blackwell/QR-code-Converter">
+                    <button type="button" class="btn btn-secondary">
+                      <i class="fab fa-fw fa-github"></i>
+                      Github
+                    </button>
+                  </a>
+                </div>
+                <hr>
+                <div class="text-center">
+                  <button class="btn btn-primary" href="#" data-dismiss="modal">
+                    <i class="fas fa-times fa-fw"></i>
+                    Close Window
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portfolio Modal 3 -->
+  <!-- Old QR-Code Generator website -->
+  <!-- <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-labelledby="portfolioModal3Label" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-8">
+
+                <h2 class="portfolio-modal-title text-secondary text-uppercase text-center mb-0">QR-Code Converter</h2>
+
+                <div class="divider-custom">
+                  <div class="divider-custom-line"></div>
+                  <div class="divider-custom-icon">
+                    <i class="fas fa-terminal"></i>
+                  </div>
+                  <div class="divider-custom-line"></div>
+                </div>
+
                 <a href="pages/qrCode/index.html">
                   <img class="img-modal rounded mb-5" src="img/portfolio/qr-code-generator.gif" alt="">
                 </a>
-                <!-- Portfolio Modal - Text -->
+
                 <h1 id="merge-sort-visualizer">QR-Code Generator</h1>
                 <h3 id="table-of-contents">Table of contents</h2>
                 <ul>
@@ -820,7 +928,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Portfolio Modal 4 -->
   <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-labelledby="portfolioModal4Label" aria-hidden="true">
