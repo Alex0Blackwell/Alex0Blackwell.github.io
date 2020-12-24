@@ -28,7 +28,7 @@ async function animatePrompt(twoAnswers, isEnd) {
   var right = document.getElementById("right");
 
   // Change back to 50
-  var speed = 10;
+  var speed = 50;
   var delay = prompt.innerHTML.length * speed + speed;
 
   // type affect to header
