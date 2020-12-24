@@ -1,0 +1,85 @@
+@font-face { font-family: pixelFont; src: url('fonts/pixelFont1.ttf'); }
+@font-face { font-family: pixelFont; font-weight: bold; src: url('fonts/pixelFont1.ttf');}
+
+body {
+  background-color: #f0ffeb !important;
+
+}
+
+h1, h3, div {
+  color: black;
+  font-family: pixelFont, sans-serif;
+}
+
+.option {
+  margin: 5px 0;
+  background-color: #b6e2d3;
+  height: 90%;
+  border: 2px solid #777e91;
+  box-shadow: 1px 1px 2px #888888;
+  border-radius: 5px;
+  transition: 0.2s;
+  line-height: 0.9;
+  padding: 5px;
+}
+
+.option:hover {
+  margin: 3px 5px;
+  height: 95%;
+  background-color: #c4f5e4;
+  box-shadow: 5px 5px 3px #888888;
+  cursor: pointer;
+}
+
+.card-container {
+  min-height: 100px;
+}
+
+#backBtn {
+  margin-top: 15px;
+  background-color: #b6e2d3;
+  border: 2px solid #777e91;
+  color: black;
+
+}
+
+/* Divider */
+
+.divider-custom {
+  margin: 1.25rem 0 1.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divider-custom .divider-custom-line {
+  width: 100%;
+  height: 0.25rem;
+  background-color: #618fcf;
+  border-radius: 1rem;
+  border-color: #618fcf !important;
+}
+
+.divider-custom .divider-custom-line:first-child {
+  margin-right: 1rem;
+}
+
+.divider-custom .divider-custom-line:last-child {
+  margin-left: 1rem;
+}
+
+.divider-custom .divider-custom-icon {
+  color: #618fcf !important;
+  font-size: 2rem;
+}
+
+.divider-custom.divider-light .divider-custom-line {
+  background-color: black;
+}
+
+.divider-custom.divider-light .divider-custom-icon {
+  color: black !important;
+}
+
+/* Divider end */
