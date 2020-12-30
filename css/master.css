@@ -9994,3 +9994,10 @@ textarea {
     height: 50px;
    }
 }
+
+
+#researchQuote {
+    background: -webkit-linear-gradient(black, #c9c9c9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
