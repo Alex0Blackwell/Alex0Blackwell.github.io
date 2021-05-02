@@ -350,14 +350,14 @@
 
         <!-- Portfolio Item 1 -->
         <div class="col-md-6 col-lg-4">
-          <p class="text-white">MARKET SIMULATOR</p>
+          <p class="text-white">WATER CONSUMPTION PREDICTION</p>
           <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
               <div class="portfolio-item-caption-content text-center text-white">
                 <i class="fas fa-plus fa-3x"></i>
               </div>
             </div>
-            <img class="img-fluid" src="img/portfolio/market-game.gif" alt="">
+            <img class="img-fluid" src="img/portfolio/water-conservation.gif" alt="">
           </div>
         </div>
 
@@ -402,6 +402,19 @@
 
         <!-- Portfolio Item 4 -->
         <div class="col-md-6 col-lg-4">
+          <p class="text-white">MARKET SIMULATOR</p>
+          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal4">
+            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+              <div class="portfolio-item-caption-content text-center text-white">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="img/portfolio/market-game.gif" alt="">
+          </div>
+        </div>
+
+        <!-- Portfolio Item 4
+        <div class="col-md-6 col-lg-4">
           <p class="text-white">FAST READER</p>
           <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal4">
             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
@@ -411,7 +424,7 @@
             </div>
             <img class="img-fluid" src="img/portfolio/fast-reader.gif" alt="">
           </div>
-        </div>
+        </div> -->
 
         <!-- Portfolio Item 5 -->
         <div class="col-md-6 col-lg-4">
@@ -715,6 +728,139 @@
 
   <!-- Portfolio Modal 1 -->
   <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-8">
+                <!-- Portfolio Modal - Title -->
+                <h2 class="portfolio-modal-title text-secondary text-uppercase text-center mb-0">Water Consumption Prediction</h2>
+                <!-- Icon Divider -->
+                <div class="divider-custom">
+                  <div class="divider-custom-line"></div>
+                  <div class="divider-custom-icon">
+                    <i class="fas fa-terminal"></i>
+                  </div>
+                  <div class="divider-custom-line"></div>
+                </div>
+                <!-- Portfolio Modal - Image -->
+                <div class="col-12 text-center">
+                  <a href="https://www.nywater.ml/">
+                    <img class="img-modal rounded mb-5" src="img/portfolio/water-conservation.gif" alt="">
+                  </a>
+                </div>
+                <!-- Portfolio Modal - Text -->
+                <h2 id="overview">Overview</h2>
+                <h4 id="introduction">Introduction</h4>
+                <p>The recent frequency of climate issues has risen, and with this topical issue is the concern of droughts. 
+                  Every summer season in the New York area comes with the possibility of water sparseness. Often, water 
+                  restrictions must be invoked, causing civil unrest and raising concerns over whether or not the constraints
+                   are of an appropriate scale. Our project forecasts water consumption so that civilians have more time to 
+                   prepare for water restrictions. Additionally, our prediction software could provide insight regarding the 
+                   most suitable magnitude of restrictions. </p>
+                <h4 id="how-we-present-our-solution">How We Present Our Solution</h4>
+                <p>A web application is hosted at <a href="http://www.nywater.ml">nywater.ml</a> with an interactive graph 
+                  displaying water consumption over time in New York regions. The regions include New York City itself, 
+                  and the boroughs: Brooklyn, Bronx, Manhattan, Queens, Staten Island, and the Federal Housing Administration 
+                  (FHA). For each region, the time span may be selected. For New York itself, a prediction can be cast into 
+                  the future by applying a machine-learning algorithm to forecast the expected water consumption trend for 
+                  a given period. When a time is selected, aggregate values corresponding to statistics on water consumption
+                  and charges are updated.</p>
+                <h4 id="what-we-found">What We Found</h4>
+                <p>Four time-series machine learning models were used on our data: exponential smoothing, ARIMA, SARIMA, 
+                  and LSTM. The seasonality of the data was represented best by Holt-Winter’s seasonal extension to exponential 
+                  smoothing and the seasonality captured in SARIMA. The ARIMA model failed to determine a pattern and suffered 
+                  from underfitting. The LSTM model had issues generalizing to the test set and resulted in poor performance 
+                  on our data. The best fit model to our data was SARIMA, achieving the lowest median absolute error of all 
+                  the considered machine learning models.</p>
+                <h2 id="technologies">Technologies</h2>
+                <h4 id="frontend">Frontend</h4>
+                <ul>
+                  <li>JavaScript</li>
+                  <li>Chart.js</li>
+                  <li>HTML</li>
+                  <li>CSS</li>
+                </ul>
+                <h4 id="backend">Backend</h4>
+                <ul>
+                  <li>Flask</li>
+                  <li>Python</li>
+                  <li>MySQL</li>
+                  <li>AWS
+                </ul>
+                <h3 id="machine-learning">Machine Learning</h3>
+                Used:
+                <ul>
+                  <li>SARIMA</li>
+                </ul>
+                <p>Evaluated but not used:</p>
+                <ul>
+                  <li>ARIMA</li>
+                  <li>Exponential Smoothing</li>
+                  <li>LSTM</li>
+                </ul>
+                <h2 id="development-setup">Development Setup</h2>
+                <h4 id="python-virtual-environment">Python Virtual Environment</h4>
+                <p>In the <code>./water-conservation-prediction</code> parent folder, create a virtual environment in Python so we can keep track of libraries.<br>To create a virtual environment:</p>
+                <pre><code>python3 -m venv <span class="hljs-keyword">env</span>
+                </code></pre><p>Where <code>env</code> is the name of your environment; however, if you choose something other than <code>env</code> you may need to update the <code>.gitignore</code> file.  </p>
+                <p>Now activate the virtual environment:<br><strong>Windows</strong></p>
+                <pre><code>env<span class="hljs-symbol">\S</span>cripts<span class="hljs-symbol">\a</span>ctivate.bat
+                </code></pre><p><strong>Unix or MacOS</strong></p>
+                <pre><code><span class="hljs-keyword">source</span> env<span class="hljs-regexp">/bin/</span>activate
+                </code></pre><p>... and install the requirements:</p>
+                <pre><code>pip <span class="hljs-keyword">install</span> -r requirements.txt
+                </code></pre><h4 id="host-backend">Host Backend</h4>
+                <p>Navigate to <code>Backend/</code> and run <code>python app.py</code> to connect to the database and activate the API endpoints.</p>
+                <h4 id="access-frontend">Access Frontend</h4>
+                <p>Navigate to <code>App/</code> and open <code>index.html</code> in your web browser.</p>
+
+                
+                <div class="text-center">
+                  <h3>White Paper</h3>
+                    <a href="files/borealis_ai/Water_Consumption_Prediction_with_Machine_Learning.pdf">
+                    <button type="button" class="btn btn-secondary">
+                      <i class="fas fa-fw fa-file-pdf"></i>
+                      Paper
+                    </button>
+                  </a>
+                  <h3>Around the Web</h3>
+                  <a href="https://www.nywater.ml/">
+                    <button type="button" class="btn btn-secondary">
+                      <i class="fas fa-server"></i>
+                       Website
+                    </button>
+                  </a>
+                  <a href="https://github.com/Alex0Blackwell/water-conservation-prediction">
+                    <button type="button" class="btn btn-secondary">
+                      <i class="fab fa-fw fa-github"></i>
+                      Github
+                    </button>
+                  </a>
+                </div>
+                <hr>
+                <div class="text-center">
+                  <button class="btn btn-primary" href="#" data-dismiss="modal">
+                    <i class="fas fa-times fa-fw"></i>
+                    Close Window
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portfolio Modal 4 -->
+  <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-labelledby="portfolioModal4Label" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
