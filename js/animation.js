@@ -5,7 +5,7 @@ $(window).on("load",function() {
 
 // List of sentences
 var _CONTENT = ["I am a computing science student",
-                "I am a software developer",
+                "I am a Demonware software developer",
                 "I am a competitive programmer",
               ];
 
