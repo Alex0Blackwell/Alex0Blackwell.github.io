@@ -12,10 +12,9 @@ class BreathTimer {
 
         while(this.breathing) {
             this._breath_in();
-            await this._async_timeout(this._delay, breath_in_time);
+            await this._delay(breath_in_time);
             this._breath_out();
-            await this._async_timeout(this._delay, breath_in_time);
-            // await this._async_timeout(this._breath_out, breath_out_time);
+            await this._delay(breath_out_time);
         }
     }
 
@@ -26,39 +25,30 @@ class BreathTimer {
     }
 
 
-    static async _async_timeout(function_to_execute, delay) {
+    static _breath_in() {
+        document.getElementById("breath-status").innerHTML = "breath in";
+    }
+
+
+    static _breath_out() {
+        document.getElementById("breath-status").innerHTML = "breath out";
+    }
+
+
+    static async _delay(time_to_delay) {
         return new Promise((resolve, reject) => {
             try {
-                setTimeout(function_to_execute, delay, resolve);
+                setTimeout(() => {
+                    resolve();
+                }, time_to_delay);
             } catch (error) {
                 reject(error);
             }
         });
     }
-
-
-    static _breath_in() {
-        console.log("breath in");
-        // resolve("yep");
-        document.getElementById("breath-status").innerHTML = "breath in";
-        // this.breath_status_el.innerHTML = "breath in";
-    }
-
-
-    static _breath_out() {
-        console.log("breath out");
-        // resolve("yep");
-        document.getElementById("breath-status").innerHTML = "breath out";
-    }
-
-
-    static _delay(resolve) {
-        console.log("delay");
-        resolve("yep");
-    }
 }
 
 
-async function start_relaxation() {
-    await BreathTimer.start_breathing(2000, 2000);
+function start_relaxation() {
+    BreathTimer.start_breathing(2000, 2000);
 }
