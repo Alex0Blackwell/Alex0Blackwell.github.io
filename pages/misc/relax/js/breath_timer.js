@@ -8,6 +8,7 @@ class BreathTimer {
 
 
     static async start_breathing(breath_in_time, breath_out_time) {
+        document.getElementById("breath-dot").classList.add("colour-breath");
         document.getElementById("breath-status").style.display = "block";
         this.breathing = true;
 
@@ -21,6 +22,7 @@ class BreathTimer {
 
 
     static end_breathing() {
+        document.getElementById("breath-dot").classList.remove("colour-breath");
         document.getElementById("breath-status").style.display = "none";
         this.breathing = false;
         window.clearTimeout(this.breath_in_timeout);
@@ -53,7 +55,7 @@ class BreathTimer {
 
 
 function start_relaxation() {
-    BreathTimer.start_breathing(1000, 1000);
+    BreathTimer.start_breathing(4000, 6000);
     const start_btn = document.getElementById("start-btn");
     start_btn.disabled = true;
 }
