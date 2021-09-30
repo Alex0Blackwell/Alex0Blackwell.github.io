@@ -14,8 +14,10 @@ class BreathTimer {
         while(this.breathing) {
             this._breath_in();
             await this._delay(breath_in_time);
-            this._breath_out();
-            await this._delay(breath_out_time);
+            if(this.breathing) {
+                this._breath_out();
+                await this._delay(breath_out_time);
+            }
         }
     }
 
