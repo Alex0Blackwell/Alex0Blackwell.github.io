@@ -2,8 +2,7 @@ class BreathTimer {
     static constructor() {
         this.breathing = false;
         this.breath_status_el = document.getElementById("breath-status");
-        this.breath_in_timeout = null;
-        this.breath_out_timeout = null;
+        this.timeout = null;
     }
 
 
@@ -23,27 +22,26 @@ class BreathTimer {
 
     static end_breathing() {
         document.getElementById("breath-dot").classList.remove("colour-breath");
-        document.getElementById("breath-status").style.display = "none";
+        document.getElementById("breath-status").innerHTML = "";
         this.breathing = false;
-        window.clearTimeout(this.breath_in_timeout);
-        window.clearTimeout(this.breath_out_timeout);
     }
 
 
     static _breath_in() {
-        document.getElementById("breath-status").innerHTML = "breath in";
+        document.getElementById("breath-status").innerHTML = "Breath In";
     }
 
 
     static _breath_out() {
-        document.getElementById("breath-status").innerHTML = "breath out";
+        document.getElementById("breath-status").innerHTML = "Breath Out";
     }
 
 
     static async _delay(time_to_delay) {
         return new Promise((resolve, reject) => {
+            clearTimeout(this.timeout);
             try {
-                setTimeout(() => {
+                this.timeout = setTimeout(() => {
                     resolve();
                 }, time_to_delay);
             } catch (error) {

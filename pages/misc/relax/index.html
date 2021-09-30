@@ -15,14 +15,31 @@
         <title>Relax</title>
     </head>
     <body>
-        <span id="breath-dot" class="dot"></span>
-        <button id="start-btn" class="btn btn-secondary" onclick="start_relaxation()">
-            Start Relaxing
-        </button>
-        <button id="end-btn" class="btn btn-secondary" onclick="stop_relaxation()">
-            Okay, I'm done now
-        </button>
-        <p id="breath-status"></p>
+        <div class="container">
+            <div class="text-center">
+                <h1>Relax With a Breathing Excercise</h1>
+                <h3>Dedicated to, Annika❤️</h3>
+                <img id="breathing-gif" src="./imgs/breath.gif" alt="breath">
+                <div class="breath-dot-container">
+                    <span id="breath-dot" class="dot"></span>
+                </div>
+                <h4 id="breath-status"></h4>
+                <div class="buttons">
+                    <button id="start-btn" class="btn btn-secondary" onclick="start_relaxation()">
+                        Start Relaxing
+                    </button>
+                    <button id="end-btn" class="btn btn-secondary" onclick="stop_relaxation()">
+                        I'm Done Now
+                    </button>
+                </div>
+            </div>
+            <p>
+                Paced Breathing is a technique that can help to activate stress reduction mechanisms
+                in the body by promoting a harmonious state between your respiration system and your heart.  
+                This website follows a four seconds in, six seconds out breathing pattern recommended
+                by my mom :)
+            </p>
+        </div>
     </body>
-    <script src="./js/breath_timer.js"></script>
+    <script src="./js/breath_timer.js" async></script>
 </html>
