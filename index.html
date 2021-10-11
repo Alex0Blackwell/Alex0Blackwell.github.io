@@ -348,6 +348,32 @@
       <!-- Portfolio Grid Items -->
       <div class="row text-center">
 
+        <!-- first portfolio item -->
+        <div class="col-md-6 col-lg-4">
+          <p class="text-white">RATE MY MEDICATION</p>
+          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModalRMM">
+            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+              <div class="portfolio-item-caption-content text-center text-white">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="img/portfolio/rate-my-meds.gif" alt="">
+          </div>
+        </div>
+
+        <!-- second portfolio item -->
+        <div class="col-md-6 col-lg-4">
+          <p class="text-white">BIAS MONITOR</p>
+          <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModalBias">
+            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+              <div class="portfolio-item-caption-content text-center text-white">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="img/portfolio/bias-monitor.gif" alt="">
+          </div>
+        </div>
+
         <!-- Portfolio Item 1 -->
         <div class="col-md-6 col-lg-4">
           <p class="text-white">WATER CONSUMPTION PREDICTION</p>
@@ -427,7 +453,7 @@
         </div> -->
 
         <!-- Portfolio Item 5 -->
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-4 offset-lg-2">
           <p class="text-white">BRAILLE CONVERTER</p>
           <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal5">
             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
@@ -725,6 +751,217 @@
   </div>
 
   <!-- Portfolio Modals -->
+  <!-- Portfolio Modal RMM -->
+  <div class="portfolio-modal modal fade" id="portfolioModalRMM" tabindex="-1" role="dialog" aria-labelledby="portfolioModalRMMLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-8">
+                <!-- Portfolio Modal - Title -->
+                <h2 class="portfolio-modal-title text-secondary text-uppercase text-center mb-0">Rate My Medication</h2>
+                <!-- Icon Divider -->
+                <div class="divider-custom">
+                  <div class="divider-custom-line"></div>
+                  <div class="divider-custom-icon">
+                    <i class="fas fa-terminal"></i>
+                  </div>
+                  <div class="divider-custom-line"></div>
+                </div>
+                <!-- Portfolio Modal - Image -->
+                <div class="col-12 text-center">
+                  <a href="https://ratemymedication.herokuapp.com/">
+                    <img class="img-modal rounded mb-5" src="img/portfolio/rate-my-meds.gif" alt="">
+                  </a>
+                </div>
+                <!-- Portfolio Modal - Text -->
+                <h2 id="overview">Overview</h2>
+                <h4>Feel Confident starting your medication</h4>
+                <p>
+                  Medication should make you better, not worse—and the stress of going on it should be non-existent.
+                  Start your medication with confidence by referencing others' experiences to guide your own beliefs.
+                </p>
+                <h4>Hear from real world experiences</h4>
+                <p>
+                  How common are the side effects written on drugs? What common properties does the medication have?
+                  Does it commonly work? Learn the real-life impact your medicine has, and inform yourself of the
+                  pros and cons. 
+                </p>
+                <h4>Review your medication</h4>
+                <p>
+                  If you are taking any medication, make your own thoughts and experiences public! Whether your
+                  review is positive or negative, it helps contribute to the larger, collective view of the drug. 
+                </p>
+                <h4>Help the community</h4>
+                <p>Don't let people make a mistake when deciding to take a medication. Medication can have a
+                  long-standing effect on lives; the right drugs can help dramatically, but the wrong ones can
+                  cause unwanted side effects and present a struggle to get off. </p>
+                <h2 id="technologies">Technologies</h2>
+                <h4 id="frontend">Frontend</h4>
+                <ul>
+                  <li>JavaScript</li>
+                  <li>Express JS</li>
+                  <li>HTML</li>
+                  <li>CSS</li>
+                </ul>
+                <h4 id="backend">Backend</h4>
+                <ul>
+                  <li>Node.js</li>
+                  <li>MySQL</li>
+                </ul>
+                <h4 id="backend">Hosting</h4>
+                <ul>
+                  <li>Heroku</li>
+                </ul>
+                <div class="text-center">
+                  <h3>Around the Web</h3>
+                  <a href="https://ratemymedication.herokuapp.com/">
+                    <button type="button" class="btn btn-secondary">
+                      <i class="fas fa-server"></i>
+                       Website
+                    </button>
+                  </a>
+                </div>
+                <hr>
+                <div class="text-center">
+                  <button class="btn btn-primary" href="#" data-dismiss="modal">
+                    <i class="fas fa-times fa-fw"></i>
+                    Close Window
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portfolio Modal Bias -->
+  <div class="portfolio-modal modal fade" id="portfolioModalBias" tabindex="-1" role="dialog" aria-labelledby="portfolioModalBiasLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-8">
+                <!-- Portfolio Modal - Title -->
+                <h2 class="portfolio-modal-title text-secondary text-uppercase text-center mb-0">Bias Monitor</h2>
+                <!-- Icon Divider -->
+                <div class="divider-custom">
+                  <div class="divider-custom-line"></div>
+                  <div class="divider-custom-icon">
+                    <i class="fas fa-terminal"></i>
+                  </div>
+                  <div class="divider-custom-line"></div>
+                </div>
+                <!-- Portfolio Modal - Image -->
+                <div class="col-12 text-center">
+                  <a href="https://chrome.google.com/webstore/detail/bias-monitor/njlgkckpfjeknfkdideknnbniehihkli">
+                    <img class="img-modal rounded mb-5" src="img/portfolio/bias-monitor.gif" alt="">
+                  </a>
+                </div>
+                <!-- Portfolio Modal - Text -->
+
+                <h2 id="overview">Overview</h2>
+                <p>Try the extension for yourself,
+                <a href="https://chrome.google.com/webstore/detail/bias-monitor/njlgkckpfjeknfkdideknnbniehihkli">available on the Chrome Web Store</a>!  </p>
+                <p><em>Bias Monitor</em> is a Chrome extension that detects the political bias
+                of news articles. Using Natural Language Processing (NLP) a machine
+                learning algorithm analyzes the context of the website content. The
+                algorithm determines the political bias of the website, and the
+                Chrome extension displays this information for the user to see.  </p>
+                <p>The extension also remembers what your viewing habits are and
+                what your own political bias is. Bias Monitor learns about the
+                type of political content you are used to seeing and encourages
+                viewing news sources of a conflicting perspective.</p>
+                <p>Please leave any complaints or suggestions in the Github
+                <a href="https://github.com/Alex0Blackwell/bias-monitor/issues">Issues</a>
+                tab.</p>
+                <h3 id="ai-overview">AI Overview</h3>
+                <p><em>Bias Monitor</em> uses a Machine Learning (ML) algorithm to determine the political lean of text input. More specifically, the area of ML this algorithm is concerned with is Natural Language Processing (NLP). To create the algorithm, labelled data was used. That is data that acts as input and correlates to a &quot;bias value&quot; indicating its political lean. By minimizing the difference between the actual bias value the ML algorithm produced and the expected value provided by the labelled data, the program can—in a sense, learn.</p>
+                <h3 id="datasets">Datasets</h3>
+                <p>To train the AI, labelled data is required. Three different labelled
+                datasets were used in the training process. The first dataset came
+                from a pre-labelled collection of articles from
+                <a href="https://adfontesmedia.com/">AdFontesMedia</a>, providing approximately
+                1200 entries, totalling about 1 million words. The data was labelled
+                from -42 to 42, representing far left to far right respectively.  </p>
+                <p>Other datasets were created by piping data through
+                <a href="https://mediabiasfactcheck.com/">Media Bias Fact Check</a>.
+                The Media Bias Fact Check website analyzes data and gives a left
+                or right political lean. About 10 thousand articles were labelled
+                and trained on using this method.  </p>
+                <p>A third data source was gathered from
+                <a href="https://www.kaggle.com/snapcrack/all-the-news">All The News</a>,
+                a Kaggle dataset consisting of about 100 thousand articles
+                labelled based on political lean.</p>
+                <h3 id="model-layout">Model Layout</h3>
+                <p>The API takes in text data, analyzes it, and returns a number in
+                the domain of [-42, 42]; a more negative number represents further
+                left politically, and a greater positive number corresponds to a
+                far-right political lean.</p>
+                <h3 id="determining-a-best-ml-model">Determining a Best ML Model</h3>
+                <p>The two main architectures used in finding the best model were
+                Long Short-Term Memory (LSTM) and Bidirectional Encoder
+                Representations from Transformers (BERT). LSTM is what lays
+                underneath
+                <a href="https://docs.fast.ai/tutorial.text.html#The-ULMFiT-approach">ULMFiT</a>
+                which was used to train one model.
+                <a href="https://github.com/google-research/bert">BERT</a> is another neural
+                network learning approach used in determining the best model.
+                <a href="https://pytorch.org/hub/pytorch_fairseq_roberta/">RoBERTa</a>
+                is a branch off of BERT and proved to provide the best
+                results of all the ML models considered.  </p>
+                <p>ReBERTa achieved the best Margin Absolute Error (MAE) of
+                6.04.</p>
+                <h2 id="license-and-credit">License and Credit</h2>
+                <p>Thanks to the
+                <a href="https://www.thebipartisanpress.com/politics/calculating-political-bias-and-fighting-partisanship-with-ai/">wonderful report</a>
+                by <a href="https://www.thebipartisanpress.com/">The Bipartisan Press</a>
+                and for providing an API endpoint for our Chrome extension
+                project <em>Bias Monitor</em>.  </p>
+                <p>Licensed under the <a href="LICENSE">MIT License</a>.</p>
+                <div class="text-center">
+                  <h3>Around the Web</h3>
+                  <a href="https://ratemymedication.herokuapp.com/">
+                    <button type="button" class="btn btn-secondary">
+                      <i class="fas fa-server"></i>
+                       Website
+                    </button>
+                  </a>
+                  <a href="https://github.com/Alex0Blackwell/bias-monitor">
+                    <button type="button" class="btn btn-secondary">
+                      <i class="fab fa-fw fa-github"></i>
+                      Github
+                    </button>
+                  </a>
+                </div>
+                <hr>
+                <div class="text-center">
+                  <button class="btn btn-primary" href="#" data-dismiss="modal">
+                    <i class="fas fa-times fa-fw"></i>
+                    Close Window
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Portfolio Modal 1 -->
   <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
