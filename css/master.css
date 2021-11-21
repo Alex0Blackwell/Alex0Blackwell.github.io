@@ -9773,7 +9773,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .portfolio .portfolio-item .portfolio-item-caption:hover {
-  opacity: 1;
+  opacity: 0.85;
 }
 
 .portfolio .portfolio-item .portfolio-item-caption .portfolio-item-caption-content {
