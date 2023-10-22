@@ -1,0 +1,116 @@
+@font-face{
+  font-family: uppercaseFont;
+  src:url('./fonts/uppercase.ttf')
+}
+
+h3 {
+    font-family: uppercaseFont, sans-serif;
+}
+
+.WelcomeStatement{
+    font-family: uppercaseFont, sans-serif;
+    text-align: center;
+}
+
+.newLeafGame{
+    display: block;
+    background-color: #9eb588;
+}
+
+.pad20 {
+    padding: 20px;
+}
+
+.pad40 {
+    padding: 40px;
+}
+
+.center-txt {
+    text-align: center;
+}
+
+.singleCard{
+    height: 500px;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.introPlayer{
+    display: block;
+}
+
+.userCards{
+    text-align: center;
+    filter: grayscale(95%)
+}
+
+
+.cardContents{
+    text-align: center;
+}
+
+.userCardsImages{
+    width: 90%;
+    height: 95%;
+}
+
+.menuPanel{
+    /* border-color: black;
+    border-width: 2px;
+    border-style: solid; */
+    height: 5vw;
+    text-align: center;
+}
+
+.endTurn{
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Card flipping */
+ /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+  background-color: transparent;
+  height: 500px;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 2s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+/* .flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+} */
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  border-radius: 20px;
+  /* background-color: #bbb; */
+  box-shadow: 0px 0px 8px 8px #cfcfcf;;
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  color: white;
+  transform: rotateY(180deg);
+}

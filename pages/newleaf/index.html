@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Leaf</title>
+    <script src="script.js"></script>
+    <link href="style.css">  <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Add Bootstrap CSS via CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!-- Start stuff -->
+    <div class="container introPlayer">
+        <div class="row justify-content-center ">
+            <p class="display-1 WelcomeStatement">Autumn Trivia Game</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="form-group">
+                <label for="num-players">Enter the number of players and press go!</label>
+                <select class="form-control" id="num-players">
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                </select>
+                <div class="center-txt pad20">
+                    <button class="btn btn-secondary" onclick="start_game()">Go!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+
+    <div class="container">
+        <div class="row">
+            <div class="justify-content-md-center">
+                <p>
+                    Answer the Autumn trivia questions correctly to add that new
+                    leaf to your inventory. Play with up to 5 friends as you all
+                    take turns building your leaf collection. But watch out! what's
+                    on the other side of the trivia card is random and potentially
+                    already in your inventory. So, this game is all about turning
+                    over a new leaf!
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Turn status -->
+    <div class="container">
+        <div class="row">
+            <div class="col-6 menuPanel">
+                <h3 id="game-status">Game not started</h3>
+            </div>
+            <div class="col-6 menuPanel">
+                <h3 id="player_num"></h3>
+            </div>
+        </div>
+    </div>
+    <br><br>
+
+    <!-- main screen -->
+
+    <div class="container">
+        <div class="row">
+            <!-- card -->
+            <div class="col-12 col-md-4 pad20">
+                <div class="flip-card" id="flip-card">
+                    <div class="flip-card-inner" id="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3>Autumn Trivia</h3>
+                            <p id="card" class="pad40"></p>
+                        </div>
+                        <div class="flip-card-back">
+                            <img id="back-img" src="images/leaf1.png" style="width:300px;height:300px;">
+                        </div>
+                    </div>
+                </div> 
+                <br><br>
+                <input type="radio" name="trivia-answer" onclick="check_answer_and_step(0)">
+                <label id="card-option1">Answer one</label><br>
+                <input type="radio" name="trivia-answer" onclick="check_answer_and_step(1)">
+                <label id="card-option2">Answer two</label><br>
+            </div>
+
+            <!-- inventory -->
+            <div class="col-12 col-md-8 pad20">
+                <h3 class="center-txt">
+                    Collect all leafs to win!
+                </h3>
+                <div class="row">
+                    <!-- top row -->
+                    <div id="leaf1" class="col-4 userCards">
+                        <img src="images/leaf1.png" class="userCardsImages">
+                    </div>
+                    <div id="leaf2" class="col-4 userCards">
+                        <img src="images/leaf2.png" class="userCardsImages">
+                    </div>
+                    <div id="leaf3" class="col-4 userCards">
+                        <img src="images/leaf3.png" class="userCardsImages">
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- bottom row -->
+                   <div id="leaf4" class="col-4 userCards">
+                        <img src="images/leaf4.png" class="userCardsImages">
+                    </div>
+                    <div id="leaf5" class="col-4 userCards">
+                        <img src="images/leaf5.png" class="userCardsImages">
+                    </div>
+                    <div id="leaf6" class="col-4 userCards">
+                        <img src="images/leaf6.png" class="userCardsImages">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="cards.js"></script> 
+    <script src="game.js"></script> 
+    <script>
+    function flip_card() {
+        document.getElementById("flip-card-inner").style.transform = "rotateY(180deg)";
+    }
+  </script>
+</html>
