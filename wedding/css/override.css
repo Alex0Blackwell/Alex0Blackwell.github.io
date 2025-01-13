@@ -1,0 +1,152 @@
+/* Color palette: https://muffingroup.com/blog/green-color-palette/ */
+
+@font-face {
+    font-family: 'wedding-font';
+    src: url('../assets/fonts/Wedding.otf');
+}
+/* 
+h1 {
+    font-size: 6rem !important;
+} */
+
+h1, h2 {
+    font-family: "wedding-font" !important;
+    font-weight: normal !important;
+}
+
+.bg-primary {
+  color: #fff !important;
+  background-color: #003e29 !important;
+}
+
+.cabin {
+  position: relative;
+  display: block;
+  max-width: 25rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.drop-shadow {
+    box-shadow: 0px 6px 13px #a7a7a7;
+}
+
+.person-list {
+    padding: 0 10px;
+}
+
+.person-item {
+    padding: 6px 0;
+    font-size: 20px;
+}
+
+.border-btm {
+    border-bottom: 2px solid #bcbdbc;
+}
+
+.cabin-header {
+    padding-top: 15px;
+    padding-bottom: 5px;
+    background-color: #003e29;
+    color: white;
+}
+
+.mini-avatar {
+    height: 75px;
+    padding-right: 10px;
+}
+
+.fa-circle {
+    color: black;
+    width: 10px;
+    padding: 0px 10px
+}
+
+.margin-0 {
+    margin: 0;
+}
+
+.rvsp-Pending {
+    color: #fee46d;
+}
+
+.rvsp-Accepted {
+    color: #467061;
+}
+
+.rvsp-Maybe {
+    color: #e6890b;
+}
+
+.rvsp-Unable-to-Attend {
+    color: #d51c3f;
+}
+
+.line-height-3 {
+    line-height: 3rem !important;
+}
+
+.rsvp-radios {
+    font-size: 20px;
+}
+
+#masthead {
+    background-image: url('../assets/img/bodega2-blur.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+    height: 600px;
+}
+
+#landing-text {
+    display: none;
+}
+
+#ftue {
+    display: none;
+}
+
+#main-page {
+    display: none;
+}
+
+.max-height {
+    position: fixed;
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+}
+
+.large-text {
+  font-size: 7rem;
+  line-height: 100px;
+}
+
+@media (min-width: 992px) {
+  .large-text {
+    font-size: 8rem;
+    line-height: 7rem;
+  }
+}
+
+.test {
+  font-size: 7rem !important;
+  line-height: 100px;
+}
+
+.fade-in {
+  animation: fadeIn ease 0.5s;
+  /* -webkit-animation: fadeIn ease .5s;
+  -moz-animation: fadeIn ease .5s;
+  -o-animation: fadeIn ease .5;
+  -ms-animation: fadeIn ease .5s; */
+}
+@keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}

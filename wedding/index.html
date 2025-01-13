@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Wedding RSVP</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.png" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/override.css" rel="stylesheet" />
+    </head>
+
+    <body>
+        <div id="landing">
+            <section class="page-section bg-primary text-white max-height">
+                <div class="container" id="landing-text">
+                    <h2 class=" text-center text-white line-height-3">Alex & Annika Wedding</h2>
+                    <h3 class="text-center text-uppercase text-white">July 14-16, 2025 - Galiano Island</h3>
+                    <div class="row">
+                        <div class="col-lg-12 ms-auto">
+                            <br>
+                            <p class="lead mb-0">
+                                Use the invite link we sent to access the website.
+                                <br>
+                                Any questions?
+                                <br>
+                                <a href="mailto:alex.annika.wedding@gmail.com">alex.annika.wedding@gmail.com</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="ftue" class="fade-in">
+            <section class="page-section bg-primary text-white max-height">
+                <div class="container ">
+                    <h1 class="large-text text-center text-white">You Are Invited!</h1>
+                    <h3 class="text-center text-uppercase text-white">To Alex and Annika's July 14-16, 2025 Wedding!</h3>
+                    <div class="row">
+                        <div class="col-lg-12 ms-auto">
+                            <br>
+                            <p class="lead" id="ftue-welcome"></p>
+                            <p class="lead">
+                                The venue is <a href="https://www.bodegaridge.com/">Bodega Ridge</a> on Galiano island. You are invited to spend two nights
+                                in cabins arriving on Monday July 14 and leaving on Wednesday July 16. The wedding itself will be on
+                                Tuesday July 15.
+                            </p>
+                            <p class="lead">
+                                Please answer the following questions. You will be able to change your answer later.
+                            </p>
+                            <p class="lead mb-0">
+                                What is your RSVP status?
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rsvp-radios">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="rsvp-radio" id="yes-rsvp", value="Accepted">
+                            <label class="form-check-label" for="yes-rsvp">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="rsvp-radio" id="maybe-rsvp" value="Maybe">
+                            <label class="form-check-label" for="maybe-rsvp">
+                                Maybe
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="rsvp-radio" id="no-rsvp" value="Unable to Attend" checked>
+                            <label class="form-check-label" for="no-rsvp">
+                                No
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 ms-auto">
+                            <p class="lead mb-0">
+                                Could you drive?
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rsvp-radios">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="drive-radio" id="yes-drive" value="true">
+                            <label class="form-check-label" for="yes-drive">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="drive-radio" id="no-drive" value="false" checked>
+                            <label class="form-check-label" for="no-drive">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="submit_rsvp()" id="ftue-submit-btn" disabled>Submit</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 ms-auto">
+                            <br>
+                            <p class="lead mb-0">
+                                Questions?
+                                <br>
+                                <a href="mailto:alex.annika.wedding@gmail.com">alex.annika.wedding@gmail.com</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="main-page" class="fade-in">
+            <!-- Masthead-->
+            <header class="masthead text-center text-white" id="masthead">
+                <div class="container d-flex align-items-center flex-column">
+                    <!-- Masthead Avatar Image-->
+                    <!-- Create here: https://avatarmaker.com/female/ -->
+                    <!-- <img class="masthead-avatar mb-5" src="assets/img/people/annika.png" alt="..." /> -->
+                    <!-- Masthead Heading-->
+                    <h1 class="masthead-heading mb-0">Alex & Annika Wedding</h1>
+                    <div class="divider-custom"></div>
+                    <!-- Masthead Subheading-->
+                    <p class="masthead-subheading font-weight-light">July 14-16, 2025 - Galiano Island</p>
+                </div>
+            </header>
+            <!-- About Section-->
+            <section class="page-section bg-primary text-white mb-0" id="about">
+                <div class="container">
+                    <!-- About Section Heading-->
+                    <h2 class="page-section-heading text-center text-white">Welcome!</h2>
+                    <!-- About Section Content-->
+                    <div class="row">
+                        <div class="col-lg-12 ms-auto">
+                            <p class="lead" id="main-page-welcome"></p>
+                            <p class="lead">
+                                <br>
+                                You are invited to Alex and Annika's intimate 2025 wedding. The event spans three days
+                                on Galiano island. You have been assigned to one of the seven 3-bedroom cabins
+                                shown in the section below.
+                                <br>
+                                <br>
+                                The venue is <a href="https://www.bodegaridge.com/">Bodega Ridge</a> and check-in is
+                                4:00pm Monday July 14th. After checking in there will be a dinner provided at the nearby
+                                restaurant <a href="https://www.bodegaridge.com/restaurant">Lola</a>. The second day, Tuesday
+                                July 15th, is the day of the actual wedding. We recommend visiting
+                                <a href="https://www.bodegaridge.com/app-landing-page">The Pink Geranium</a> for breakfast and lunch.
+                                The ceremony will start at 3:00pm; the site is just a few minutes walk away from the cabins.
+                                Following the ceremony will be a dinner at Lola's. Check out is at 11:00am Wednesday July 16th.
+                                <br>
+                                <br>
+                                Cabin information, FAQs, and contact info is all on this website.
+                                We will include a more detailed itinerary as we get closer to the date,
+                                so make sure to save this link.
+                                We are so looking forward to seeing you!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cabin Section-->
+            <section class="page-section portfolio" id="portfolio">
+                <div class="container">
+                    <!-- Cabin Section Heading-->
+                    <h2 class="page-section-heading text-center text-secondary mb-0">Cabins</h2>
+                    <!-- Icon Divider-->
+                    <div class="divider-custom"></div>
+                    <div class="text-center">
+                        <h3 id="your-cabin-number">Find your cabin!</h3>
+                        <p>Click the people below to get more info.</p>
+                        <img class="img-fluid rounded mb-5" src="assets/img/cabin-layout.png"/>
+                    </div>
+                    <div class="divider-custom"></div>
+                    <!-- Cabin Grid Items-->
+                    <div class="row justify-content-center" id="cabin-grid">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Update Info Section-->
+            <section class="page-section bg-primary text-white">
+                <div class="container">
+                    <!-- Update Info Section Heading-->
+                    <h2 class="page-section-heading text-center text-white">FAQs</h2>
+                    <!-- About Section Content-->
+                    <div class="row">
+                        <div class="col-lg-12 ms-auto lead">
+                            <br>
+                            <h3>How Do I Get There?</h3>
+                            <p>
+                                You can take a ferry from Langdale that brings you straight to Galiano; it takes
+                                about 40 minutes once the ferry is moving. Then you can drive up to Bodega Ridge 
+                                which is another 30 minutes. Try pressing on the people above to see who you
+                                can carpool with.
+                            </p>
+
+                            <h3>What is the Colour Scheme?</h3>
+                            <p>
+                                Sage green and lavender.
+                            </p>
+
+                            <h3>What Should I Wear?</h3>
+                            <p>
+                                Suits and long dresses is what we're thinking. 
+                            </p>
+
+                            <h3>What Am I Paying For?</h3>
+                            <p>
+                                You're on the hook for breakfast and lunches.
+                            </p>
+
+                            <h3>Where's the Wedding Registry?</h3>
+                            <p>
+                                we're not expecting any gifts, but anything is appreciated. Just please don't get
+                                anything too big since we have a little apartment :)
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </section>
+
+            <!-- FAQ Section-->
+            <section class="page-section portfolio" id="portfolio">
+                <div class="container">
+                    <!-- Cabin Section Heading-->
+                    <h2 class="page-section-heading text-center text-secondary">Update Your Status</h2>
+                    <div class="row">
+                        <div class="col-lg-12 ms-auto">
+                            <p class="lead mb-0">
+                                What is your RSVP status?
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rsvp-radios">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="post-rsvp-radio" id="main-yes-rsvp" value="Accepted">
+                            <label class="form-check-label" for="main-yes-rsvp">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="post-rsvp-radio" id="main-maybe-rsvp" value="Maybe">
+                            <label class="form-check-label" for="main-maybe-rsvp">
+                                Maybe
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="post-rsvp-radio" id="main-no-rsvp" value="Unable to Attend" checked>
+                            <label class="form-check-label" for="main-no-rsvp">
+                                No
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 ms-auto">
+                            <p class="lead mb-0">
+                                Could you drive?
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rsvp-radios">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="post-drive-radio" id="main-yes-drive" value="true">
+                            <label class="form-check-label" for="main-yes-drive">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="post-drive-radio" id="main-no-drive" value="false", checked>
+                            <label class="form-check-label" for="main-no-drive">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="submit_rsvp_main_page()" id="main-submit">Submit</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 ms-auto text-center">
+                            <br><br><br>
+                            <p class="lead mb-0">
+                                Contact
+                                <br>
+                                <a href="mailto:alex.annika.wedding@gmail.com">alex.annika.wedding@gmail.com</a>
+                            </p>
+                            <p class="lead mb-0">
+                                Alex: (604) 767-4611
+                            </p>
+                            <p class="lead mb-0">
+                                Annika: (604) 499-6551
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Portfolio Modal -->
+            <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                        <div class="modal-body text-center pb-5">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-8">
+                                        <!-- Portfolio Modal - Title-->
+                                        <h3 class="portfolio-modal-title text-secondary mb-0" id="modal-name"></h3>
+
+                                        <!-- Portfolio Modal - Image-->
+                                        <img class="img-fluid rounded mb-5" alt="..." id="modal-image" />
+                                        <!-- Portfolio Modal - Text-->
+                                        <p class="mb-4" id="modal-text"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bootstrap core JS-->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+            <!-- Core theme JS-->
+            <script src="js/scripts.js"></script>
+        </div>
+        
+    </body>
+</html>
