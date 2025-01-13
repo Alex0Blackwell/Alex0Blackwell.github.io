@@ -118,7 +118,7 @@ function build_person_mappings() {
 function fill_modal(person_name) {
     let person = person_to_info[person_name];
     document.getElementById("modal-name").innerHTML = person_name;
-    let person_file_name = person_name.toLowerCase().replace(" ", "-");
+    let person_file_name = person_name.toLowerCase().replace(" ", "_");
     document.getElementById("modal-image").src = `assets/img/people/${person_file_name}.png`;;
 
     let person_description = (
@@ -203,7 +203,7 @@ function populate_cabins() {
 
             let person_avatar = document.createElement("img")
             person_avatar.setAttribute("class", "mini-avatar")
-            let person_file_name = person_name.toLowerCase().replace(" ", "-");
+            let person_file_name = person_name.toLowerCase().replace(" ", "_");
             person_avatar.setAttribute("src", `assets/img/people/${person_file_name}.png`)
             person_icon_dom.appendChild(person_avatar)
 
