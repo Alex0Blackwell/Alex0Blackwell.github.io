@@ -131,7 +131,7 @@ function fill_modal(person_name) {
     } else {
         person_description += `${person_name} will be in Cabin ${person.cabin}. `
     }
-    if(person.is_driving) {
+    if(person.is_driving == "true") {
         person_description += `${person_name} said they may be able to drive, so reach out to carpool!`
 
     }
