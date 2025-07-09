@@ -14,6 +14,7 @@ let people_json = JSON.parse(`{
         "rsvp_status": "Pending",
         "is_driving": false,
         "cabin": 1,
+        "code": 1234,
         "roommate": "Shawn",
         "relation": "is Annika's mom."
     },
@@ -22,6 +23,7 @@ let people_json = JSON.parse(`{
         "rsvp_status": "Pending",
         "is_driving": false,
         "cabin": 1,
+        "code": 1234,
         "roommate": "Cam",
         "relation": "is Cam's husband."
     },
@@ -29,7 +31,8 @@ let people_json = JSON.parse(`{
         "id": "7m288h31",
         "rsvp_status": "Pending",
         "is_driving": false,
-        "cabin": 1,
+        "cabin": 2,
+        "code": 5432,
         "roommate": "nobody",
         "relation": "is Annika's brother."
     },
@@ -37,7 +40,8 @@ let people_json = JSON.parse(`{
         "id": "ibsmqid3",
         "rsvp_status": "Pending",
         "is_driving": false,
-        "cabin": 1,
+        "cabin": 2,
+        "code": 5543,
         "roommate": "nobody",
         "relation": "is Annika's brother."
     }
@@ -58,7 +62,7 @@ person_info = null
 async function get_person_data(is_mocked=True) {
     if(is_mocked) {
         people_json = people_json;
-        await new Promise(r => setTimeout(r, 800));
+        await new Promise(r => setTimeout(r, 10));
     } else {
         const url = "https://api.jsonbin.io/v3/b/674689fbacd3cb34a8af8bb1/latest?meta=false";
         try {
@@ -187,7 +191,11 @@ function populate_cabins() {
         let cabin_number_dom = document.createElement("div")
         cabin_number_dom.setAttribute("class", "cabin-header")
         let cabin_text_dom = document.createElement("h3")
-        cabin_text_dom.innerHTML = `Cabin ${cabin_num}`
+        if(person_info.cabin == cabin_num) {
+            cabin_text_dom.innerHTML = `Cabin ${cabin_num}, door code ${person_info.code}`
+        } else {
+            cabin_text_dom.innerHTML = `Cabin ${cabin_num}`
+        }
         cabin_number_dom.appendChild(cabin_text_dom)
 
         let person_list_dom = document.createElement("div")
@@ -250,7 +258,7 @@ function set_cabin_number() {
     if(person_name == "guest") {
         document.getElementById("your-cabin-number").innerHTML = "Find your cabin below!"
     } else {
-        document.getElementById("your-cabin-number").innerHTML = `You are Cabin ${person_info.cabin}`
+        document.getElementById("your-cabin-number").innerHTML = `You are Cabin ${person_info.cabin}, door code ${person_info.code}`
     }
 }
 
