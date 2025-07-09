@@ -1,6 +1,14 @@
 mocking = false
 
 let people_json = JSON.parse(`{
+    "guest": {
+        "id": "wothi5g2",
+        "rsvp_status": "",
+        "is_driving": "",
+        "cabin": "",
+        "roommate": "",
+        "relation": ""
+    },
     "Cam": {
         "id": "toffo6t1",
         "rsvp_status": "Pending",
@@ -106,6 +114,8 @@ function build_person_mappings() {
         let person_info = people_json[person_name]
         person_to_info[person_name] = person_info;
         id_to_person[person_info.id] = person_name;
+        if(person_name == "guest")
+            continue
         if(!cabin_to_people[person_info.cabin]) {
             cabin_to_people[person_info.cabin] = [];
         }
@@ -237,7 +247,11 @@ function populate_cabins() {
 }
 
 function set_cabin_number() {
-    document.getElementById("your-cabin-number").innerHTML = `You are Cabin ${person_info.cabin}`
+    if(person_name == "guest") {
+        document.getElementById("your-cabin-number").innerHTML = "Find your cabin below!"
+    } else {
+        document.getElementById("your-cabin-number").innerHTML = `You are Cabin ${person_info.cabin}`
+    }
 }
 
 
@@ -249,6 +263,9 @@ function main_page_setup() {
     document.getElementById("ftue").style.display = "none";
     document.getElementById("landing").style.display = "none";
     document.getElementById("main-page").style.display = "block";
+    if(person_name == "guest") {
+        document.getElementById("update-status-section").style.display = "none";
+    }
 }
 
 
