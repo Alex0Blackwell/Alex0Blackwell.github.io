@@ -1,1 +1,4 @@
-node_modules
+.browser-check/
+__pycache__/
+tests/artifacts/
+*.log
