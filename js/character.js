@@ -29,8 +29,9 @@ window.createDoodleCharacter = function createDoodleCharacter(root) {
   const farLeg = limb('leg-far', 18);
   const nearLeg = limb('leg-near', 19);
   const farArm = limb('arm-far', 13);
-  const torso = element('path', { id: 'torso', fill: '#fff' }, body);
+  const torso = element('path', { id: 'torso', fill: '#fff', stroke: 'none' }, body);
   const bodyShade = element('path', { id: 'body-shade', fill: '#e7e7e7', stroke: 'none', mask: `url(#${bodyMask.id})` }, body);
+  const torsoOutline = element('path', { id: 'torso-outline', fill: 'none' }, body);
   const nearArm = limb('arm-near', 14);
   const head = element('g', { id: 'head' }, rig);
   const outline = 'M0-325C48-326 82-290 82-244C84-197 50-160 2-160C-45-158-82-193-82-240C-84-286-49-324 0-325Z';
@@ -94,10 +95,23 @@ window.createDoodleCharacter = function createDoodleCharacter(root) {
       const spread = p.side ? 1 : .55;
       p.nl = [8, -78, nk[0] * dir * spread, nk[1], n[0] * dir * spread, n[1] - 11];
       p.fl = [-8, -78, fk[0] * dir * spread, fk[1], f[0] * dir * spread, f[1] - 11];
+      if (p.side) {
+        for (const leg of [p.nl, p.fl]) {
+          // Bend ahead of the hip-to-ankle line, with more flex as the foot
+          // lifts. A trailing foot must not pull its knee backward with it.
+          const kneeHeight = clamp((leg[3] - leg[1]) / (leg[5] - leg[1]), 0, 1);
+          const lift = Math.max(0, -leg[5] - 11);
+          leg[2] = lerp(leg[0], leg[4], kneeHeight) + dir * (4 + lift * .65);
+        }
+      }
       const swing = lerp(a.arm, b.arm, blend) * dir;
-      p.na = [14, -147, 16 + swing * .7, -123, 13 + swing, -102];
-      p.fa = [-11, -146, -15 - swing * .65, -123, -12 - swing, -102];
+      p.na = [-14 * dir, -147, -16 * dir + swing * .7, -123, -13 * dir + swing, -102];
+      p.fa = [11 * dir, -146, 15 * dir - swing * .65, -123, 12 * dir - swing, -102];
       if (!p.side) {
+        // Front/back strides lift each foot in its own lane instead of
+        // projecting the sideways gait across the body's center line.
+        p.nl = [17, -78, 18, nk[1], 19, n[1] - 11];
+        p.fl = [-17, -78, -18, fk[1], -19, f[1] - 11];
         p.na = [29, -147, 43, -122, 42, -100 + swing * .35];
         p.fa = [-29, -147, -43, -122, -42, -100 - swing * .35];
       }
@@ -107,6 +121,8 @@ window.createDoodleCharacter = function createDoodleCharacter(root) {
     } else delete root.dataset.walkFrame;
 
     if (['typing', 'seated', 'sitting-down'].includes(name)) {
+      p.eyeX = [-48, 16];
+      p.eyeA = [1, 1];
       p.fl = [-14, -86, -39, -63, -43, -24];
       p.nl = [14, -85, -10, -59, -12, -18];
       const tap = name === 'typing' && moving ? Math.sin(Math.floor(time * 18) / 18 * 20) * 2.2 : 0;
@@ -120,6 +136,10 @@ window.createDoodleCharacter = function createDoodleCharacter(root) {
       const bend = name === 'carrying' ? 0 : Math.sin(clamp(options.progress || 0, 0, 1) * Math.PI);
       p.fa = [-12, -146, -37, -118 + bend * 12, -69, -108 + bend * 16];
       p.na = [12, -144, -15, -100 + bend * 10, -72, -95 + bend * 16];
+      if (options.carriedObject === 'chair') {
+        p.fa = [-12, -146, -37, -105, -69, -87];
+        p.na = [12, -144, -15, -94, -72, -76];
+      }
       p.lean = -bend * 5;
       p.bob += bend * 7;
       p.tilt = -4 - bend * 5;
@@ -165,9 +185,10 @@ window.createDoodleCharacter = function createDoodleCharacter(root) {
     return p;
   }
 
-  function drawLimb(part, points, foot = false, bob = 0) {
+  function drawLimb(part, points, foot = false, bob = 0, footDirection = null) {
     const [x, y, kx, ky, ex, ey] = points;
-    const d = `M${x},${y + bob}Q${kx},${ky} ${ex},${ey}${foot ? `q${ex < x ? -3 : 3},2 ${ex < x ? -5 : 5},1` : ''}`;
+    const toe = footDirection ?? (ex < x ? -1 : 1);
+    const d = `M${x},${y + bob}Q${kx},${ky} ${ex},${ey}${foot ? `q${toe * 3},2 ${toe * 5},1` : ''}`;
     part.outline.setAttribute('d', d);
     part.fill.setAttribute('d', d);
   }
@@ -190,16 +211,19 @@ window.createDoodleCharacter = function createDoodleCharacter(root) {
       else body.append(nearArm.group);
     }
     if (root.dataset.pose !== name) {
-      // Both hands rest in front of the belly in the sheet's folded-leg pose.
+      // Folded hands sit in front; otherwise the far arm stays behind the torso.
       if (name === 'ground-sitting') body.insertBefore(farArm.group, nearArm.group);
       else body.insertBefore(farArm.group, torso);
     }
     const w = lerp(45, 34, p.side), shoulder = lerp(30, 20, p.side);
     torso.setAttribute('d', `M${-shoulder},${-161 + p.bob}Q${-w - 5},${-126 + p.bob} ${-w},${-91 + p.bob}Q${-w + 1},${-76 + p.bob} -18,${-76 + p.bob}Q0,${-73 + p.bob} 18,${-76 + p.bob}Q${w},${-74 + p.bob} ${w},${-91 + p.bob}Q${w + 1},${-129 + p.bob} ${shoulder},${-161 + p.bob}Z`);
     bodyShade.setAttribute('d', torso.getAttribute('d'));
+    torsoOutline.setAttribute('d', torso.getAttribute('d'));
     body.setAttribute('transform', `rotate(${p.lean} 0 -80)`);
-    drawLimb(farLeg, p.fl, true, p.bob);
-    drawLimb(nearLeg, p.nl, true, p.bob);
+    const walking = name === 'walking' || name === 'carrying';
+    const toeDirection = target.facing === 'left' ? -1 : target.facing === 'right' ? 1 : 0;
+    drawLimb(farLeg, p.fl, true, p.bob, walking ? (toeDirection || -1) : null);
+    drawLimb(nearLeg, p.nl, true, p.bob, walking ? (toeDirection || 1) : null);
     drawLimb(farArm, p.fa, false, p.bob);
     drawLimb(nearArm, p.na, false, p.bob);
     // The arm group transform also makes the alternating keystrokes inspectable.

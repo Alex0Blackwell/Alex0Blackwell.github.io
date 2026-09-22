@@ -43,7 +43,7 @@ def run():
     b.viewport(1440,1000)
     b.open()
     assert state(b)['character']['facing']=='left'
-    assert b.evaluate("Number(document.querySelector('#eye-right').getAttribute('opacity'))") < .05
+    assert b.evaluate("Number(document.querySelector('#eye-right').getAttribute('opacity'))") > .95
     # A long retrieval exercises the complete walk cycle and all recovery poses.
     for _ in range(8):
         b.evaluate("window.__deskScene.nudge('computer','left')")

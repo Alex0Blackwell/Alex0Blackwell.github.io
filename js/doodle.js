@@ -12,7 +12,36 @@
   }]));
   const { desk, chair, character, computer, lamp } = bodies;
   const deskTop = document.querySelector('#desk-top');
+  const lampHead = document.querySelector('#lamp-head');
   const actor = window.createDoodleCharacter(character.element);
+  // Reuse the animated forearms above the keyboard without lifting the body
+  // or legs out from behind the desk.
+  const typingHands = document.createElementNS(world.namespaceURI, 'g');
+  typingHands.id = 'typing-hands';
+  typingHands.setAttribute('class', 'object ink');
+  typingHands.setAttribute('data-body', 'character');
+  typingHands.setAttribute('aria-hidden', 'true');
+  typingHands.innerHTML = '<defs><mask id="far-typing-arm-mask" maskUnits="userSpaceOnUse" x="-150" y="-200" width="300" height="220" mask-type="luminance"><rect x="-150" y="-200" width="300" height="220" fill="white" stroke="none"/><path fill="black" stroke="black" stroke-width="2.8"/></mask></defs><g><use href="#arm-far" mask="url(#far-typing-arm-mask)"/><use href="#arm-near"/></g>';
+  const farArmMask = typingHands.querySelector('mask path');
+  const characterTorso = character.element.querySelector('#torso');
+  const handPose = typingHands.querySelector(':scope > g');
+  const characterRig = character.element.querySelector('#character-rig');
+  const characterBody = character.element.querySelector('#character-body');
+  const carryingArm = document.createElementNS(world.namespaceURI, 'g');
+  carryingArm.id = 'carrying-arm';
+  carryingArm.setAttribute('class', 'object ink');
+  carryingArm.setAttribute('data-body', 'character');
+  carryingArm.setAttribute('aria-hidden', 'true');
+  carryingArm.innerHTML = '<g><use href="#arm-near"/></g>';
+  const carryingArmPose = carryingArm.firstElementChild;
+  const farArm = character.element.querySelector('#arm-far');
+  const carryingFarArm = document.createElementNS(world.namespaceURI, 'g');
+  carryingFarArm.id = 'carrying-far-arm';
+  carryingFarArm.setAttribute('class', 'object ink');
+  carryingFarArm.setAttribute('data-body', 'character');
+  carryingFarArm.setAttribute('aria-hidden', 'true');
+  const carryingFarPose = document.createElementNS(world.namespaceURI, 'g');
+  carryingFarArm.append(carryingFarPose);
   const locomotion = { distance: 0, facing: 'left' };
   const navigation = { side: 'back', path: [] };
   const nav = window.DeskNavigation;
@@ -44,23 +73,37 @@
   function layers() {
     const order = navigation.side === 'back'
       ? [chair.element, character.element, desk.element, deskTop, computer.element, lamp.element]
-      : [desk.element, chair.element, deskTop, computer.element, lamp.element, character.element];
+      : [chair.element, desk.element, deskTop, computer.element, lamp.element, character.element];
     const bringForward = element => { order.splice(order.indexOf(element), 1); order.push(element); };
-    if (chair.y > deskBarrier().bottom) {
-      bringForward(chair.element);
-      if (navigation.side === 'front') bringForward(character.element);
-    }
     if (mission?.phase === 'carry' || mission?.phase === 'place') {
       const element = mission.body.element;
       order.splice(order.indexOf(element), 1);
       order.splice(order.indexOf(character.element) + 1, 0, element);
       if (mission.body === desk) { order.splice(order.indexOf(deskTop), 1); order.splice(order.indexOf(element) + 1, 0, deskTop); }
     }
+    order.splice(order.indexOf(computer.element) + 1, 0, typingHands);
+    const carryingFurniture = ['carry', 'place'].includes(mission?.phase) && [desk, chair].includes(mission?.body);
+    const armBehind = carryingFurniture ? (mission.body === desk ? deskTop : chair.element) : character.element;
+    order.splice(order.indexOf(armBehind) + 1, 0, carryingArm);
+    // Keep the whole chair behind both desk layers, including during recovery.
+    // The drag override below lifts it only when the chair itself is grabbed.
+    if (order.indexOf(chair.element) > order.indexOf(desk.element)) {
+      order.splice(order.indexOf(chair.element), 1);
+      order.splice(order.indexOf(desk.element), 0, chair.element);
+    }
+    order.splice(order.indexOf(chair.element), 0, carryingFarArm);
     if (drag) {
       bringForward(drag.body.element);
       if (drag.body === desk) bringForward(deskTop);
       if (drag.body === character || navigation.side === 'front') bringForward(character.element);
       if (drag.body === chair && attached) bringForward(character.element);
+    }
+    // Props stay above the complete table even when the table is lifted.
+    for (const element of [lamp.element, computer.element]) {
+      if (order.indexOf(element) < order.indexOf(deskTop)) {
+        order.splice(order.indexOf(element), 1);
+        order.splice(order.indexOf(deskTop) + 1, 0, element);
+      }
     }
     const key = order.map(element => element.id).join(',');
     if (key === layerOrder) return;
@@ -103,11 +146,12 @@
     const introBottom = document.querySelector('.intro').getBoundingClientRect().bottom + scrollY;
     const floor = (introBottom + height) / 2 + 115 * scale - (width <= 600 ? 66 : 70);
     const center = width / 2 - 15 * scale;
+    const workspaceX = center + 44 * scale;
     const homes = {
-      desk: [center, floor], chair: [center + 86 * scale, floor],
-      character: [center + 86 * scale, floor],
-      computer: [center - 85 * scale, floor - 105 * scale],
-      lamp: [center - 168 * scale, floor - 102 * scale],
+      desk: [center, floor], chair: [workspaceX + 86 * scale, floor],
+      character: [workspaceX + 86 * scale, floor],
+      computer: [workspaceX - 85 * scale, floor - 105 * scale],
+      lamp: [workspaceX - 168 * scale, floor - 102 * scale],
     };
     for (const body of Object.values(bodies)) {
       body.home = { x: homes[body.id][0], y: homes[body.id][1] };
@@ -438,13 +482,26 @@
     if (mission?.phase === 'happy') pose = 'happy';
     if (!attached && !mission && character.dirty && !character.sleeping) pose = 'falling';
     if (character.held) pose = 'held';
-    const light = new DOMPoint(69, -123).matrixTransform(lamp.element.getCTM());
+    const light = new DOMPoint(69, -123).matrixTransform(lampHead.getCTM());
     actor.animate(time, {
       light,
+      carriedObject: mission?.body.id,
       pose, facing: locomotion.facing, distance: locomotion.distance,
       moving: walking, seated: attached, reducedMotion: reduceMotion.matches,
       progress: mission ? mission.elapsed / (mission.phase === 'pickup' ? .25 : .45) : (time - seatedAt) / .4,
     });
+    typingHands.toggleAttribute('hidden', !typing);
+    typingHands.setAttribute('transform', character.element.getAttribute('transform'));
+    handPose.setAttribute('transform', `${characterRig.getAttribute('transform')} ${characterBody.getAttribute('transform')}`);
+    farArmMask.setAttribute('d', characterTorso.getAttribute('d'));
+    carryingArm.toggleAttribute('hidden', !(['carrying', 'placing'].includes(pose) && [desk, chair].includes(mission?.body)));
+    carryingArm.setAttribute('transform', character.element.getAttribute('transform'));
+    carryingArmPose.setAttribute('transform', handPose.getAttribute('transform'));
+    const carryingChair = ['carrying', 'placing'].includes(pose) && mission?.body === chair;
+    if (carryingChair && farArm.parentNode !== carryingFarPose) carryingFarPose.append(farArm);
+    else if (!carryingChair && farArm.parentNode === carryingFarPose) characterBody.insertBefore(farArm, characterTorso);
+    carryingFarArm.setAttribute('transform', character.element.getAttribute('transform'));
+    carryingFarPose.setAttribute('transform', handPose.getAttribute('transform'));
     world.dataset.typing = String(pose === 'typing');
   }
 
@@ -559,7 +616,7 @@
   function project(id) {
     const body = bodies[id];
     if (!body) return null;
-    const anchors = { character: [0, -245], chair: [64, -136], computer: [-15, -78], lamp: [-5, -89], desk: [-166, -50] };
+    const anchors = { character: [0, -245], chair: [46, -120], computer: [-15, -78], lamp: [-5, -89], desk: [-166, -50] };
     const [x, y] = anchors[id];
     const c = Math.cos(body.angle), s = Math.sin(body.angle);
     return { x: body.x + (x * c - y * s) * scale - scrollX, y: body.y + (x * s + y * c) * scale - scrollY };

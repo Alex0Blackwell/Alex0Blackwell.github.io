@@ -30,13 +30,13 @@ def layout(b, width):
     v=b.evaluate("""({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,
       pageHeight:document.querySelector('main').offsetHeight,
       world:(()=>{const r=document.querySelector('#world').getBoundingClientRect();return {width:r.width,height:r.height}})(),
-      title:document.querySelector('h1').textContent,role:document.querySelector('.role').textContent,
-      education:document.querySelector('.education').textContent,pause:!!document.querySelector('#pause'),
+      title:document.querySelector('h1').textContent,role:document.querySelector('.role').textContent.trim(),
+      education:!!document.querySelector('.education'),linkedin:document.querySelector('.linkedin').href,pause:!!document.querySelector('#pause'),
       canvas:!!document.querySelector('canvas'),blank:document.elementFromPoint(10,100).tagName,
       resources:performance.getEntriesByType('resource').map(r=>({name:r.name,bytes:r.transferSize}))})""")
     assert v['scrollWidth'] <= width,v
-    assert v['title']=='Alex Blackwell' and v['role']=='Backend Software Developer',v
-    assert v['education']=='Simon Fraser University Computing Science',v
+    assert v['title']=='Alex Blackwell' and v['role']=='Software Developer',v
+    assert not v['education'] and v['linkedin']=='https://www.linkedin.com/in/alex-blackwell',v
     assert not v['pause'] and not v['canvas'],v
     assert v['world']['height']==v['pageHeight'] and v['blank'] not in ('svg','g','path'),v
     return v
