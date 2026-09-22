@@ -75,7 +75,7 @@ window.createDoodleCharacter = function createDoodleCharacter(root) {
       eyeX: [-37, 37], eyeA: [1, 1], gaze: 0,
     };
     let facing = options.facing || 'front';
-    if (['typing', 'seated', 'pickup', 'carrying', 'placing', 'sitting-down'].includes(name)) facing = 'left';
+    if (['typing', 'seated', 'sitting-down'].includes(name)) facing = 'left';
     if (['held', 'falling', 'happy', 'wave', 'neutral', 'ground-sitting'].includes(name)) facing = 'front';
     p.side = facing === 'left' || facing === 'right' ? 1 : 0;
     if (p.side) {
@@ -93,8 +93,8 @@ window.createDoodleCharacter = function createDoodleCharacter(root) {
       const pair = key => a[key].map((value, i) => lerp(value, b[key][i], blend));
       const n = pair('n'), f = pair('f'), nk = pair('nk'), fk = pair('fk');
       const spread = p.side ? 1 : .55;
-      p.nl = [8, -78, nk[0] * dir * spread, nk[1], n[0] * dir * spread, n[1] - 11];
-      p.fl = [-8, -78, fk[0] * dir * spread, fk[1], f[0] * dir * spread, f[1] - 11];
+      p.nl = [-8 * dir, -78, nk[0] * dir * spread, nk[1], n[0] * dir * spread, n[1] - 11];
+      p.fl = [8 * dir, -78, fk[0] * dir * spread, fk[1], f[0] * dir * spread, f[1] - 11];
       if (p.side) {
         for (const leg of [p.nl, p.fl]) {
           // Bend ahead of the hip-to-ankle line, with more flex as the foot
@@ -143,6 +143,18 @@ window.createDoodleCharacter = function createDoodleCharacter(root) {
       p.lean = -bend * 5;
       p.bob += bend * 7;
       p.tilt = -4 - bend * 5;
+      if (facing === 'right') {
+        p.fa = p.fa.map((value, i) => i % 2 ? value : -value);
+        p.na = p.na.map((value, i) => i % 2 ? value : -value);
+        if (options.carriedObject === 'chair') { p.fa[4] = 61; p.na[4] = 58; }
+        p.lean *= -1;
+        p.tilt *= -1;
+      } else if (!p.side) {
+        const handY = options.carriedObject === 'chair' ? -80 : -103;
+        p.fa = [-28, -146, -43, -116, -33, handY];
+        p.na = [28, -144, 43, -115, 33, handY];
+        p.lean = p.tilt = 0;
+      }
     }
     if (name === 'held') {
       const sway = moving ? Math.sin(t * 5) : 0;
@@ -205,7 +217,12 @@ window.createDoodleCharacter = function createDoodleCharacter(root) {
     }
     for (const key of ['bob', 'tilt', 'lean', 'side', 'rigY']) current[key] = lerp(current[key], target[key], blend);
     const p = current;
-    rig.setAttribute('transform', `translate(0 ${p.rigY})`);
+    const poke = options.poke;
+    const recoil = poke ? Math.max(0, poke.age < .07 ? poke.age / .07 : 1 - (poke.age - .07) / .38) : 0;
+    const strength = recoil * recoil * (options.reducedMotion ? .35 : 1);
+    const flinchX = (poke?.dx || 0) * strength;
+    const flinchY = (poke?.dy || 0) * strength;
+    rig.setAttribute('transform', `translate(${flinchX * 8} ${p.rigY + flinchY * 6})`);
     if (root.dataset.facing !== target.facing) {
       if (target.facing === 'back') body.insertBefore(nearArm.group, torso);
       else body.append(nearArm.group);
@@ -219,7 +236,7 @@ window.createDoodleCharacter = function createDoodleCharacter(root) {
     torso.setAttribute('d', `M${-shoulder},${-161 + p.bob}Q${-w - 5},${-126 + p.bob} ${-w},${-91 + p.bob}Q${-w + 1},${-76 + p.bob} -18,${-76 + p.bob}Q0,${-73 + p.bob} 18,${-76 + p.bob}Q${w},${-74 + p.bob} ${w},${-91 + p.bob}Q${w + 1},${-129 + p.bob} ${shoulder},${-161 + p.bob}Z`);
     bodyShade.setAttribute('d', torso.getAttribute('d'));
     torsoOutline.setAttribute('d', torso.getAttribute('d'));
-    body.setAttribute('transform', `rotate(${p.lean} 0 -80)`);
+    body.setAttribute('transform', `rotate(${p.lean + flinchX * 4} 0 -80)`);
     const walking = name === 'walking' || name === 'carrying';
     const toeDirection = target.facing === 'left' ? -1 : target.facing === 'right' ? 1 : 0;
     drawLimb(farLeg, p.fl, true, p.bob, walking ? (toeDirection || -1) : null);
@@ -229,7 +246,7 @@ window.createDoodleCharacter = function createDoodleCharacter(root) {
     // The arm group transform also makes the alternating keystrokes inspectable.
     nearArm.group.setAttribute('transform', `translate(0 ${name === 'typing' && !options.reducedMotion ? Math.sin(time * 18) * .5 : 0})`);
     farArm.group.setAttribute('transform', 'translate(0 0)');
-    head.setAttribute('transform', `translate(0 ${p.bob}) rotate(${p.tilt} 0 -242)`);
+    head.setAttribute('transform', `translate(0 ${p.bob}) rotate(${p.tilt + flinchX * (poke?.head ? 8 : 4)} 0 -242)`);
     // Subtract a silhouette shifted toward the bulb, leaving a soft grey rim
     // on the opposite side. Local transforms include body lean and head tilt.
     for (const [part, mask, shape, centerY, depth] of [
@@ -250,7 +267,7 @@ window.createDoodleCharacter = function createDoodleCharacter(root) {
       eye.setAttribute('cx', p.eyeX[index]);
       eye.setAttribute('cy', '-232');
       eye.setAttribute('opacity', p.eyeA[index]);
-      eye.setAttribute('ry', blink ? '.65' : '4.2');
+      eye.setAttribute('ry', strength > .15 ? '1.3' : blink ? '.65' : '4.2');
     });
     root.dataset.pose = name;
     root.dataset.facing = target.facing;

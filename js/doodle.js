@@ -14,6 +14,7 @@
   const deskTop = document.querySelector('#desk-top');
   const lampHead = document.querySelector('#lamp-head');
   const actor = window.createDoodleCharacter(character.element);
+  const handCursor = window.createDoodleCursor();
   // Reuse the animated forearms above the keyboard without lifting the body
   // or legs out from behind the desk.
   const typingHands = document.createElementNS(world.namespaceURI, 'g');
@@ -42,6 +43,12 @@
   carryingFarArm.setAttribute('aria-hidden', 'true');
   const carryingFarPose = document.createElementNS(world.namespaceURI, 'g');
   carryingFarArm.append(carryingFarPose);
+  const impact = document.createElementNS(world.namespaceURI, 'g');
+  impact.id = 'poke-impact';
+  impact.setAttribute('aria-hidden', 'true');
+  impact.setAttribute('pointer-events', 'none');
+  impact.setAttribute('hidden', '');
+  impact.innerHTML = '<g fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><circle r="4"/><path d="M0-9V-14M0 9V14M-9 0H-14M9 0H14M-7-7-10-10M7 7 10 10M7-7 10-10M-7 7-10 10"/></g>';
   const locomotion = { distance: 0, facing: 'left' };
   const navigation = { side: 'back', path: [] };
   const nav = window.DeskNavigation;
@@ -56,9 +63,10 @@
   };
   const quoteIndex = {};
   let width = 1440, height = 900, scale = 1;
-  let time = 0, lastFrame = performance.now(), lastSpeech = -10, speechUntil = 0;
-  let lastDisturbance = -10, interactions = 0, selected = 'character';
+  let time = 0, lastFrame = performance.now(), lastSpeech = -Infinity, speechUntil = 0;
+  let interactions = 0, selected = 'character';
   let drag = null, mission = null, attached = true, frameId = 0;
+  let press = null, poke = null;
   let state = 'typing', idleHello = false;
   const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
   const mix = (a, b, t) => a + (b - a) * t;
@@ -105,6 +113,7 @@
         order.splice(order.indexOf(deskTop) + 1, 0, element);
       }
     }
+    order.push(impact);
     const key = order.map(element => element.id).join(',');
     if (key === layerOrder) return;
     order.forEach(element => world.append(element));
@@ -151,7 +160,7 @@
       desk: [center, floor], chair: [workspaceX + 86 * scale, floor],
       character: [workspaceX + 86 * scale, floor],
       computer: [workspaceX - 85 * scale, floor - 105 * scale],
-      lamp: [workspaceX - 168 * scale, floor - 102 * scale],
+      lamp: [workspaceX - 186 * scale, floor - 102 * scale],
     };
     for (const body of Object.values(bodies)) {
       body.home = { x: homes[body.id][0], y: homes[body.id][1] };
@@ -169,11 +178,14 @@
     render();
   }
 
-  function say(message, duration = 2.8) {
+  function say(message) {
+    if (time - lastSpeech < 12) return false;
     speech.textContent = message;
-    speechUntil = time + duration;
+    lastSpeech = time;
+    speechUntil = time + 5;
     speech.classList.add('visible');
     positionSpeech();
+    return true;
   }
 
   function positionSpeech() {
@@ -185,24 +197,24 @@
 
   function disturb(body, talk = true) {
     greetingUntil = 0;
-    if (mission && ['carry', 'place'].includes(mission.phase)) {
-      mission.body.sleeping = false;
-      mission.body.vx = mission.body.vy = 0;
+    // Moving an unrelated object must not interrupt the current job.
+    if (mission && (body === character || mission.body === body)) {
+      if (['carry', 'place'].includes(mission.phase)) {
+        mission.body.sleeping = false;
+        mission.body.vx = mission.body.vy = 0;
+      }
+      mission = null;
+      navigation.path = [];
     }
-    mission = null;
-    navigation.path = [];
     body.dirty = true;
     body.sleeping = false;
-    lastDisturbance = time;
     interactions++;
     if (body === character) { attached = false; navigation.side = 'front'; }
     if (body === chair && attached) character.dirty = true;
-    state = 'interrupted';
-    if (talk && time - lastSpeech > .9) {
+    state = mission ? 'recovering' : attached ? 'typing' : 'interrupted';
+    if (talk) {
       const index = quoteIndex[body.id] || 0;
-      say(quotes[body.id][index % quotes[body.id].length]);
-      quoteIndex[body.id] = index + 1;
-      lastSpeech = time;
+      if (say(quotes[body.id][index % quotes[body.id].length])) quoteIndex[body.id] = index + 1;
     }
     layers();
   }
@@ -229,6 +241,13 @@
   }
 
   function endDrag(event) {
+    if (press && (!event || event.pointerId === press.id)) {
+      const released = press;
+      press = null;
+      if (event?.type === 'pointerup') pokeCharacter(event.pageX, event.pageY);
+      if (world.hasPointerCapture(released.id)) world.releasePointerCapture(released.id);
+      return;
+    }
     if (!drag || (event && event.pointerId !== drag.id)) return;
     const released = drag;
     drag = null;
@@ -240,22 +259,48 @@
     body.vx = recent ? released.vx * .55 : 0;
     body.vy = recent ? released.vy * .55 : 0;
     body.spin = body === desk ? 0 : body.vx * .0017;
-    lastDisturbance = time;
     if (world.hasPointerCapture(released.id)) world.releasePointerCapture(released.id);
     layers();
   }
 
   world.addEventListener('pointerdown', event => {
     const id = event.target.closest('[data-body]')?.dataset.body;
+    if (press || drag) return;
+    if (id === 'character' && event.isPrimary && event.button === 0) {
+      event.preventDefault();
+      selected = id;
+      press = { id: event.pointerId, x: event.pageX, y: event.pageY, threshold: event.pointerType === 'touch' ? 10 : 6 };
+      character.element.focus({ preventScroll: true });
+      world.setPointerCapture(event.pointerId);
+      return;
+    }
     if (bodies[id]) beginDrag(event, bodies[id]);
   });
+  function pokeCharacter(x, y) {
+    const local = new DOMPoint(x - scrollX, y - scrollY).matrixTransform(character.element.getScreenCTM().inverse());
+    const head = local.y < -170;
+    const dx = -local.x, dy = (head ? -242 : -115) - local.y;
+    const length = Math.hypot(dx, dy) || 1;
+    poke = { x, y, started: time, dx: length > 1 ? dx / length : 1, dy: dy / length, head };
+    interactions++;
+    greetingUntil = 0;
+    say('Hey! That tickles.');
+  }
   world.addEventListener('touchstart', event => {
     if (event.target.closest('[data-body]')) event.preventDefault();
   }, { passive: false });
   window.addEventListener('touchmove', event => {
-    if (drag) event.preventDefault();
+    if (drag || press) event.preventDefault();
   }, { passive: false });
   window.addEventListener('pointermove', event => {
+    if (press && event.pointerId === press.id) {
+      event.preventDefault();
+      if (Math.hypot(event.pageX - press.x, event.pageY - press.y) < press.threshold) return;
+      const start = press;
+      press = null;
+      poke = null;
+      beginDrag({ isPrimary: true, button: 0, pointerId: start.id, pageX: start.x, pageY: start.y, preventDefault() {} }, character);
+    }
     if (!drag || event.pointerId !== drag.id) return;
     event.preventDefault();
     const now = performance.now();
@@ -271,7 +316,6 @@
     drag.lastX = drag.x;
     drag.lastY = drag.y;
     drag.stamp = now;
-    lastDisturbance = time;
   }, { passive: false });
   window.addEventListener('pointerup', endDrag);
   window.addEventListener('pointercancel', endDrag);
@@ -356,11 +400,11 @@
     }
   }
 
-  function approach(body, home = false) {
+  function approach(body, home = false, facing = 'left') {
     const position = home ? body.home : body;
     const horizontal = body === desk ? 190 : body === chair ? 65 : 78;
     return {
-      x: clamp(position.x + horizontal * scale, 68 * scale, width - 70 * scale),
+      x: clamp(position.x + (facing === 'right' ? -horizontal : horizontal) * scale, 68 * scale, width - 70 * scale),
       y: clamp(position.y + ([computer, lamp].includes(body) ? 105 * scale : 0), 330 * scale, height - 18),
     };
   }
@@ -396,10 +440,11 @@
   }
 
   function recover(dt) {
-    if (drag || time - lastDisturbance < 1.05) return;
+    if (character.held || (attached && chair.held)) return;
     if (!mission) {
-      const body = [desk, computer, lamp, chair].find(item => item.dirty);
+      const body = [desk, computer, lamp, chair].find(item => item.dirty && !item.held);
       if (!body && !character.dirty) { state = 'typing'; return; }
+      if (!body && chair.held) return;
       attached = false;
       character.sleeping = true;
       character.dirty = true;
@@ -409,7 +454,9 @@
     const task = mission;
     task.elapsed += dt;
     if (task.phase === 'approach') {
-      if (walkTo(approach(task.body), dt)) {
+      task.pickupFacing = task.body.home.x > task.body.x ? 'right' : 'left';
+      if (walkTo(approach(task.body, false, task.pickupFacing), dt)) {
+        locomotion.facing = task.pickupFacing;
         task.phase = 'pickup';
         task.elapsed = 0;
         task.body.sleeping = true;
@@ -418,24 +465,26 @@
     } else if (task.phase === 'pickup') {
       if (task.elapsed > .25) {
         task.phase = 'carry';
+        task.deliveryFacing = task.pickupFacing;
         task.elapsed = 0;
-        if (time - lastSpeech > 3) {
-          say(task.body === computer ? 'Let’s get you back on the desk.' : 'Right. Back where you belong.', 2.1);
-          lastSpeech = time;
-        }
+        say(task.body === computer ? 'Let’s get you back on the desk.' : 'Right. Back where you belong.');
         layers();
       }
     } else if (task.phase === 'carry') {
-      const arrived = walkTo(approach(task.body, true), dt, task.body === desk ? 180 : 210);
+      const arrived = walkTo(approach(task.body, true, task.deliveryFacing), dt, task.body === desk ? 180 : 210);
       const oldX = task.body.x, oldY = task.body.y;
       const offsetX = task.body === desk ? 190 : task.body === chair ? 65 : 78;
       const offsetY = [computer, lamp].includes(task.body) ? 105 : 0;
-      task.body.x = mix(task.body.x, character.x - offsetX * scale, 1 - Math.exp(-12 * dt));
-      task.body.y = mix(task.body.y, character.y - offsetY * scale, 1 - Math.exp(-12 * dt));
+      const facing = locomotion.facing;
+      const side = facing === 'left' ? -1 : facing === 'right' ? 1 : 0;
+      const depth = facing === 'back' ? -12 : facing === 'front' ? 12 : 0;
+      task.body.x = mix(task.body.x, character.x + side * offsetX * scale, 1 - Math.exp(-12 * dt));
+      task.body.y = mix(task.body.y, character.y + (depth - offsetY) * scale, 1 - Math.exp(-12 * dt));
       task.body.angle *= Math.exp(-10 * dt);
       if (task.body === desk) shiftContents(task.body.x - oldX, task.body.y - oldY);
       if (arrived) {
         task.phase = 'place';
+        locomotion.facing = task.deliveryFacing;
         task.elapsed = 0;
         task.start = { x: task.body.x, y: task.body.y };
       }
@@ -449,12 +498,13 @@
       if (progress === 1) {
         restore(task.body);
         mission = [desk, computer, lamp, chair].some(body => body.dirty)
-          ? null : { body: character, phase: 'happy', elapsed: 0 };
+          ? null : { body: character, phase: Math.random() < .5 ? 'happy' : 'return', elapsed: 0 };
         layers();
       }
     } else if (task.phase === 'happy') {
       if (task.elapsed > .65) { task.phase = 'return'; task.elapsed = 0; }
     } else if (task.phase === 'return') {
+      if (chair.dirty || chair.held) { mission = null; return; }
       if (walkTo(character.home, dt)) {
         restore(character);
         attached = true;
@@ -470,7 +520,7 @@
   }
 
   function animateCharacter() {
-    const typing = attached && !drag && !mission && !Object.values(bodies).some(body => body.dirty);
+    const typing = attached && !mission;
     const walking = !!mission && ['approach', 'carry', 'return'].includes(mission.phase);
     let pose = attached ? 'seated' : character.dirty && character.sleeping && !mission ? 'ground-sitting' : 'neutral';
     if (typing) pose = time - seatedAt < .4 ? 'sitting-down' : 'typing';
@@ -485,6 +535,7 @@
     const light = new DOMPoint(69, -123).matrixTransform(lampHead.getCTM());
     actor.animate(time, {
       light,
+      poke: poke ? { ...poke, age: time - poke.started } : null,
       carriedObject: mission?.body.id,
       pose, facing: locomotion.facing, distance: locomotion.distance,
       moving: walking, seated: attached, reducedMotion: reduceMotion.matches,
@@ -510,6 +561,14 @@
     layers();
     for (const body of Object.values(bodies)) transform(body);
     animateCharacter();
+    if (poke && time - poke.started >= .55) poke = null;
+    impact.toggleAttribute('hidden', !poke);
+    handCursor.update({ dragging: !!drag, pressing: !!press, pokeTime: poke?.started ?? null });
+    if (poke) {
+      const progress = (time - poke.started) / .55;
+      impact.setAttribute('transform', `translate(${poke.x} ${poke.y}) scale(${scale * (1 + progress * .3)})`);
+      impact.setAttribute('opacity', String(1 - progress));
+    }
     positionSpeech();
   }
 
@@ -543,7 +602,7 @@
     if (!idleHello && time > 3 && interactions === 0) {
       idleHello = true;
       greetingUntil = time + 1.1;
-      say('Just one more line…', 2.5);
+      say('Just one more line…');
     }
   }
 
@@ -559,6 +618,7 @@
 
   function reset() {
     endDrag();
+    poke = null;
     mission = null;
     for (const body of Object.values(bodies)) restore(body);
     attached = true;
@@ -569,7 +629,6 @@
     navigation.side = 'back';
     navigation.path = [];
     actor.reset(time);
-    lastDisturbance = -10;
     layers();
     say('Much better. Thank you.');
     render();

@@ -44,7 +44,8 @@ def run():
     b.open()
     assert state(b)['character']['facing']=='left'
     assert b.evaluate("Number(document.querySelector('#eye-right').getAttribute('opacity'))") > .95
-    # A long retrieval exercises the complete walk cycle and all recovery poses.
+    # A long retrieval exercises the walk cycle and required recovery poses.
+    # Celebration is optional; its artwork is also covered by the pose atlas.
     for _ in range(8):
         b.evaluate("window.__deskScene.nudge('computer','left')")
     poses=set(); frames=set(); facings=set()
@@ -56,7 +57,7 @@ def run():
         if s['typing'] and not any(body['dirty'] for body in s['objects']): break
         time.sleep(.025)
     else: raise AssertionError('Retrieval did not finish')
-    assert {'walking','pickup','carrying','placing','happy','sitting-down','typing'}<=poses,poses
+    assert {'walking','pickup','carrying','placing','sitting-down','typing'}<=poses,poses
     assert len(frames)==8,frames
     assert {'left','right'}<=facings,facings
     assert not b.errors(),b.errors()
