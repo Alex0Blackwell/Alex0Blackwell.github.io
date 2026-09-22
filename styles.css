@@ -1,0 +1,22 @@
+:root{font-family:Arial,Helvetica,sans-serif;color:#262626;background:#fff;color-scheme:light;font-synthesis:none;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;min-width:280px;position:relative;background:#fff;overflow-x:clip}
+main{min-height:max(760px,100svh);padding:0 32px 28px;display:flex;flex-direction:column;align-items:center}
+.intro{text-align:center;padding-top:clamp(48px,8vh,88px);position:relative}
+h1{font:400 clamp(48px,6.2vw,76px)/1.08 Georgia,'Times New Roman',serif;letter-spacing:-3.8px;margin:0 0 22px}
+.intro p{margin:0;line-height:1.7}
+.role{font-size:16px;color:#535353;letter-spacing:.15px}
+.education{font-size:13px;color:#929292;margin-top:3px!important;letter-spacing:.1px}
+#world{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;pointer-events:none;touch-action:none;overflow:hidden}
+.ink{stroke:#202020;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;fill:#fff}
+.object{pointer-events:visiblePainted;cursor:grab;touch-action:none;-webkit-tap-highlight-color:transparent;outline:none}
+.object:focus-visible{outline:none}
+.object.dragging{cursor:grabbing}
+.hit{stroke:transparent;stroke-width:20;fill:none;pointer-events:stroke}
+.speech{position:absolute;left:50%;top:100px;z-index:3;background:#fff;border:1.5px solid #333;border-radius:15px 13px 15px 5px;padding:11px 16px;font-size:12px;line-height:1.5;color:#333;max-width:230px;white-space:nowrap;pointer-events:none;opacity:0;transform:translate(-50%,-100%) translateY(5px);transition:opacity .15s,transform .15s}
+.speech::after{content:'';position:absolute;bottom:-6px;left:48%;width:9px;height:9px;transform:rotate(45deg);border-bottom:1.5px solid #333;border-right:1.5px solid #333;background:#fff}
+.speech.visible{opacity:1;transform:translate(-50%,-100%)}
+@media(max-width:600px){main{padding:0 22px 20px;min-height:max(720px,100svh)}.intro{padding-top:53px}h1{font-size:51px;letter-spacing:-2.8px;margin-bottom:19px}.role{font-size:14px}.education{font-size:11px}.speech{font-size:11px;padding:9px 12px}}
+@media(max-width:360px){main{padding-inline:16px}.intro{padding-top:42px}h1{font-size:44px;letter-spacing:-2.4px}.education{font-size:10px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
