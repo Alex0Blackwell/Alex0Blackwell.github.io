@@ -79,10 +79,14 @@
   }
 
   function layers() {
-    const order = navigation.side === 'back'
-      ? [chair.element, character.element, desk.element, deskTop, computer.element, lamp.element]
-      : [chair.element, desk.element, deskTop, computer.element, lamp.element, character.element];
-    const bringForward = element => { order.splice(order.indexOf(element), 1); order.push(element); };
+    // Compare ground/contact positions, rather than the tops of the drawings.
+    // Clean desktop props share the desk's depth while resting on its surface.
+    const depth = body => body === desk ? body.y + 74 * scale
+      : [computer, lamp].includes(body) && !body.dirty && !body.held ? desk.y + 74 * scale
+      : body.y;
+    const order = [chair, character, desk, computer, lamp]
+      .sort((a, b) => depth(a) - depth(b))
+      .flatMap(body => body === desk ? [body.element, deskTop] : [body.element]);
     if (mission?.phase === 'carry' || mission?.phase === 'place') {
       const element = mission.body.element;
       order.splice(order.indexOf(element), 1);
@@ -93,24 +97,24 @@
     const carryingFurniture = ['carry', 'place'].includes(mission?.phase) && [desk, chair].includes(mission?.body);
     const armBehind = carryingFurniture ? (mission.body === desk ? deskTop : chair.element) : character.element;
     order.splice(order.indexOf(armBehind) + 1, 0, carryingArm);
-    // Keep the whole chair behind both desk layers, including during recovery.
-    // The drag override below lifts it only when the chair itself is grabbed.
-    if (order.indexOf(chair.element) > order.indexOf(desk.element)) {
-      order.splice(order.indexOf(chair.element), 1);
-      order.splice(order.indexOf(desk.element), 0, chair.element);
-    }
     order.splice(order.indexOf(chair.element), 0, carryingFarArm);
-    if (drag) {
-      bringForward(drag.body.element);
-      if (drag.body === desk) bringForward(deskTop);
-      if (drag.body === character || navigation.side === 'front') bringForward(character.element);
-      if (drag.body === chair && attached) bringForward(character.element);
-    }
     // Props stay above the complete table even when the table is lifted.
     for (const element of [lamp.element, computer.element]) {
       if (order.indexOf(element) < order.indexOf(deskTop)) {
         order.splice(order.indexOf(element), 1);
         order.splice(order.indexOf(deskTop) + 1, 0, element);
+      }
+    }
+    if (mission?.phase === 'carry' && locomotion.facing === 'back') {
+      const carried = mission.body === desk
+        ? [deskTop, ...[computer, lamp].filter(body => !body.held
+          && Math.abs(body.x - desk.x) < 190 * scale
+          && Math.abs(body.y - (desk.y - 103 * scale)) < 20 * scale).map(body => body.element)]
+        : [mission.body.element];
+      const frontmost = carried.reduce((front, element) => order.indexOf(element) > order.indexOf(front) ? element : front);
+      if (order.indexOf(character.element) < order.indexOf(frontmost)) {
+        order.splice(order.indexOf(character.element), 1);
+        order.splice(order.indexOf(frontmost) + 1, 0, character.element);
       }
     }
     order.push(impact);
@@ -153,7 +157,7 @@
     world.setAttribute('viewBox', `0 0 ${width} ${height}`);
     world.style.height = `${height}px`;
     const introBottom = document.querySelector('.intro').getBoundingClientRect().bottom + scrollY;
-    const floor = (introBottom + height) / 2 + 115 * scale - (width <= 600 ? 66 : 70);
+    const floor = (introBottom + height) / 2 + 115 * scale - (width <= 600 ? 0 : 70);
     const center = width / 2 - 15 * scale;
     const workspaceX = center + 44 * scale;
     const homes = {
@@ -235,7 +239,6 @@
       vx: 0, vy: 0, stamp: performance.now(),
     };
     body.element.classList.add('dragging');
-    body.element.focus({ preventScroll: true });
     world.setPointerCapture(event.pointerId);
     layers();
   }
@@ -270,7 +273,6 @@
       event.preventDefault();
       selected = id;
       press = { id: event.pointerId, x: event.pageX, y: event.pageY, threshold: event.pointerType === 'touch' ? 10 : 6 };
-      character.element.focus({ preventScroll: true });
       world.setPointerCapture(event.pointerId);
       return;
     }
@@ -350,6 +352,15 @@
   }
 
   function physics(body, dt) {
+    if ([computer, lamp].includes(body) && !body.held && (mission?.body !== body || mission.phase === 'approach')) {
+      const bottom = body.y + extents(body).bottom;
+      const supported = Math.abs(body.x - desk.x) < 170 * scale && Math.abs(desk.angle) < .12
+        && Math.abs(bottom - (desk.y - 100 * scale)) < 12 * scale;
+      if (!supported && bottom < height - 21) {
+        body.sleeping = false;
+        body.dirty = true;
+      }
+    }
     if (body.held || body.sleeping || (mission?.body === body && mission.phase !== 'approach') || (body === character && (attached || mission))) return;
     const oldX = body.x, oldY = body.y;
     const oldBottom = oldY + extents(body).bottom;
@@ -381,7 +392,7 @@
       body.vx *= -.25;
     }
     if (body === desk) shiftContents(body.x - oldX, body.y - oldY);
-    if (body === character || (body === chair && attached)) blockCharacter({ x: oldX, y: oldY }, body);
+    if (body === character) blockCharacter({ x: oldX, y: oldY }, body);
   }
 
   function pushNeighbors(body, dt) {
@@ -440,9 +451,19 @@
   }
 
   function recover(dt) {
-    if (character.held || (attached && chair.held)) return;
+    if (character.held || (attached && (chair.held || !chair.sleeping))) return;
+    // A desktop item cannot be delivered until its supporting table is ready.
+    // If the table is moved mid-delivery, release the item and restore it first.
+    if ((desk.dirty || desk.held) && [computer, lamp].includes(mission?.body)) {
+      mission.body.sleeping = false;
+      mission.body.dirty = true;
+      mission.body.vx = mission.body.vy = mission.body.spin = 0;
+      mission = null;
+    }
     if (!mission) {
-      const body = [desk, computer, lamp, chair].find(item => item.dirty && !item.held);
+      const body = [desk, computer, lamp, chair].find(item => item.dirty && !item.held
+        && (!([computer, lamp].includes(item)) || (!desk.dirty && !desk.held)));
+      if (!body && (desk.dirty || desk.held)) return;
       if (!body && !character.dirty) { state = 'typing'; return; }
       if (!body && chair.held) return;
       attached = false;
@@ -520,7 +541,7 @@
   }
 
   function animateCharacter() {
-    const typing = attached && !mission;
+    const typing = attached && !mission && !chair.held && !chair.dirty;
     const walking = !!mission && ['approach', 'carry', 'return'].includes(mission.phase);
     let pose = attached ? 'seated' : character.dirty && character.sleeping && !mission ? 'ground-sitting' : 'neutral';
     if (typing) pose = time - seatedAt < .4 ? 'sitting-down' : 'typing';
@@ -531,7 +552,7 @@
     if (mission?.phase === 'place') pose = 'placing';
     if (mission?.phase === 'happy') pose = 'happy';
     if (!attached && !mission && character.dirty && !character.sleeping) pose = 'falling';
-    if (character.held) pose = 'held';
+    if (character.held || (attached && (chair.held || !chair.sleeping))) pose = 'held';
     const light = new DOMPoint(69, -123).matrixTransform(lampHead.getCTM());
     actor.animate(time, {
       light,
@@ -545,7 +566,7 @@
     typingHands.setAttribute('transform', character.element.getAttribute('transform'));
     handPose.setAttribute('transform', `${characterRig.getAttribute('transform')} ${characterBody.getAttribute('transform')}`);
     farArmMask.setAttribute('d', characterTorso.getAttribute('d'));
-    carryingArm.toggleAttribute('hidden', !(['carrying', 'placing'].includes(pose) && [desk, chair].includes(mission?.body)));
+    carryingArm.toggleAttribute('hidden', !(['carrying', 'placing'].includes(pose) && [desk, chair].includes(mission?.body)) || (pose === 'carrying' && locomotion.facing === 'back'));
     carryingArm.setAttribute('transform', character.element.getAttribute('transform'));
     carryingArmPose.setAttribute('transform', handPose.getAttribute('transform'));
     const carryingChair = ['carrying', 'placing'].includes(pose) && mission?.body === chair;
@@ -648,23 +669,6 @@
     render();
   }
 
-  window.addEventListener('keydown', event => {
-    if (event.altKey || event.ctrlKey || event.metaKey) return;
-    const target = event.target.closest?.('[data-body]');
-    if (target) selected = target.dataset.body;
-    if (/^[1-5]$/.test(event.key)) {
-      selected = ['character', 'chair', 'computer', 'lamp', 'desk'][Number(event.key) - 1];
-      bodies[selected].element.focus({ preventScroll: true });
-      event.preventDefault();
-    } else if (target && event.key.startsWith('Arrow')) {
-      event.preventDefault();
-      nudge(selected, event.key.slice(5).toLowerCase());
-    } else if (target && (event.code === 'Space' || event.key === 'Enter')) {
-      event.preventDefault();
-      nudge(selected);
-    } else if (event.key.toLowerCase() === 'r') reset();
-    else if (event.key === 'Escape') endDrag();
-  });
   document.addEventListener('visibilitychange', () => {
     endDrag();
     if (document.hidden) { cancelAnimationFrame(frameId); frameId = 0; }

@@ -162,6 +162,10 @@ window.createDoodleCharacter = function createDoodleCharacter(root) {
       p.na = [29, -147, 67, -171, 88, -192 - sway * 6];
       p.fl = [-17, -78, -23 + sway * 4, -44, -27 + sway * 9, -9];
       p.nl = [17, -78, 18 - sway * 4, -44, 20 - sway * 8, -7];
+      if (options.seated) {
+        p.fl = [-14, -86, -39, -63, -43, -24];
+        p.nl = [14, -85, -10, -59, -12, -18];
+      }
       p.tilt = -4;
     }
     if (name === 'falling') {

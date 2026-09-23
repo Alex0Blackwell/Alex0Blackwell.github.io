@@ -47,8 +47,10 @@ window.createDoodleCursor = function createDoodleCursor() {
   return {
     update({ dragging, pressing, pokeTime }) {
       if (!active) return;
-      const hovered = document.elementFromPoint(x, y)?.closest('[data-body]')?.dataset.body;
-      const next = dragging ? 'closed' : pressing || pokeTime !== null || hovered === 'character' ? 'point' : hovered ? 'hover' : 'open';
+      const target = document.elementFromPoint(x, y);
+      const hovered = target?.closest('[data-body]')?.dataset.body;
+      const overLink = !!target?.closest('a[href]');
+      const next = dragging ? 'closed' : pressing || pokeTime !== null || hovered === 'character' || overLink ? 'point' : hovered ? 'hover' : 'open';
       if (next !== pose) {
         pose = next;
         cursor.dataset.pose = pose;
